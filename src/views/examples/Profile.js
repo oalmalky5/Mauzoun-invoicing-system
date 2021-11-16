@@ -28,7 +28,6 @@ import {
     CardBody,
     FormGroup,
     Form,
-    Input,
     Container,
     Row,
     Col,
@@ -134,7 +133,7 @@ export function Profile(props) {
             {/* Page content */}
             <Container className="mt--7" fluid>
                 <Row>
-                    <Col className="order-xl-1" xl="6">
+                    <Col className="order-xl-1" xl="8">
                         <Card className="bg-secondary shadow">
                             <CardHeader className="bg-white border-0">
                                 <Row className="align-items-center">
@@ -227,8 +226,9 @@ export function Profile(props) {
                                             href="#pablo"
                                             onClick={updateProfileHandler}
                                             className="float-right"
+                                            disabled={disabled}
                                         >
-                                            Edit profile
+                                            Save
                                         </Button>
 
 
@@ -237,7 +237,7 @@ export function Profile(props) {
                             </CardBody>
                         </Card>
                     </Col>
-                    <Col className="order-xl-1" xl="6">
+                    <Col className="order-xl-1" xl="4">
                         <Card className="bg-secondary shadow">
                             <CardHeader className="bg-white border-0">
                                 <Row className="align-items-center">
@@ -314,7 +314,7 @@ export function Profile(props) {
                                         onClick={changePasswordHandler}
                                         className="float-right"
                                     >
-                                        Edit profile
+                                        Save
                                     </Button>
                                 </Form>
                             </CardBody>

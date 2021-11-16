@@ -17,6 +17,8 @@
 */
 import Index from "views/Index.js";
 import {Profile} from "views/examples/Profile.js";
+import {CreateUser} from "views/Users/CreateUser.js";
+import {UserList} from "views/Users/UserList.js";
 import Maps from "views/examples/Maps.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
@@ -35,10 +37,17 @@ var routes = [
         layout: "/admin",
     },
     {
-        path: "/users-management",
-        name: "Users Management",
+        path: "/users/list",
+        name: "Users List",
         icon: "fas fa-users text-primary",
-        component: UsersManagement,
+        component: UserList,
+        layout: "/admin",
+    },
+    {
+        path: "/users/create",
+        name: "Create User",
+        icon: "ni ni-fat-add text-primary ",
+        component: CreateUser,
         layout: "/admin",
     },
     {
@@ -65,10 +74,10 @@ var routes = [
     {
         path: "/profile",
         name: "Profile",
-        icon: "fas fa-sign-in-alt text-primary",
+        icon: "ni ni-single-02 text-primary",
         component: Profile,
         layout: "/admin",
-    },
+    }
 
 ];
 export default routes;
