@@ -15,92 +15,156 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import {API_URL, STATIC_TOKEN} from "../../constants";
+import {Link, useHistory} from "react-router-dom";
+import alertify from "alertifyjs";
 
 // reactstrap components
 import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Row,
-  Col,
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    FormGroup,
+    Form,
+    Input,
+    InputGroupAddon,
+    InputGroupText,
+    InputGroup,
+    Row,
+    Col,
 } from "reactstrap";
 
 const Login = () => {
-  return (
-    <>
-      <Col lg="5" md="7">
-        <Card className="bg-secondary shadow border-0">
-          <CardBody className="px-lg-5 py-lg-5">
-            <div className="text-center text-muted mb-4">
-              <small>sign In</small>
-            </div>
-            <Form role="form">
-              <FormGroup className="mb-3">
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-email-83" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Email"
-                    type="email"
-                    autoComplete="new-email"
-                  />
-                </InputGroup>
-              </FormGroup>
-              <FormGroup>
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Password"
-                    type="password"
-                    autoComplete="new-password"
-                  />
-                </InputGroup>
-              </FormGroup>
-              <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
-                  Sign in
-                </Button>
-              </div>
-            </Form>
-          </CardBody>
-        </Card>
-        {/*<Row className="mt-3">*/}
-        {/*  <Col xs="6">*/}
-        {/*    <a*/}
-        {/*      className="text-light"*/}
-        {/*      href="#pablo"*/}
-        {/*      onClick={(e) => e.preventDefault()}*/}
-        {/*    >*/}
-        {/*      <small>Forgot password?</small>*/}
-        {/*    </a>*/}
-        {/*  </Col>*/}
-        {/*  <Col className="text-right" xs="6">*/}
-        {/*    <a*/}
-        {/*      className="text-light"*/}
-        {/*      href="#pablo"*/}
-        {/*      onClick={(e) => e.preventDefault()}*/}
-        {/*    >*/}
-        {/*      <small>Create new account</small>*/}
-        {/*    </a>*/}
-        {/*  </Col>*/}
-        {/*</Row>*/}
-      </Col>
-    </>
-  );
+    const [disabled, setDisabled] = useState(false);
+    let history = useHistory();
+
+    const loginHandler = (e) => {
+        e.preventDefault();
+        setDisabled(true);
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const url = API_URL + "auth/login";
+
+        axios
+            .post(url, {
+                email: email,
+                password: password
+            })
+            .then((response) => {
+
+                if (response.data.status) {
+
+                    alertify.success("Logged in Successfully");
+                    localStorage.setItem("token", response.data.token.token);
+
+                    const config = {
+                        headers: {
+                            Authorization: 'Bearer ' + response.data.token.token,
+                        }
+                    };
+
+                    axios.get(API_URL + 'account/me', config).then((response) => {
+                        if (response.data.status) {
+                            console.log(response.data.data);
+                            localStorage.setItem("user-data", JSON.stringify(response.data.data));
+
+                        } else {
+                            alertify.error(response.data.message);
+                            return null;
+                        }
+                    });
+
+                    setDisabled(false);
+                    history.push('/admin/index');
+                }
+
+
+            }).catch((error) => {
+            // let errors = error.response.data;
+            //
+            // // for (let err in errors) {
+            // //     alertify.error(`${err}: ${errors[err][0]}`);
+            // // }
+
+        });
+    };
+
+    return (
+        <>
+            <Col lg="5" md="7">
+                <Card className="bg-secondary shadow border-0">
+                    <CardBody className="px-lg-5 py-lg-5">
+                        <div className="text-center text-muted mb-4">
+                            <small>sign In</small>
+                        </div>
+                        <Form role="form">
+                            <FormGroup className="mb-3">
+                                <InputGroup className="input-group-alternative">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>
+                                            <i className="ni ni-email-83"/>
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <Input
+                                        placeholder="Email"
+                                        type="email"
+                                        autoComplete="new-email"
+                                        id="email"
+                                        defaultValue="admin@web.com"
+                                    />
+                                </InputGroup>
+                            </FormGroup>
+                            <FormGroup>
+                                <InputGroup className="input-group-alternative">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>
+                                            <i className="ni ni-lock-circle-open"/>
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <Input
+                                        placeholder="Password"
+                                        type="password"
+                                        autoComplete="new-password"
+                                        id="password"
+                                        defaultValue="123456"
+                                    />
+                                </InputGroup>
+                            </FormGroup>
+                            <div className="text-center">
+                                <Button className="my-4" color="primary" type="button" onClick={e => loginHandler(e)}
+                                        disabled={disabled}>
+                                    Sign in
+                                </Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                </Card>
+                {/*<Row className="mt-3">*/}
+                {/*  <Col xs="6">*/}
+                {/*    <a*/}
+                {/*      className="text-light"*/}
+                {/*      href="#pablo"*/}
+                {/*      onClick={(e) => e.preventDefault()}*/}
+                {/*    >*/}
+                {/*      <small>Forgot password?</small>*/}
+                {/*    </a>*/}
+                {/*  </Col>*/}
+                {/*  <Col className="text-right" xs="6">*/}
+                {/*    <a*/}
+                {/*      className="text-light"*/}
+                {/*      href="#pablo"*/}
+                {/*      onClick={(e) => e.preventDefault()}*/}
+                {/*    >*/}
+                {/*      <small>Create new account</small>*/}
+                {/*    </a>*/}
+                {/*  </Col>*/}
+                {/*</Row>*/}
+            </Col>
+        </>
+    );
 };
 
 export default Login;
