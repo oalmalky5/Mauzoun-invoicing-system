@@ -22,56 +22,46 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
+import UsersManagement from "./views/examples/UsersManagement";
+import CustomersManagement from "./views/examples/CustomersManagement";
+import InvoiceManagement from "./views/examples/InvoiceManagement";
 
 var routes = [
-  {
-    path: "/index",
-    name: "Dashboard",
-    icon: "ni ni-tv-2 text-primary",
-    component: Index,
-    layout: "/admin",
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "ni ni-planet text-blue",
-    component: Icons,
-    layout: "/admin",
-  },
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "ni ni-pin-3 text-orange",
-    component: Maps,
-    layout: "/admin",
-  },
-  {
-    path: "/user-profile",
-    name: "User Profile",
-    icon: "ni ni-single-02 text-yellow",
-    component: Profile,
-    layout: "/admin",
-  },
-  {
-    path: "/tables",
-    name: "Tables",
-    icon: "ni ni-bullet-list-67 text-red",
-    component: Tables,
-    layout: "/admin",
-  },
-  {
-    path: "/login",
-    name: "Login",
-    icon: "ni ni-key-25 text-info",
-    component: Login,
-    layout: "/auth",
-  },
-  {
-    path: "/register",
-    name: "Register",
-    icon: "ni ni-circle-08 text-pink",
-    component: Register,
-    layout: "/auth",
-  },
+    {
+        path: "/index",
+        name: "Dashboard",
+        icon: "fas fa-desktop text-primary",
+        component: Index,
+        layout: "/admin",
+    },
+    {
+        path: "/users-management",
+        name: "Users Management",
+        icon: "fas fa-users text-primary",
+        component: UsersManagement,
+        layout: "/admin",
+    },
+    {
+        path: "/customers-management",
+        name: "Customers Management",
+        icon: "fas fa-users-cog text-primary",
+        component: CustomersManagement,
+        layout: "/admin",
+    },
+    {
+        path: "/invoice-management",
+        name: "Invoice Management",
+        icon: "fas fa-scroll text-primary",
+        component: InvoiceManagement,
+        layout: "/admin",
+    },
+    {
+        path: "/login",
+        name: "Login",
+        icon: "fas fa-sign-in-alt text-primary",
+        component: Login,
+        layout: "/auth",
+    },
+
 ];
 export default routes;
