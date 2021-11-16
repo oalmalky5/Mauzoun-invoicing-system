@@ -122,7 +122,8 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'old_password' => 'required',
-            'new_password' => 'required'
+            'new_password' => 'required',
+            'confirm_password' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -131,6 +132,13 @@ class UserController extends Controller
                 'message' => $validator->errors()->first()
             ]);
 
+        }
+
+        if ($request->new_password != $request->confirm_password) {
+            return response()->json([
+                'status' => false,
+                'message' => "Password does not match"
+            ]);
         }
 
         if (Hash::check($request->old_password, Auth::user()->getAuthPassword())) {
