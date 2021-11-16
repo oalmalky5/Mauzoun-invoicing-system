@@ -17,3 +17,27 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('/users')->group(function () {
+        Route::post('/store', 'App\Http\Controllers\UserController@store');
+        Route::post('/{id}/delete', 'App\Http\Controllers\UserController@destroy');
+        Route::get('/{id}/show', 'App\Http\Controllers\UserController@show');
+        Route::post('/update', 'App\Http\Controllers\UserController@update');
+        Route::get('/all', 'App\Http\Controllers\UserController@all');
+        Route::get('/staff', 'App\Http\Controllers\UserController@staff');
+    });
+
+    Route::prefix('/customers')->group(function () {
+        Route::post('/store', 'App\Http\Controllers\CustomerController@store');
+        Route::post('/{id}/delete', 'App\Http\Controllers\CustomerController@destroy');
+        Route::get('/{id}/show', 'App\Http\Controllers\CustomerController@show');
+        Route::post('/update', 'App\Http\Controllers\CustomerController@update');
+        Route::get('/all', 'App\Http\Controllers\CustomerController@all');
+    });
+});
+
+
+Route::prefix('/auth')->group(function () {
+    Route::post('/login', '\App\Http\Controllers\AuthController@login');
+});
