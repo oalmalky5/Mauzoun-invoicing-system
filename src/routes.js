@@ -55,6 +55,13 @@ var routes = [
         component: InvoiceManagement,
         layout: "/admin",
     },
+    {
+        path: "/login",
+        name: "Login",
+        icon: "fas fa-sign-in-alt text-primary",
+        component: Login,
+        layout: "/auth",
+    },
 
 ];
 export default routes;
