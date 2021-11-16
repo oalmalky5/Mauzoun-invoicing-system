@@ -28,7 +28,7 @@ class AuthController extends Controller
         // check if User exist or not
         if (!$User) {
             return response()->json([
-                'code' => 404,
+                'status' => false,
                 'message' => 'No user registered with this email'
             ]);
         }
@@ -37,13 +37,13 @@ class AuthController extends Controller
         if (Hash::check($request->password, $User->password)) {
             $token = $User->createToken('Admin')->plainTextToken;
             return response()->json([
-                'code' => 200,
+                'status' => true,
                 'message' => 'Logged in',
                 'token' => ['token' => $token]
             ])->header('Cache-Control', 'private')->header('Authorization', $token);
         } else {
             return response()->json([
-                'code' => 404,
+                'status' => false,
                 'message' => 'Invalid Password!'
             ]);
         }
