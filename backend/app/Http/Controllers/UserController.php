@@ -4,12 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Role;
 
 class UserController extends Controller
 {
+    public function me()
+    {
+        return response()->json([
+            'status' => TRUE,
+            'data' => Auth::user()
+        ]);
+    }
+
     public function all()
     {
         return response()->json([
@@ -107,5 +116,61 @@ class UserController extends Controller
                 $role->where('key', '=', 'admin');
             }]
          * */
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+
+        }
+
+        if (Hash::check($request->old_password, Auth::user()->getAuthPassword())) {
+            User::where('id', Auth::user()->id)->update(['password' => Hash::make($request->new_password)]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Password Changed Successfully'
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Current Password is wrong'
+            ]);
+        }
+    }
+
+    public function updateAccount(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
+
+        $User = User::find(Auth::id());
+        $User->first_name = $request->first_name;
+        $User->last_name = $request->last_name;
+        $User->notes = $request->notes;
+
+        $User->save(); // Can use update here as well
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Account updated successfully'
+        ]);
     }
 }

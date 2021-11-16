@@ -35,6 +35,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/update', 'App\Http\Controllers\CustomerController@update');
         Route::get('/all', 'App\Http\Controllers\CustomerController@all');
     });
+
+    Route::prefix('/account')->group(function () {
+        Route::post('/change-password', 'App\Http\Controllers\UserController@changePassword');
+        Route::get('/me', 'App\Http\Controllers\UserController@me');
+        Route::post('/update', 'App\Http\Controllers\UserController@updateAccount');
+    });
 });
 
 
