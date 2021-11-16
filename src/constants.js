@@ -1,2 +1,2 @@
-export const API_URL = "https://lims.londonhealthcompany.co.uk/backend/api/";
-export const BACKEND_URL = "https://lims.londonhealthcompany.co.uk/backend/";
+export const API_URL = "http://localhost:8000/api/";
+export const BACKEND_URL = "http://localhost:8000/";
