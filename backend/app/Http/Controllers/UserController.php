@@ -22,6 +22,7 @@ class UserController extends Controller
     public function all()
     {
         return response()->json([
+            'status' => true,
             'data' => User::with('role')->get()
         ]);
     }
@@ -38,7 +39,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'first_name' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required|min:6'
         ]);
