@@ -77,7 +77,15 @@ var routes = [
         icon: "ni ni-single-02 text-primary",
         component: Profile,
         layout: "/admin",
+    },
+    {
+        path: "/users/:id",
+        name: "Edit User",
+        icon: "ni ni-single-02 text-primary",
+        component: Profile,
+        layout: "/default",
     }
+
 
 ];
 export default routes;
