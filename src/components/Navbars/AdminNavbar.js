@@ -39,7 +39,7 @@ const AdminNavbar = (props) => {
 
   const userInfo = JSON.parse(localStorage.getItem('user-data'));
 
-    const [userData, setUserData] = useState(userInfo);
+    // const [userData, setUserData] = useState(userInfo);
     // setUserData(JSON.parse(localStorage.getItem('user-data')));
     return (
         <>
@@ -78,7 +78,7 @@ const AdminNavbar = (props) => {
                   </span>
                                     <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      {userData.first_name}
+                      {/*{userData.first_name}*/}
                     </span>
                                     </Media>
                                 </Media>

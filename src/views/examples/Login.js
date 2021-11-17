@@ -79,15 +79,22 @@ const Login = () => {
 
                     setDisabled(false);
                     history.push('/admin/index');
+                } else {
+                    setDisabled(false);
+                    // let errors = error.response.data;
+                    alertify.error(response.data.message);
+                    return null;
                 }
 
 
             }).catch((error) => {
+
+            console.log(error);
             // let errors = error.response.data;
-            //
-            // // for (let err in errors) {
-            // //     alertify.error(`${err}: ${errors[err][0]}`);
-            // // }
+            // for (let err in errors) {
+            //     alertify.error(`${err}: ${errors[err][0]}`);
+            // }
+            setDisabled(false);
 
         });
     };
@@ -98,7 +105,7 @@ const Login = () => {
                 <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
                         <div className="text-center text-muted mb-4">
-                            <small>sign In</small>
+                            <small>Sign In</small>
                         </div>
                         <Form role="form">
                             <FormGroup className="mb-3">
