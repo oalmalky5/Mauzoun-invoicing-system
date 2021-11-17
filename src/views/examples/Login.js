@@ -67,6 +67,7 @@ const Login = () => {
                         if (response.data.status) {
                             console.log(response.data.data);
                             localStorage.setItem("user-data", JSON.stringify(response.data.data));
+                            history.push('/admin/index');
 
                         } else {
                             alertify.error(response.data.message);
@@ -75,7 +76,7 @@ const Login = () => {
                     });
 
                     setDisabled(false);
-                    history.push('/admin/index');
+
                 } else {
                     setDisabled(false);
                     // let errors = error.response.data;

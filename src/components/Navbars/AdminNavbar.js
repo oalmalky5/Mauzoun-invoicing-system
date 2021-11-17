@@ -36,18 +36,20 @@ import {
 } from "reactstrap";
 
 const AdminNavbar = (props) => {
-    // const [userData, setUserData] = useState();
+    const [userData, setUserData] = useState({
+        first_name :''
+    });
     // setUserData(JSON.parse(localStorage.getItem('user-data')));
-    const userInfo = JSON.parse(localStorage.getItem('user-data'));
+
     let history = useHistory();
 
     useEffect(() => {
+        const userInfo = JSON.parse(localStorage.getItem('user-data'));
+        console.log(userInfo)
+        setUserData(userInfo);
+    },[]);
 
-        const token = localStorage.getItem('token');
-        console.log(token);
-    });
-
-    const logoutHandler = () =>{
+    const logoutHandler = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user-data");
         history.push('/auth/login');
@@ -91,7 +93,7 @@ const AdminNavbar = (props) => {
                   </span>
                                     <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      {userInfo.first_name}
+                      {userData.first_name}
                     </span>
                                     </Media>
                                 </Media>
@@ -100,7 +102,7 @@ const AdminNavbar = (props) => {
                                 <DropdownItem className="noti-title" header tag="div">
                                     <h6 className="text-overflow m-0">Welcome!</h6>
                                 </DropdownItem>
-                                <DropdownItem to="/admin/user-profile" tag={Link}>
+                                <DropdownItem to="/admin/profile" tag={Link}>
                                     <i className="ni ni-single-02"/>
                                     <span>My profile</span>
                                 </DropdownItem>
