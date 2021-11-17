@@ -16,7 +16,7 @@
 
 */
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 // reactstrap components
 import {
     DropdownMenu,
@@ -39,12 +39,19 @@ const AdminNavbar = (props) => {
     // const [userData, setUserData] = useState();
     // setUserData(JSON.parse(localStorage.getItem('user-data')));
     const userInfo = JSON.parse(localStorage.getItem('user-data'));
+    let history = useHistory();
 
     useEffect(() => {
 
         const token = localStorage.getItem('token');
         console.log(token);
     });
+
+    const logoutHandler = () =>{
+        localStorage.removeItem("token");
+        localStorage.removeItem("user-data");
+        history.push('/auth/login');
+    };
 
 
     return (
@@ -102,7 +109,7 @@ const AdminNavbar = (props) => {
                                     <span>Settings</span>
                                 </DropdownItem>
                                 <DropdownItem divider/>
-                                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                                <DropdownItem onClick={logoutHandler}>
                                     <i className="ni ni-user-run"/>
                                     <span>Logout</span>
                                 </DropdownItem>
