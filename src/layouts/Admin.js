@@ -38,10 +38,10 @@ const Admin = (props) => {
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/admin" || prop.layout === "/default") {
         return (
           <Route
-            path={prop.layout + prop.path}
+            path={"/admin" + prop.path}
             component={prop.component}
             key={key}
           />
