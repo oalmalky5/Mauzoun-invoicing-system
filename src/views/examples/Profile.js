@@ -56,7 +56,7 @@ export function Profile(props) {
     };
 
     useEffect(() => {
-        axios.get(API_URL + 'account/me', config).then((response) => {
+        axios.get('account/me', config).then((response) => {
             if (response.data.status) {
                 setUser(response.data.data);
 
@@ -71,7 +71,7 @@ export function Profile(props) {
         e.preventDefault();
         setDisabled(1);
         setIconDisabled(0);
-        axios.post(API_URL + "account/update",
+        axios.post("account/update",
             {
                 first_name: first_name.current.value,
                 last_name: last_name.current.value,

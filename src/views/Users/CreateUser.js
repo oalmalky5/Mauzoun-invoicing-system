@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useState, useRef} from "react";
 import axios from "axios";
 import alertify from "alertifyjs";
 import {API_URL, STATIC_TOKEN} from "../../constants.js";
@@ -25,8 +25,8 @@ export function CreateUser(props) {
     const password = useRef();
     const notes = useRef();
 
-    const [disabled, setDisabled] = useState(0);
-    const [iconDisabled, setIconDisabled] = useState(1);
+    const [disabled, setDisabled] = useState(false);
+    const [iconDisabled, setIconDisabled] = useState(true);
 
     const config = {
         headers: {
@@ -36,8 +36,8 @@ export function CreateUser(props) {
 
     const createUserHandler = (e) => {
         e.preventDefault();
-        setDisabled(1);
-        setIconDisabled(0);
+        setDisabled(true);
+        setIconDisabled(false);
         axios.post(API_URL + "users/store",
             {
                 first_name: first_name.current.value,
@@ -45,10 +45,10 @@ export function CreateUser(props) {
                 email: email.current.value,
                 password: password.current.value,
                 notes: notes.current.value
-            }, config
+            },
         ).then((response) => {
-            setDisabled(0);
-            setIconDisabled(1);
+            setDisabled(false);
+            setIconDisabled(true);
             if (response.data.status) {
                 alertify.success(response.data.message);
 
@@ -58,8 +58,8 @@ export function CreateUser(props) {
                 return null;
             }
         }).catch((error) => {
-            setDisabled(0);
-            setIconDisabled(1);
+            setDisabled(false);
+            setIconDisabled(true);
             if (error.message === 'Request failed with status code 401') {
                 //props.logout();
             }

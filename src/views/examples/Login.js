@@ -25,7 +25,6 @@ import alertify from "alertifyjs";
 import {
     Button,
     Card,
-    CardHeader,
     CardBody,
     FormGroup,
     Form,
@@ -33,7 +32,6 @@ import {
     InputGroupAddon,
     InputGroupText,
     InputGroup,
-    Row,
     Col,
 } from "reactstrap";
 
@@ -46,10 +44,9 @@ const Login = () => {
         setDisabled(true);
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        const url = API_URL + "auth/login";
 
         axios
-            .post(url, {
+            .post(API_URL + "auth/login", {
                 email: email,
                 password: password
             })
@@ -66,7 +63,7 @@ const Login = () => {
                         }
                     };
 
-                    axios.get(API_URL + 'account/me', config).then((response) => {
+                    axios.get(API_URL + 'account/me').then((response) => {
                         if (response.data.status) {
                             console.log(response.data.data);
                             localStorage.setItem("user-data", JSON.stringify(response.data.data));

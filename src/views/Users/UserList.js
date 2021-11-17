@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 import axios from "axios";
 import $ from "jquery";
 // import DataTable from "datatables.net";
-import {Link} from "react-router-dom";
+
 import {useHistory} from 'react-router';
 import alertify from "alertifyjs";
 
@@ -12,8 +12,6 @@ import {
     Card,
     CardHeader,
     CardBody,
-    FormGroup,
-    Form,
     Container,
     Row,
     Col,
@@ -35,10 +33,13 @@ import {API_URL, STATIC_TOKEN} from '../../constants.js';
 export function UserList(props) {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState(-1);
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = useState(false);
+    const [modal, setModal] = useState(false);
     const history = useHistory();
-    const [disabled, setDisabled] = useState(0);
-    const [iconDisabled, setIconDisabled] = useState(1);
+    const [disabled, setDisabled] = useState(false);
+    const [iconDisabled, setIconDisabled] = useState(true);
+
+    const toggle = () => setModal(!modal);
 
     const config = {
         headers: {
@@ -48,38 +49,36 @@ export function UserList(props) {
 
     const setCurrentUser = (user) => {
         setUser(user);
-        setShow(true);
-
+        setModal(!modal);
     };
 
-    const handleClose = () => setShow(false);
 
     const deleteUser = () => {
-        setDisabled(1);
-        setIconDisabled(0);
+        setDisabled(true);
+        setIconDisabled(false);
         axios.post(
-            API_URL + 'user/' + user.id + '/delete'
+            'users/' + user.id + '/delete', {},
         ).then((response) => {
             if (response.data.status) {
                 history.go(0);
-                setShow(false);
+                setModal(false);
                 alertify.success(response.data.message);
             } else {
-                setDisabled(0);
-                setIconDisabled(1);
+                setDisabled(false);
+                setIconDisabled(true);
                 alertify.error(response.data.message);
                 return null;
             }
         }).catch((error) => {
-            setDisabled(0);
-            setIconDisabled(1);
+            setDisabled(false);
+            setIconDisabled(true);
             // alertify.error("Something went wrong. Try again!");
         });
     };
 
     useEffect(() => {
 
-        axios.get(API_URL + 'users/all', config).then((response) => {
+        axios.get(API_URL + 'users/all').then((response) => {
             if (response.data.status) {
 
                 setUsers(response.data.data);
@@ -149,8 +148,8 @@ export function UserList(props) {
                                                                 Edit
                                                             </DropdownItem>
                                                             <DropdownItem
-                                                                href="#pablo"
-                                                                onClick={(e) => e.preventDefault()}
+                                                                onClick={() => setCurrentUser(user)}
+                                                                key={user.id}
                                                             >
                                                                 Delete
                                                             </DropdownItem>
@@ -206,23 +205,25 @@ export function UserList(props) {
 
                 <Modal
                     centered
-                    toggle={function noRefCheck(){}}
+                    isOpen={modal}
+                    toggle={toggle}
                 >
-                    <ModalHeader toggle={function noRefCheck(){}}>
-                        Modal title
+                    <ModalHeader toggle={toggle}>
+                        Delete User
                     </ModalHeader>
                     <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Are you sure you want to Delete?
                     </ModalBody>
                     <ModalFooter>
                         <Button
                             color="primary"
-                            onClick={function noRefCheck(){}}
+                            onClick={deleteUser} disabled={disabled}
                         >
-                            Do Something
+                            Confirm <span
+                            dangerouslySetInnerHTML={{__html: disabled ? `<i class='fas fa-spinner fa-spin'></i>` : ``}}/>
                         </Button>
                         {' '}
-                        <Button onClick={function noRefCheck(){}}>
+                        <Button onClick={toggle}>
                             Cancel
                         </Button>
                     </ModalFooter>

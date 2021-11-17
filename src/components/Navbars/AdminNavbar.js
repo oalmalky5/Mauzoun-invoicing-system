@@ -36,11 +36,17 @@ import {
 } from "reactstrap";
 
 const AdminNavbar = (props) => {
-
-  const userInfo = JSON.parse(localStorage.getItem('user-data'));
-
-    // const [userData, setUserData] = useState(userInfo);
+    // const [userData, setUserData] = useState();
     // setUserData(JSON.parse(localStorage.getItem('user-data')));
+    const userInfo = JSON.parse(localStorage.getItem('user-data'));
+
+    useEffect(() => {
+
+        const token = localStorage.getItem('token');
+        console.log(token);
+    });
+
+
     return (
         <>
             <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -78,7 +84,7 @@ const AdminNavbar = (props) => {
                   </span>
                                     <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      {/*{userData.first_name}*/}
+                      {userInfo.first_name}
                     </span>
                                     </Media>
                                 </Media>
