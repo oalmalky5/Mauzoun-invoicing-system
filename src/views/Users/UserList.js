@@ -40,13 +40,6 @@ export function UserList(props) {
     const [iconDisabled, setIconDisabled] = useState(true);
 
     const toggle = () => setModal(!modal);
-
-    const config = {
-        headers: {
-            Authorization: 'Bearer ' + STATIC_TOKEN,
-        }
-    };
-
     const setCurrentUser = (user) => {
         setUser(user);
         setModal(!modal);
@@ -57,7 +50,7 @@ export function UserList(props) {
         setDisabled(true);
         setIconDisabled(false);
         axios.post(
-            'users/' + user.id + '/delete', {},
+            API_URL + 'users/' + user.id + '/delete', {},
         ).then((response) => {
             if (response.data.status) {
                 history.go(0);

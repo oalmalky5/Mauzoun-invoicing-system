@@ -45,18 +45,12 @@ export function Profile(props) {
     const new_password = useRef();
     const confirm_password = useRef();
 
-    const [disabled, setDisabled] = useState(0);
-    const [iconDisabled, setIconDisabled] = useState(1);
+    const [disabled, setDisabled] = useState(false);
+    const [iconDisabled, setIconDisabled] = useState(true);
     const [user, setUser] = useState({});
 
-    const config = {
-        headers: {
-            Authorization: 'Bearer ' + STATIC_TOKEN,
-        }
-    };
-
     useEffect(() => {
-        axios.get('account/me', config).then((response) => {
+        axios.get(API_URL + 'account/me').then((response) => {
             if (response.data.status) {
                 setUser(response.data.data);
 
@@ -69,17 +63,17 @@ export function Profile(props) {
 
     const updateProfileHandler = (e) => {
         e.preventDefault();
-        setDisabled(1);
-        setIconDisabled(0);
-        axios.post("account/update",
+        setDisabled(true);
+        setIconDisabled(false);
+        axios.post(API_URL + "account/update",
             {
                 first_name: first_name.current.value,
                 last_name: last_name.current.value,
                 notes: notes.current.value
-            }, config
+            }
         ).then((response) => {
-            setDisabled(0);
-            setIconDisabled(1);
+            setDisabled(false);
+            setIconDisabled(true);
             if (response.data.status) {
                 alertify.success(response.data.message);
 
@@ -88,8 +82,8 @@ export function Profile(props) {
                 return null;
             }
         }).catch((error) => {
-            setDisabled(0);
-            setIconDisabled(1);
+            setDisabled(false);
+            setIconDisabled(true);
             if (error.message === 'Request failed with status code 401') {
                 //props.logout();
             }
@@ -99,17 +93,17 @@ export function Profile(props) {
 
     const changePasswordHandler = (e) => {
         e.preventDefault();
-        setDisabled(1);
-        setIconDisabled(0);
+        setDisabled(true);
+        setIconDisabled(false);
         axios.post(API_URL + "account/change-password",
             {
                 old_password: old_password.current.value,
                 new_password: new_password.current.value,
                 confirm_password: confirm_password.current.value
-            }, config
+            }
         ).then((response) => {
-            setDisabled(0);
-            setIconDisabled(1);
+            setDisabled(false);
+            setIconDisabled(true);
             if (response.data.status) {
                 alertify.success(response.data.message);
 
@@ -118,8 +112,8 @@ export function Profile(props) {
                 return null;
             }
         }).catch((error) => {
-            setDisabled(0);
-            setIconDisabled(1);
+            setDisabled(false);
+            setIconDisabled(true);
             if (error.message === 'Request failed with status code 401') {
                 //props.logout();
             }
