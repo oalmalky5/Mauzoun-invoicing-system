@@ -67,7 +67,6 @@ const Sidebar = (props,{onChangeLanguage}) => {
             setLanguage("ar");
         }else{
           localStorage.setItem("lang", "en");
-          alert("en")
         }
     };
 
