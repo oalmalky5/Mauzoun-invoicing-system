@@ -45,7 +45,6 @@ const AdminNavbar = (props) => {
 
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem('user-data'));
-        console.log(userInfo)
         setUserData(userInfo);
     },[]);
 

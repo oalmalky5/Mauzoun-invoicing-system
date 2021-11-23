@@ -65,8 +65,11 @@ const Sidebar = (props,{onChangeLanguage}) => {
         if (language === "en") {
             localStorage.setItem("lang", "ar");
             setLanguage("ar");
+            history.go(0)
         }else{
           localStorage.setItem("lang", "en");
+            setLanguage("en");
+            history.go(0)
         }
     };
 
@@ -293,7 +296,7 @@ const Sidebar = (props,{onChangeLanguage}) => {
                 <div className="d-flex lang-toggle align-content-center justify-content-center">
                     <span className="en font-weight-600">English</span>
                     <label className="custom-toggle">
-                        <input defaultChecked type="checkbox" onChange={handleLanguage}/>
+                        <input defaultChecked={false} type="checkbox" onChange={handleLanguage}/>
                         <span className="custom-toggle-slider rounded-circle"/>
                     </label>
                     <span className="ar font-weight-600">العربية</span>
