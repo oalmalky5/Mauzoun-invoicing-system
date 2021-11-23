@@ -142,7 +142,7 @@ export function Profile(props) {
                                     <h6 className="heading-small text-muted mb-4">
                                         User information
                                     </h6>
-                                    <div className="pl-lg-4">
+                                    <div>
                                         <Row>
                                             <Col lg="6">
                                                 <FormGroup>
@@ -203,7 +203,7 @@ export function Profile(props) {
                                     </div>
                                     <hr className="my-4"/>
                                     <h6 className="heading-small text-muted mb-4">About me</h6>
-                                    <div className="pl-lg-4">
+                                    <div>
                                         <FormGroup>
                                             <label>About Me</label>
                                             <textarea
@@ -244,7 +244,7 @@ export function Profile(props) {
                             <CardBody>
                                 <Form>
 
-                                    <div className="pl-lg-4">
+                                    <div>
                                         <Row>
                                             <Col lg="12">
                                                 <FormGroup>

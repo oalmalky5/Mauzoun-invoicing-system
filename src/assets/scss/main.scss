@@ -1,6 +1,18 @@
+.lang-toggle{
+  direction: ltr!important;
+
+  span.en{
+    margin-right: 15px;
+  }
+
+  span.ar{
+    margin-left: 15px;
+  }
+}
+
 .navbar-vertical.navbar-expand-md {
   .navbar-brand-img {
-    max-height: 115px;
+    max-height: 115px!important;
   }
 }
 
@@ -8,6 +20,6 @@
   max-width: 115px;
   img {
     width:100% ;
-    height: 95px;
+    height: 95px!important;
   }
 }

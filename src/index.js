@@ -19,24 +19,31 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 
-
 import "assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-// import "assets/scss/argon-dashboard-react.scss";
-import "assets/css/argon-dashboard-react.css";
+
 
 import 'alertifyjs/build/css/alertify.css';
-import "assets/scss/main.scss";
 
 import AdminLayout from "layouts/Admin.js";
+
 import AuthLayout from "layouts/Auth.js";
 import axios from "axios";
+import "assets/scss/main.scss";
+
+
+
 // const token = JSON.parse(localStorage.getItem('token'));
 const token = localStorage.getItem('token');
+
+
+
 console.log(token);
 axios.create({
     // baseURL: 'http://localhost:8000/api/'
 });
+
+
 
 // Alter defaults after instance has been created
 axios.defaults.headers.common['Authorization'] = "Bearer " + token;
@@ -52,3 +59,4 @@ ReactDOM.render(
     </BrowserRouter>,
     document.getElementById("root")
 );
+

@@ -56,12 +56,9 @@ const Login = () => {
 
                     alertify.success("Logged in Successfully");
                     localStorage.setItem("token", response.data.token.token);
+                    // localStorage.setItem("lang", "en");
 
-                    const config = {
-                        headers: {
-                            Authorization: 'Bearer ' + response.data.token.token,
-                        }
-                    };
+
 
                     axios.get(API_URL + 'account/me').then((response) => {
                         if (response.data.status) {

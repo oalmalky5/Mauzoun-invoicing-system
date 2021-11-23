@@ -46,7 +46,7 @@ var routes = [
     {
         path: "/users/create",
         name: "Create User",
-        icon: "ni ni-fat-add text-primary ",
+        icon: "fas fa-plus text-primary ",
         component: CreateUser,
         layout: "/admin",
     },
