@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required',
-            'password' => 'required|min:6'
+            'password' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -24,7 +24,6 @@ class AuthController extends Controller
         }
 
         $User = User::where('email', $request->email)->first();
-
         // check if User exist or not
         if (!$User) {
             return response()->json([
