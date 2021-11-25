@@ -29,6 +29,7 @@ import CustomersManagement from "./views/examples/CustomersManagement";
 import InvoiceManagement from "./views/examples/InvoiceManagement";
 import {EditUser} from "./views/Users/EditUser";
 
+
 var routes = [
     {
         path: "/index",

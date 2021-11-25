@@ -6,7 +6,7 @@ import $ from "jquery";
 import {useHistory} from 'react-router';
 import {Link} from 'react-router-dom';
 import alertify from "alertifyjs";
-
+import {useTranslation} from "react-i18next";
 
 import {
     Button,
@@ -39,6 +39,8 @@ export function UserList(props) {
     const history = useHistory();
     const [disabled, setDisabled] = useState(false);
     const [iconDisabled, setIconDisabled] = useState(true);
+
+    // const {t} = useTranslation();
 
     const toggle = () => setModal(!modal);
     const setCurrentUser = (user) => {
@@ -88,6 +90,8 @@ export function UserList(props) {
 
     }, []);
 
+    const {t} = useTranslation();
+
 
     return (
         <>
@@ -97,7 +101,7 @@ export function UserList(props) {
                     <Col md={12}>
                         <Card>
                             <CardHeader>
-                                Users List
+                                {t("users_list")}
                             </CardHeader>
                             <CardBody style={{overflow: 'auto'}}>
 
@@ -105,12 +109,12 @@ export function UserList(props) {
                                        className="stratprop_datatable table table-bordered align-items-center table-flush table">
                                     <thead className="thead-light">
                                     <tr>
-                                        <th>SN.</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Notes</th>
-                                        <th>Actions</th>
+                                        <th>{t("sr_no")}</th>
+                                        <th>{t("first_name")}</th>
+                                        <th>{t("last_name")}</th>
+                                        <th>{t("email")}</th>
+                                        <th>{t("notes")}</th>
+                                        <th>{t("actions")}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -138,13 +142,13 @@ export function UserList(props) {
                                                             <DropdownItem
                                                                 tag={Link} to={`/admin/users/edit/${user.id}`}
                                                             >
-                                                                Edit
+                                                                {t("edit")}
                                                             </DropdownItem>
                                                             <DropdownItem
                                                                 onClick={() => setCurrentUser(user)}
                                                                 key={user.id}
                                                             >
-                                                                Delete
+                                                                {t("delete")}
                                                             </DropdownItem>
 
                                                         </DropdownMenu>

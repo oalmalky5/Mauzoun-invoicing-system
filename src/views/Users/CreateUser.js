@@ -3,7 +3,7 @@ import axios from "axios";
 import alertify from "alertifyjs";
 import {API_URL, STATIC_TOKEN} from "../../constants.js";
 import Header from "components/Headers/Header.js";
-
+import {useTranslation} from "react-i18next";
 
 import {
     Button,
@@ -18,7 +18,7 @@ import {
 } from "reactstrap";
 
 export function CreateUser(props) {
-    // const { t } = useTranslation();
+    const { t } = useTranslation();
     const first_name = useRef();
     const last_name = useRef();
     const email = useRef();
@@ -73,7 +73,7 @@ export function CreateUser(props) {
                     <Col md={12}>
                         <Card>
                             <CardHeader>
-                                <h3 className="mb-0">Add New User</h3>
+                                <h3 className="mb-0">{t("add_new_user")}</h3>
                             </CardHeader>
                             <CardBody>
 
@@ -82,19 +82,19 @@ export function CreateUser(props) {
                                         <Row>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>First Name</label>
+                                                    <label>{t("first_name")}</label>
                                                     <input ref={first_name}
                                                            className="form-control-alternative form-control"
-                                                           placeholder="Enter First Name"/>
+                                                           placeholder={t("enter") + " " + t("first_name")}/>
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>Last Name</label>
+                                                    <label>{t("last_name")}</label>
                                                     <input ref={last_name}
                                                            className="form-control-alternative form-control"
                                                            rows={1}
-                                                           placeholder="Enter Last Name"/>
+                                                           placeholder={t("enter") + " " + t("last_name")}/>
                                                 </FormGroup>
                                             </Col>
 
@@ -103,19 +103,19 @@ export function CreateUser(props) {
                                         <Row>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>Email</label>
+                                                    <label>{t("email")}</label>
                                                     <input ref={email} className="form-control-alternative form-control"
-                                                           placeholder="Enter Email"/>
+                                                           placeholder={t("enter") + " " + t("email")}/>
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>Password</label>
+                                                    <label>{t("password")}</label>
                                                     <input type={'password'}
                                                            className="form-control-alternative form-control"
                                                            ref={password}
                                                            rows={1}
-                                                           placeholder="Enter Password"/>
+                                                           placeholder={t("enter") + " " + t("password")}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -123,10 +123,10 @@ export function CreateUser(props) {
                                         <Row>
                                             <Col lg="12">
                                                 <FormGroup>
-                                                    <label>Notes</label>
+                                                    <label>{t("notes")}</label>
                                                     <textarea ref={notes} rows={4}
                                                               className="form-control-alternative form-control"
-                                                              placeholder="Enter Notes"/>
+                                                              placeholder={t("enter") + " " + t("notes")}/>
                                                 </FormGroup>
                                             </Col>
 
@@ -135,7 +135,7 @@ export function CreateUser(props) {
                                         <Button variant="primary" className="float-right" type="submit"
                                                 disabled={disabled} color="info"
                                                 href="#pablo" onClick={createUserHandler}>
-                                            Save
+                                            {t("save")}
                                             <span
                                                 dangerouslySetInnerHTML={{__html: disabled ? `<i class='fas fa-spinner fa-spin'></i>` : ``}}/>
                                         </Button>

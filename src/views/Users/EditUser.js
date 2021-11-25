@@ -21,6 +21,7 @@ import {
     UncontrolledDropdown
 } from "reactstrap";
 import Header from "../../components/Headers/Header";
+import {useTranslation} from "react-i18next";
 
 // import {useTranslation} from "react-i18next";
 
@@ -41,6 +42,7 @@ export function EditUser(props) {
     const [iconDisabled, setIconDisabled] = useState(true);
     const [user, setUser] = useState({});
     const id = props.match.params.id;
+    const {t} = useTranslation();
 
 
     useEffect(() => {
@@ -99,7 +101,7 @@ export function EditUser(props) {
                     <Col md={12}>
                         <Card>
                             <CardHeader>
-                                Edit User
+                                {t("edit_user")}
                             </CardHeader>
                             <CardBody>
                                 <div className="mt-5">
@@ -107,18 +109,18 @@ export function EditUser(props) {
                                         <Row>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>First Name</label>
+                                                    <label>{t("first_name")}</label>
                                                     <input ref={first_name} defaultValue={user.first_name}
                                                            className="form-control-alternative form-control"
-                                                           placeholder="Enter First Name"/>
+                                                           placeholder={t("enter") + " " + t("first_name")}/>
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>Last Name</label>
+                                                    <label>{t("last_name")}</label>
                                                     <input ref={last_name} defaultValue={user.last_name}
                                                            className="form-control-alternative form-control"
-                                                           placeholder="Enter Last Name"/>
+                                                           placeholder={t("enter") + " " + t("last_name")}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -126,9 +128,10 @@ export function EditUser(props) {
                                         <Row>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>Email</label>
-                                                    <input ref={email} defaultValue={user.email} className="form-control-alternative form-control"
-                                                           placeholder="Enter Email"/>
+                                                    <label>{t("email")}</label>
+                                                    <input ref={email} defaultValue={user.email}
+                                                           className="form-control-alternative form-control"
+                                                           placeholder={t("enter") + " " + t("email")}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -136,18 +139,18 @@ export function EditUser(props) {
                                         <Row>
                                             <Col lg="12">
                                                 <FormGroup>
-                                                    <label>Notes</label>
+                                                    <label>{t("notes")}</label>
                                                     <textarea ref={notes} defaultValue={user.notes} rows={4}
                                                               className="form-control-alternative form-control"
-                                                              placeholder="Enter Notes"/>
+                                                              placeholder={t("enter") + " " + t("notes")}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>
 
                                         <Button variant="primary" className="float-right" type="submit"
                                                 disabled={disabled} color="info"
-                                                 onClick={updateUserHandler}>
-                                            Save
+                                                onClick={updateUserHandler}>
+                                            {t("save")}
                                             <span
                                                 dangerouslySetInnerHTML={{__html: disabled ? `<i class='fas fa-spinner fa-spin'></i>` : ``}}/>
                                         </Button>

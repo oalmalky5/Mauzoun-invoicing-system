@@ -34,10 +34,12 @@ import {
     InputGroup,
     Col,
 } from "reactstrap";
+import {useTranslation} from "react-i18next";
 
 const Login = () => {
     const [disabled, setDisabled] = useState(false);
     let history = useHistory();
+    const {t} = useTranslation();
 
     const loginHandler = (e) => {
         e.preventDefault();
@@ -100,7 +102,7 @@ const Login = () => {
                 <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
                         <div className="text-center text-muted mb-4">
-                            <small>Sign In</small>
+                            <small>{t("sign_in")}</small>
                         </div>
                         <Form role="form">
                             <FormGroup className="mb-3">
@@ -111,7 +113,7 @@ const Login = () => {
                                         </InputGroupText>
                                     </InputGroupAddon>
                                     <Input
-                                        placeholder="Email"
+                                        placeholder={t("email")}
                                         type="email"
                                         autoComplete="new-email"
                                         id="email"
@@ -127,7 +129,7 @@ const Login = () => {
                                         </InputGroupText>
                                     </InputGroupAddon>
                                     <Input
-                                        placeholder="Password"
+                                        placeholder={t("password")}
                                         type="password"
                                         autoComplete="new-password"
                                         id="password"
@@ -138,7 +140,7 @@ const Login = () => {
                             <div className="text-center">
                                 <Button className="my-4" color="primary" type="button" onClick={e => loginHandler(e)}
                                         disabled={disabled}>
-                                    Sign in
+                                    {t("sign_in")}
                                 </Button>
                             </div>
                         </Form>

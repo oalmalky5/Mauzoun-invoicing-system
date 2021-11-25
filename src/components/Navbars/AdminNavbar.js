@@ -35,6 +35,8 @@ import {
     Media,
 } from "reactstrap";
 
+import {useTranslation} from "react-i18next";
+
 const AdminNavbar = (props) => {
     const [userData, setUserData] = useState({
         first_name :''
@@ -54,6 +56,7 @@ const AdminNavbar = (props) => {
         history.push('/auth/login');
     };
 
+    const {t} = useTranslation();
 
     return (
         <>
@@ -73,7 +76,7 @@ const AdminNavbar = (props) => {
                                         <i className="fas fa-search"/>
                                     </InputGroupText>
                                 </InputGroupAddon>
-                                <Input placeholder="Search" type="text"/>
+                                <Input placeholder={t("search")} type="text"/>
                             </InputGroup>
                         </FormGroup>
                     </Form>
@@ -99,20 +102,20 @@ const AdminNavbar = (props) => {
                             </DropdownToggle>
                             <DropdownMenu className="dropdown-menu-arrow" right>
                                 <DropdownItem className="noti-title" header tag="div">
-                                    <h6 className="text-overflow m-0">Welcome!</h6>
+                                    <h6 className="text-overflow m-0">{t("welcome")}</h6>
                                 </DropdownItem>
                                 <DropdownItem to="/admin/profile" tag={Link}>
                                     <i className="ni ni-single-02"/>
-                                    <span>My profile</span>
+                                    <span>{t("my_profile")}</span>
                                 </DropdownItem>
                                 <DropdownItem to="/admin/user-profile" tag={Link}>
                                     <i className="ni ni-settings-gear-65"/>
-                                    <span>Settings</span>
+                                    <span>{t("settings")}</span>
                                 </DropdownItem>
                                 <DropdownItem divider/>
                                 <DropdownItem onClick={logoutHandler}>
                                     <i className="ni ni-user-run"/>
-                                    <span>Logout</span>
+                                    <span>{t("logout")}</span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>

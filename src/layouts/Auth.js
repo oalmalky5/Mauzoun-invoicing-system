@@ -25,17 +25,16 @@ import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 
 import routes from "routes.js";
+import cookies from "js-cookie";
 
 const Auth = (props) => {
     const mainContent = React.useRef(null);
     const location = useLocation();
 
-    let lang = localStorage.getItem("lang");
-    console.log(lang);
+    const currentLanguage = cookies.get('i18next') || 'en';
 
-    if (lang === "en" || lang === null) {
-        import("assets/css/argon-dashboard-react.css")
-
+    if (currentLanguage === "en" || currentLanguage === null) {
+        import("assets/css/argon-dashboard-react.css");
     } else {
         import("assets/css/argon-dashboard-react-rtl.css");
     }

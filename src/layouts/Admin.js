@@ -31,9 +31,6 @@ const Admin = (props) => {
     const location = useLocation();
     const [language, setLanguage] = useState();
 
-    const langChange = (lang) => {
-      // alert(lang)
-    };
 
     const currentLanguage = cookies.get('i18next') || 'en';
 
@@ -87,7 +84,6 @@ const Admin = (props) => {
                     imgSrc: require("../assets/img/brand/main-logo.png").default,
                     imgAlt: "...",
                 }}
-                onChangeLanguage={langChange(currentLanguage)}
             />
             <div className="main-content" ref={mainContent}>
                 <AdminNavbar

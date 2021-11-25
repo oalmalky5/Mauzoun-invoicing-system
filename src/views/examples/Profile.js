@@ -35,6 +35,7 @@ import {
 
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
+import {useTranslation} from "react-i18next";
 
 export function Profile(props) {
 
@@ -48,6 +49,8 @@ export function Profile(props) {
     const [disabled, setDisabled] = useState(false);
     const [iconDisabled, setIconDisabled] = useState(true);
     const [user, setUser] = useState({});
+
+    const {t} = useTranslation()
 
     useEffect(() => {
         axios.get(API_URL + 'account/me').then((response) => {
@@ -121,6 +124,8 @@ export function Profile(props) {
     };
 
 
+
+
     return (
         <>
             <UserHeader user={user}/>
@@ -132,7 +137,7 @@ export function Profile(props) {
                             <CardHeader className="bg-white border-0">
                                 <Row className="align-items-center">
                                     <Col xs="8">
-                                        <h3 className="mb-0">My Account</h3>
+                                        <h3 className="mb-0">{t("my_account")}</h3>
                                     </Col>
 
                                 </Row>
@@ -140,7 +145,7 @@ export function Profile(props) {
                             <CardBody>
                                 <Form>
                                     <h6 className="heading-small text-muted mb-4">
-                                        User information
+                                        {t("user_information")}
                                     </h6>
                                     <div>
                                         <Row>
@@ -150,13 +155,13 @@ export function Profile(props) {
                                                         className="form-control-label"
                                                         htmlFor="input-first-name"
                                                     >
-                                                        First name
+                                                        {t("first_name")}
                                                     </label>
                                                     <input
                                                         className="form-control-alternative form-control"
                                                         ref={first_name}
                                                         defaultValue={user.first_name}
-                                                        placeholder="First name"
+                                                        placeholder={t("first_name")}
                                                         type="text"
                                                     />
                                                 </FormGroup>
@@ -167,14 +172,14 @@ export function Profile(props) {
                                                         className="form-control-label"
                                                         htmlFor="input-last-name"
                                                     >
-                                                        Last name
+                                                        {t("last_name")}
                                                     </label>
                                                     <input
                                                         className="form-control-alternative form-control"
                                                         defaultValue={user.last_name}
                                                         ref={last_name}
                                                         id="input-last-name"
-                                                        placeholder="Last name"
+                                                        placeholder={t("last_name")}
                                                         type="text"
                                                     />
                                                 </FormGroup>
@@ -187,7 +192,7 @@ export function Profile(props) {
                                                         className="form-control-label"
                                                         htmlFor="input-email"
                                                     >
-                                                        Email address
+                                                        {t("email")}
                                                     </label>
                                                     <input
                                                         className="form-control-alternative form-control"
@@ -202,13 +207,13 @@ export function Profile(props) {
                                         </Row>
                                     </div>
                                     <hr className="my-4"/>
-                                    <h6 className="heading-small text-muted mb-4">About me</h6>
+                                    <h6 className="heading-small text-muted mb-4">{t("about_me")}</h6>
                                     <div>
                                         <FormGroup>
-                                            <label>About Me</label>
+                                            <label>{t("about_me")}</label>
                                             <textarea
                                                 className="form-control-alternative form-control"
-                                                placeholder="A few words about you ..."
+                                                placeholder={t("few_words")}
                                                 rows="4"
                                                 defaultValue={user.notes}
                                                 ref={notes}
@@ -222,7 +227,7 @@ export function Profile(props) {
                                             className="float-right"
                                             disabled={disabled}
                                         >
-                                            Save
+                                            {t("save")}
                                         </Button>
                                     </div>
                                 </Form>
@@ -234,7 +239,7 @@ export function Profile(props) {
                             <CardHeader className="bg-white border-0">
                                 <Row className="align-items-center">
                                     <Col xs="8">
-                                        <h3 className="mb-0">Change Password</h3>
+                                        <h3 className="mb-0">{t("change_password")}</h3>
                                     </Col>
 
                                 </Row>
@@ -250,13 +255,13 @@ export function Profile(props) {
                                                         className="form-control-label"
                                                         htmlFor="input-first-name"
                                                     >
-                                                        Old Password
+                                                        {t("old_password")}
                                                     </label>
                                                     <input
                                                         className="form-control-alternative form-control"
                                                         ref={old_password}
                                                         type="password"
-                                                        placeholder="Type old password"
+                                                        placeholder={t("old_password")}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -269,13 +274,13 @@ export function Profile(props) {
                                                         className="form-control-label"
                                                         htmlFor="input-email"
                                                     >
-                                                        New Password
+                                                        {t("new_password")}
                                                     </label>
                                                     <input
                                                         className="form-control-alternative form-control"
                                                         ref={new_password}
                                                         type="password"
-                                                        placeholder="Type new password"
+                                                        placeholder={t("new_password")}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -288,13 +293,13 @@ export function Profile(props) {
                                                         className="form-control-label"
                                                         htmlFor="input-email"
                                                     >
-                                                        Confirm Password
+                                                        {t("confirm_password")}
                                                     </label>
                                                     <input
                                                         className="form-control-alternative form-control"
                                                         ref={confirm_password}
                                                         type="password"
-                                                        placeholder="Confirm password"
+                                                        placeholder={t("confirm_password")}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -306,7 +311,7 @@ export function Profile(props) {
                                         onClick={changePasswordHandler}
                                         className="float-right"
                                     >
-                                        Save
+                                        {t("save")}
                                     </Button>
                                 </Form>
                             </CardBody>

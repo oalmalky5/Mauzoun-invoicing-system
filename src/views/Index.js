@@ -40,7 +40,7 @@ import {
 
 import Header from "components/Headers/Header.js";
 import { useTranslation } from 'react-i18next'
-import i18next from 'i18next'
+
 
 
 const Index = (props) => {
@@ -57,7 +57,7 @@ const Index = (props) => {
         setChartExample1Data("data" + index);
     };
 
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
 
 

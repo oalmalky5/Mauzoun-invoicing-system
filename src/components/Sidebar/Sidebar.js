@@ -53,15 +53,15 @@ import {
 } from "reactstrap";
 import i18next from "i18next";
 import cookies from 'js-cookie';
-
+import { useTranslation } from 'react-i18next'
 var ps;
 
-const Sidebar = (props,{onChangeLanguage}) => {
+const Sidebar = (props) => {
     const [collapseOpen, setCollapseOpen] = useState();
     const lang = localStorage.getItem("lang");
     const [language, setLanguage] = useState(lang);
     const currentLanguage = cookies.get('i18next') || 'en';
-
+    const {t} = useTranslation();
 
     const handleLanguage = () => {
         if (currentLanguage === "en") {
@@ -187,28 +187,20 @@ const Sidebar = (props,{onChangeLanguage}) => {
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem className="noti-title" header tag="div">
-                                <h6 className="text-overflow m-0">Welcome!</h6>
+                                <h6 className="text-overflow m-0">{t("welcome")}</h6>
                             </DropdownItem>
                             <DropdownItem to="/admin/user-profile" tag={Link}>
                                 <i className="ni ni-single-02"/>
-                                <span>My profile</span>
+                                <span>{t("my_profile")}</span>
                             </DropdownItem>
                             <DropdownItem to="/admin/user-profile" tag={Link}>
                                 <i className="ni ni-settings-gear-65"/>
-                                <span>Settings</span>
-                            </DropdownItem>
-                            <DropdownItem to="/admin/user-profile" tag={Link}>
-                                <i className="ni ni-calendar-grid-58"/>
-                                <span>Activity</span>
-                            </DropdownItem>
-                            <DropdownItem to="/admin/user-profile" tag={Link}>
-                                <i className="ni ni-support-16"/>
-                                <span>Support</span>
+                                <span>{t("settings")}</span>
                             </DropdownItem>
                             <DropdownItem divider/>
                             <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                                 <i className="ni ni-user-run"/>
-                                <span>Logout</span>
+                                <span>{t("logout")}</span>
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
