@@ -27,6 +27,7 @@ import Icons from "views/examples/Icons.js";
 import UsersManagement from "./views/examples/UsersManagement";
 import CustomersManagement from "./views/examples/CustomersManagement";
 import InvoiceManagement from "./views/examples/InvoiceManagement";
+import {EditUser} from "./views/Users/EditUser";
 
 var routes = [
     {
@@ -79,10 +80,10 @@ var routes = [
         layout: "/admin",
     },
     {
-        path: "/users/:id",
+        path: "/users/edit/:id",
         name: "Edit User",
         icon: "ni ni-single-02 text-primary",
-        component: Profile,
+        component: EditUser,
         layout: "/default",
     }
 

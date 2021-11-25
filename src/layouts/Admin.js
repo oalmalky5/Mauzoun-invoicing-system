@@ -23,16 +23,8 @@ import {Container} from "reactstrap";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-
+import cookies from 'js-cookie'
 import routes from "routes.js";
-
-let lang = localStorage.getItem("lang");
-
-if (lang === "en") {
-    import("assets/css/argon-dashboard-react.css")
-} else {
-    import("assets/css/argon-dashboard-react-rtl.css");
-}
 
 const Admin = (props) => {
     const mainContent = React.useRef(null);
@@ -40,8 +32,16 @@ const Admin = (props) => {
     const [language, setLanguage] = useState();
 
     const langChange = (lang) => {
-      // setLanguage(lang);
+      // alert(lang)
     };
+
+    const currentLanguage = cookies.get('i18next') || 'en';
+
+    if (currentLanguage === "en" || currentLanguage === null) {
+        import("assets/css/argon-dashboard-react.css");
+    } else {
+        import("assets/css/argon-dashboard-react-rtl.css");
+    }
 
     React.useEffect(() => {
         document.documentElement.scrollTop = 0;
@@ -87,7 +87,7 @@ const Admin = (props) => {
                     imgSrc: require("../assets/img/brand/main-logo.png").default,
                     imgAlt: "...",
                 }}
-                onChangeLanguage={langChange(lang)}
+                onChangeLanguage={langChange(currentLanguage)}
             />
             <div className="main-content" ref={mainContent}>
                 <AdminNavbar

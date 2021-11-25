@@ -44,7 +44,6 @@ const UserHeader = ({user}) => {
               <p className="text-white mt-0 mb-5">
                   {user.notes}
               </p>
-
             </Col>
           </Row>
         </Container>

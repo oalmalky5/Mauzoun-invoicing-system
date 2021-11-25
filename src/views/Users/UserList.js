@@ -4,6 +4,7 @@ import $ from "jquery";
 // import DataTable from "datatables.net";
 
 import {useHistory} from 'react-router';
+import {Link} from 'react-router-dom';
 import alertify from "alertifyjs";
 
 
@@ -135,8 +136,7 @@ export function UserList(props) {
                                                         </DropdownToggle>
                                                         <DropdownMenu className="dropdown-menu-arrow" right>
                                                             <DropdownItem
-                                                                href="#pablo"
-                                                                onClick={(e) => e.preventDefault()}
+                                                                tag={Link} to={`/admin/users/edit/${user.id}`}
                                                             >
                                                                 Edit
                                                             </DropdownItem>

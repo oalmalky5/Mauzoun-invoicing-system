@@ -51,6 +51,8 @@ import {
     Row,
     Col,
 } from "reactstrap";
+import i18next from "i18next";
+import cookies from 'js-cookie';
 
 var ps;
 
@@ -58,17 +60,18 @@ const Sidebar = (props,{onChangeLanguage}) => {
     const [collapseOpen, setCollapseOpen] = useState();
     const lang = localStorage.getItem("lang");
     const [language, setLanguage] = useState(lang);
-
+    const currentLanguage = cookies.get('i18next') || 'en';
 
 
     const handleLanguage = () => {
-        if (language === "en") {
-            localStorage.setItem("lang", "ar");
-            setLanguage("ar");
+        if (currentLanguage === "en") {
+            i18next.changeLanguage(currentLanguage);
+            cookies.set('i18next','ar');
             history.go(0)
         }else{
-          localStorage.setItem("lang", "en");
-            setLanguage("en");
+            // cookies.setItem('i18next','en');
+            i18next.changeLanguage(currentLanguage);
+            cookies.set('i18next','en');
             history.go(0)
         }
     };
