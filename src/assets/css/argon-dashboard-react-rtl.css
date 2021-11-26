@@ -15,6 +15,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+@import "fonts.css";
+
 :root {
     --blue: #5e72e4;
     --indigo: #5603ad;
@@ -59,7 +61,7 @@
 }
 
 html {
-    font-family: sans-serif;
+    font-family: "GE Dinar Two","Alegreya Sans";
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -72,11 +74,11 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
     margin: 0;
-    font-family: Open Sans, sans-serif;
+    font-family: "GE Dinar Two","Alegreya Sans";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #525f7f;
+    color: #0a0c0d;
     text-align: right;
     background-color: #f8f9fe
 }
@@ -94,6 +96,21 @@ hr {
 h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 0.5rem;
+    font-family: "GE Dinar One" !important;
+}
+
+label {
+    font-family: "GE Dinar One" !important;
+    font-weight: 500;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-family: "GE Dinar One","Alegreya Sans" !important;
+    font-weight: 500;
+}
+
+.alertify-notifier.ajs-right{
+    left: 10px!important;
 }
 
 p {
@@ -175,7 +192,7 @@ a {
 }
 
 a:hover {
-    color: #233dd2;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -3755,10 +3772,11 @@ input[type="button"].btn-block {
 }
 
 .dropdown-item.active, .dropdown-item:active {
-    color: #fff;
+    color: #000000;
     text-decoration: none;
-    background-color: #5e72e4;
+    background-color: #f8d952;
 }
+
 
 .dropdown-item.disabled, .dropdown-item:disabled {
     color: #adb5bd;
@@ -3768,6 +3786,10 @@ input[type="button"].btn-block {
 
 .dropdown-menu.show {
     display: block;
+}
+
+td .dropdown-menu {
+    transform: translate3d(0px, -77px, 0px) !important;
 }
 
 .dropdown-header {
@@ -7113,7 +7135,7 @@ button.bg-dark:focus {
 }
 
 .bg-default {
-    background-color: #172b4d !important;
+    background-color: #212529 !important;
 }
 
 a.bg-default:hover, a.bg-default:focus,
@@ -15898,7 +15920,7 @@ button.bg-lighter:focus {
 }
 
 .bg-gradient-info {
-    background: linear-gradient(-87deg, #11cdef 0, #1171ef 100%) !important;
+    background: linear-gradient(-87deg, #fbec9a 0, #f8d952 100%) !important;
 }
 
 .bg-gradient-warning {
@@ -16176,7 +16198,7 @@ button.section-darker:focus {
 }
 
 .bg-gradient-info {
-    background: linear-gradient(-87deg, #11cdef 0, #1171ef 100%) !important;
+    background: linear-gradient(-87deg, #fbec9a 0, #f8d952 100%) !important;
 }
 
 .bg-gradient-warning {
@@ -16276,7 +16298,7 @@ button.section-darker:focus {
 }
 
 .fill-default {
-    fill: #172b4d;
+    fill: #212529;
 }
 
 .stroke-default {
@@ -19222,14 +19244,6 @@ textarea[resize="horizontal"] {
     position: relative;
 }
 
-.navbar-vertical .navbar-nav .nav-link.active:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0.25rem;
-    bottom: 0.25rem;
-    border-right: 2px solid #5e72e4;
-}
 
 .navbar-vertical .navbar-nav .nav-link > i {
     min-width: 2.25rem;
@@ -19564,12 +19578,19 @@ textarea[resize="horizontal"] {
     }
 
     .navbar-vertical.navbar-expand-md .navbar-nav .nav-link.active:before {
-        top: 0.25rem;
-        bottom: 0.25rem;
-        right: 0;
-        left: auto;
-        border-right: 2px solid #5e72e4;
-        border-bottom: 0;
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 40px;
+        height: 40px;
+        right: 12px;
+        background: url("../img/icons/common/tilted-square.svg") no-repeat;
+        background-size: cover;
+        z-index: -1;
+        filter: invert(99%) sepia(59%) saturate(426%) hue-rotate(
+                169deg) brightness(112%) contrast(100%);
     }
 
     .navbar-vertical.navbar-expand-md .navbar-nav .nav .nav-link {
@@ -19670,15 +19691,6 @@ textarea[resize="horizontal"] {
 
     .navbar-vertical.navbar-expand-lg .navbar-nav .nav-link {
         padding: 0.65rem 1.5rem;
-    }
-
-    .navbar-vertical.navbar-expand-lg .navbar-nav .nav-link.active:before {
-        top: 0.25rem;
-        bottom: 0.25rem;
-        right: 0;
-        left: auto;
-        border-right: 2px solid #5e72e4;
-        border-bottom: 0;
     }
 
     .navbar-vertical.navbar-expand-lg .navbar-nav .nav .nav-link {

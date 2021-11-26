@@ -53,7 +53,8 @@ import {
 } from "reactstrap";
 import i18next from "i18next";
 import cookies from 'js-cookie';
-import { useTranslation } from 'react-i18next'
+import {useTranslation} from 'react-i18next'
+
 var ps;
 
 const Sidebar = (props) => {
@@ -66,12 +67,12 @@ const Sidebar = (props) => {
     const handleLanguage = () => {
         if (currentLanguage === "en") {
             i18next.changeLanguage(currentLanguage);
-            cookies.set('i18next','ar');
+            cookies.set('i18next', 'ar');
             history.go(0)
-        }else{
+        } else {
             // cookies.setItem('i18next','en');
             i18next.changeLanguage(currentLanguage);
-            cookies.set('i18next','en');
+            cookies.set('i18next', 'en');
             history.go(0)
         }
     };
@@ -91,7 +92,7 @@ const Sidebar = (props) => {
 
     useEffect(() => {
 
-    }, [])
+    }, []);
     // creates the links that appear in the left menu / Sidebar
     const createLinks = (routes) => {
         return routes.map((prop, key) => {
@@ -131,7 +132,7 @@ const Sidebar = (props) => {
 
     return (
         <Navbar
-            className="navbar-vertical fixed-left navbar-light bg-white"
+            className="navbar-vertical fixed-left navbar-light bg-yellow"
             expand="md"
             id="sidenav-main"
         >

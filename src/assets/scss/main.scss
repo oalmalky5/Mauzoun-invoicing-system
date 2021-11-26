@@ -1,3 +1,7 @@
+body{
+  margin: 0;
+  padding: 0;
+}
 .lang-toggle{
   direction: ltr!important;
 
@@ -24,6 +28,36 @@
   }
 }
 
-.custom-toggle-slider:before{
-  background-color: #5e72e4 !important;
+.navbar-dark .navbar-nav .nav-link {
+  color: #212529!important;
 }
+
+.custom-toggle-slider {
+  border: 1px solid #212529!important;
+
+  &:before {
+    background-color: #212529 !important;
+  }
+}
+
+.bg-yellow{
+  background-color: #f8d952;
+}
+
+
+.navbar-light .navbar-nav .nav-link {
+  color: #212529!important;
+  font-size: 20px!important;
+
+  &:hover,&.active{
+    color: #000000!important;
+  }
+}
+
+.alertify-notifier{
+  color: #FFFFFF!important;
+  border-radius: 7px;
+}
+
+
+

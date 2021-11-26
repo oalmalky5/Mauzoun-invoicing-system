@@ -137,9 +137,8 @@ export function Profile(props) {
                             <CardHeader className="bg-white border-0">
                                 <Row className="align-items-center">
                                     <Col xs="8">
-                                        <h3 className="mb-0">{t("my_account")}</h3>
+                                        <h2 className="mb-0">{t("my_account")}</h2>
                                     </Col>
-
                                 </Row>
                             </CardHeader>
                             <CardBody>
@@ -221,7 +220,7 @@ export function Profile(props) {
                                             ></textarea>
                                         </FormGroup>
                                         <Button
-                                            color="info"
+                                            color="dark"
                                             href="#pablo"
                                             onClick={updateProfileHandler}
                                             className="float-right"
@@ -239,9 +238,8 @@ export function Profile(props) {
                             <CardHeader className="bg-white border-0">
                                 <Row className="align-items-center">
                                     <Col xs="8">
-                                        <h3 className="mb-0">{t("change_password")}</h3>
+                                        <h2 className="mb-0">{t("change_password")}</h2>
                                     </Col>
-
                                 </Row>
                             </CardHeader>
                             <CardBody>
@@ -306,7 +304,7 @@ export function Profile(props) {
                                         </Row>
                                     </div>
                                     <Button
-                                        color="info"
+                                        color="dark"
                                         href="#pablo"
                                         onClick={changePasswordHandler}
                                         className="float-right"

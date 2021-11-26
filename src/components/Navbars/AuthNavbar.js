@@ -38,7 +38,7 @@ const AdminNavbar = () => {
             <img
               alt="..."
               src={
-                require("../../assets/img/brand/logo-white.png").default
+                require("../../assets/img/brand/main-logo.png").default
               }
             />
           </NavbarBrand>

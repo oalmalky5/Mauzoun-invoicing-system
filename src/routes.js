@@ -24,7 +24,7 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
-import UsersManagement from "./views/examples/UsersManagement";
+
 import CustomersManagement from "./views/examples/CustomersManagement";
 import InvoiceManagement from "./views/examples/InvoiceManagement";
 import {EditUser} from "./views/Users/EditUser";
@@ -34,56 +34,56 @@ var routes = [
     {
         path: "/index",
         name: "Dashboard",
-        icon: "fas fa-desktop text-primary",
+        icon: "fas fa-desktop",
         component: Index,
         layout: "/admin",
     },
     {
         path: "/users/list",
         name: "Users List",
-        icon: "fas fa-users text-primary",
+        icon: "fas fa-users",
         component: UserList,
         layout: "/admin",
     },
     {
         path: "/users/create",
         name: "Create User",
-        icon: "fas fa-plus text-primary ",
+        icon: "fas fa-plus ",
         component: CreateUser,
         layout: "/admin",
     },
     {
         path: "/customers-management",
-        name: "Customers Management",
-        icon: "fas fa-users-cog text-primary",
+        name: "Customers List",
+        icon: "fas fa-users-cog",
         component: CustomersManagement,
         layout: "/admin",
     },
     {
         path: "/invoice-management",
-        name: "Invoice Management",
-        icon: "fas fa-scroll text-primary",
+        name: "Invoices",
+        icon: "fas fa-scroll",
         component: InvoiceManagement,
         layout: "/admin",
     },
     {
         path: "/login",
         name: "Login",
-        icon: "fas fa-sign-in-alt text-primary",
+        icon: "fas fa-sign-in-alt",
         component: Login,
         layout: "/auth",
     },
     {
         path: "/profile",
         name: "Profile",
-        icon: "ni ni-single-02 text-primary",
+        icon: "fas fa-user",
         component: Profile,
         layout: "/admin",
     },
     {
         path: "/users/edit/:id",
         name: "Edit User",
-        icon: "ni ni-single-02 text-primary",
+        icon: "ni ni-single-02",
         component: EditUser,
         layout: "/default",
     }

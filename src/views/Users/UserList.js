@@ -101,7 +101,7 @@ export function UserList(props) {
                     <Col md={12}>
                         <Card>
                             <CardHeader>
-                                {t("users_list")}
+                               <h2 className="mb-0"> {t("users_list")}</h2>
                             </CardHeader>
                             <CardBody style={{overflow: 'auto'}}>
 

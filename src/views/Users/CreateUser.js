@@ -73,7 +73,7 @@ export function CreateUser(props) {
                     <Col md={12}>
                         <Card>
                             <CardHeader>
-                                <h3 className="mb-0">{t("add_new_user")}</h3>
+                                <h2 className="mb-0">{t("add_new_user")}</h2>
                             </CardHeader>
                             <CardBody>
 
@@ -133,7 +133,7 @@ export function CreateUser(props) {
                                         </Row>
 
                                         <Button variant="primary" className="float-right" type="submit"
-                                                disabled={disabled} color="info"
+                                                disabled={disabled} color="dark"
                                                 href="#pablo" onClick={createUserHandler}>
                                             {t("save")}
                                             <span

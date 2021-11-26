@@ -71,7 +71,7 @@ axios.defaults.headers.common['Authorization'] = "Bearer " + token;
 
 
 ReactDOM.render(
-    <Suspense fallback={'loading'}>
+    <Suspense fallback={<div>Loading..</div>}>
         <BrowserRouter>
             <Switch>
                 <Route path="/admin" render={(props) => <AdminLayout {...props} />}/>

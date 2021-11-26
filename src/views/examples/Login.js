@@ -102,7 +102,7 @@ const Login = () => {
                 <Card className="bg-secondary shadow border-0">
                     <CardBody className="px-lg-5 py-lg-5">
                         <div className="text-center text-muted mb-4">
-                            <small>{t("sign_in")}</small>
+                            <h2>{t("sign_in")}</h2>
                         </div>
                         <Form role="form">
                             <FormGroup className="mb-3">
@@ -138,7 +138,7 @@ const Login = () => {
                                 </InputGroup>
                             </FormGroup>
                             <div className="text-center">
-                                <Button className="my-4" color="primary" type="button" onClick={e => loginHandler(e)}
+                                <Button className="mt-4" color="dark" type="button" onClick={e => loginHandler(e)}
                                         disabled={disabled}>
                                     {t("sign_in")}
                                 </Button>
