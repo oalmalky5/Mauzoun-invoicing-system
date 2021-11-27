@@ -267,7 +267,7 @@ const Sidebar = (props) => {
                         {/*    </NavLink>*/}
                         {/*  </NavItem>*/}
                         {/*</Nav>*/}
-                        <div className="d-flex lang-toggle align-content-center justify-content-center py-3">
+                        <div className="d-flex lang-toggle align-content-center justify-content-center py-3 mt-auto">
                             <span className="en font-weight-600">English</span>
                             <label className="custom-toggle">
                                 <input defaultChecked={false} type="checkbox" onChange={handleLanguage}/>
