@@ -14,6 +14,8 @@ class Invoice extends Model
 
     protected $guarded = [];
     protected $with = ['details', 'customer'];
+    protected $appends = ['address'];
+
     public function details()
     {
         return $this->hasMany(InvoiceDetail::class);
@@ -22,6 +24,11 @@ class Invoice extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function getAddressAttribute()
+    {
+        return $this->street . ', ' . $this->city . ', ' . $this->state . ', ' . $this->zip_code . ', ' . $this->country;
     }
 
     public function getInvoiceDateFormattedAttribute()

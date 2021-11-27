@@ -23,6 +23,7 @@ class CreateInvoicesTable extends Migration
             $table->string('billing_name')->nullable();
             $table->string('billing_company_name')->nullable();
             $table->string('billing_email')->nullable();
+            $table->string('billing_phone')->nullable();
             $table->string('billing_street')->nullable();
             $table->string('billing_city')->nullable();
             $table->string('billing_state')->nullable();

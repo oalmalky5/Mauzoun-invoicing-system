@@ -114,6 +114,10 @@
       <path value="$PROJECT_DIR$/backend/vendor/sebastian/type" />
       <path value="$PROJECT_DIR$/backend/vendor/sebastian/global-state" />
       <path value="$PROJECT_DIR$/backend/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/backend/vendor/setasign/fpdi" />
+      <path value="$PROJECT_DIR$/backend/vendor/carlos-meneses/laravel-mpdf" />
+      <path value="$PROJECT_DIR$/backend/vendor/mpdf/mpdf" />
+      <path value="$PROJECT_DIR$/backend/vendor/paragonie/random_compat" />
     </include_path>
   </component>
   <component name="PhpUnit">
