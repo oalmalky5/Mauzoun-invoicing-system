@@ -49,32 +49,11 @@ axios.create({
 axios.defaults.headers.common['Authorization'] = "Bearer " + token;
 // const languages = ['en', 'ar'];
 
-// i18next
-//     .use(HttpApi)
-//     .use(LanguageDetector)
-//     .use(initReactI18next)
-//     .init({
-//         supportedLngs: ['en', 'ar'],
-//         fallbackLng: 'en',
-//         debug: false,
-//         // Options for language detector
-//         // whitelist: languages,
-//         detection: {
-//             order: ['cookie', 'htmlTag', 'path'],
-//             caches: ['cookie'],
-//         },
-//         // react: { useSuspense: false },
-//         backend: {
-//             loadPath: '/assets/locales/{{lng}}/translation.js',
-//         },
-//     });
-
-
 ReactDOM.render(
     <Suspense fallback={<div>Loading..</div>}>
         <BrowserRouter>
             <Switch>
-                <Route path="/admin" render={(props) => <AdminLayout {...props} />}/>
+                <Route path="/admin" render={(props) => <AdminLayout {...props}  />}/>
                 <Route path="/auth" render={(props) => <AuthLayout {...props} />}/>
 
                 <Redirect from="/" to="/auth/login"/>
@@ -83,4 +62,5 @@ ReactDOM.render(
     </Suspense>,
     document.getElementById("root")
 );
+
 

@@ -29,8 +29,6 @@ import routes from "routes.js";
 const Admin = (props) => {
     const mainContent = React.useRef(null);
     const location = useLocation();
-    const [language, setLanguage] = useState();
-
 
     const currentLanguage = cookies.get('i18next') || 'en';
 
@@ -44,6 +42,7 @@ const Admin = (props) => {
         document.documentElement.scrollTop = 0;
         document.scrollingElement.scrollTop = 0;
         mainContent.current.scrollTop = 0;
+
     }, [location]);
 
     const getRoutes = (routes) => {

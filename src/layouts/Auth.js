@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React ,{useEffect} from "react";
 import {useLocation, Route, Switch, Redirect} from "react-router-dom";
 // reactstrap components
 import {Container, Row, Col} from "reactstrap";
@@ -27,7 +27,9 @@ import AuthFooter from "components/Footers/AuthFooter.js";
 import routes from "routes.js";
 import cookies from "js-cookie";
 
-const Auth = (props) => {
+
+
+const Auth = (props, {hideLoader}) => {
     const mainContent = React.useRef(null);
     const location = useLocation();
 
@@ -39,17 +41,21 @@ const Auth = (props) => {
         import("assets/css/argon-dashboard-react-rtl.css");
     }
 
-    React.useEffect(() => {
+
+    React.useEffect((loader) => {
         document.body.classList.add("bg-default");
         return () => {
             document.body.classList.remove("bg-default");
         };
+
     }, []);
     React.useEffect(() => {
         document.documentElement.scrollTop = 0;
         document.scrollingElement.scrollTop = 0;
         mainContent.current.scrollTop = 0;
+
     }, [location]);
+
 
     const getRoutes = (routes) => {
         return routes.map((prop, key) => {

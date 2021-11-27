@@ -19225,7 +19225,7 @@ textarea[resize="horizontal"] {
     .navbar-vertical .navbar-collapse:before {
         content: '';
         display: block;
-        margin: 1rem -1rem;
+        margin: 0.3rem -1rem;
     }
 }
 
