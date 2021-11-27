@@ -8,7 +8,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Meneses\LaravelMpdf\LaravelMpdf;
+use PDF;
 
 class InvoiceController extends Controller
 {
@@ -18,6 +21,26 @@ class InvoiceController extends Controller
             'status' => true,
             'data' => Invoice::with('customer')->get()
         ]);
+    }
+
+    public function invoice_view(Request $request)
+    {
+        return view('invoice', ['invoice' => Invoice::find($request->id)]);
+    }
+
+    public function invoice_pdf(Request $request)
+    {
+        $Invoice = Invoice::find($request->id);
+
+        $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
+        //File::delete($filename);
+
+        $view = "invoice";
+        $pdf = PDF::loadView($view, array(
+            'invoice' => $Invoice,
+            'is_pdf' => true
+        ));
+        return $pdf->stream($view);
     }
 
     public function store(Request $request)
@@ -75,6 +98,21 @@ class InvoiceController extends Controller
             $Invoice->details()->create($details);
             //InvoiceDetail::created($details);
         }
+
+        $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
+        File::delete($filename);
+
+        $view = "invoice";
+        PDF::loadView($view, array(
+            'invoice' => $Invoice,
+            'is_pdf' => true
+        ))->save(public_path() . '/invoices/' . $filename, 'F');
+
+        exit();
+//        PDF::loadView($view, array(
+//            'invoice' => $Invoice
+//        ))->Output(public_path() . '/invoices/' . $filename, 'F');
+
 
         return response()->json([
             'status' => true,

@@ -103,7 +103,7 @@ export function InvoiceList(props) {
                             <CardHeader>
                                 <h2 className="mb-0">{t("invoices_list")}</h2>
                             </CardHeader>
-                            <CardBody style={{overflow: 'auto'}}>
+                            <CardBody>
 
                                 <table id="invoice_table"
                                        className="stratprop_datatable table table-bordered align-items-center table-flush table">
@@ -114,8 +114,8 @@ export function InvoiceList(props) {
                                         <th>{t("address")}</th>
                                         <th>{t("email")}</th>
                                         <th>{t("phone")}</th>
-                                        <th>{t("total")}</th>
-                                        <th>{t("amount")}</th>
+                                        <th>{t("tota_amount")}</th>
+                                        <th>{t("notes")}</th>
                                         <th>{t("actions")}</th>
                                     </tr>
                                     </thead>
@@ -134,7 +134,7 @@ export function InvoiceList(props) {
                                                 </td>
                                                 <td>{invoice.billing_email}</td>
                                                 <td>{invoice.billing_phone}</td>
-                                                <td>{invoice.total_amount}</td>
+                                                <td>{invoice.total}</td>
                                                 <td>{invoice.notes}</td>
                                                 <td>
                                                     <UncontrolledDropdown>
