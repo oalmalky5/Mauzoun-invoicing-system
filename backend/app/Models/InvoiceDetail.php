@@ -10,21 +10,7 @@ class InvoiceDetail extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use \Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
 
     protected $guarded = [];
-    protected $appends = ['tax_ids'];
-    protected $casts = [
-        'taxes' => 'json',
-    ];
 
-    public function getTaxIdsAttribute()
-    {
-        return $this->taxes()->pluck('id')->toArray();
-    }
-
-    public function taxes()
-    {
-        return $this->belongsToJson(Tax::class, 'taxes->list[]->id');
-    }
 }

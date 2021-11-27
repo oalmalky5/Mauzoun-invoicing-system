@@ -12,6 +12,7 @@ class CustomerController extends Controller
     public function all()
     {
         return response()->json([
+            "status" => true,
             'data' => Customer::all()
         ]);
     }
@@ -28,9 +29,8 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|unique:customers',
-            'password' => 'required|min:6'
+            'first_name' => 'required',
+            'email' => 'required|unique:customers'
         ]);
 
         if ($validator->fails()) {
@@ -44,6 +44,7 @@ class CustomerController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'website' => $request->website,
             'company_name' => $request->company_name,
             'street' => $request->street,
@@ -51,9 +52,7 @@ class CustomerController extends Controller
             'state' => $request->state,
             'zip_code' => $request->zip_code,
             'country' => $request->country,
-            'dob' => $request->dob,
             'notes' => $request->notes,
-            'password' => Hash::make($request->password),
         ]);
 
         return response()->json([
@@ -65,7 +64,7 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'first_name' => 'required',
             'id' => 'required'
         ]);
 
@@ -80,6 +79,7 @@ class CustomerController extends Controller
         $Customer->first_name = $request->first_name;
         $Customer->last_name = $request->last_name;
         $Customer->email = $request->email;
+        $Customer->phone = $request->phone;
         $Customer->website = $request->website;
         $Customer->company_name = $request->company_name;
         $Customer->street = $request->street;
@@ -87,7 +87,6 @@ class CustomerController extends Controller
         $Customer->state = $request->state;
         $Customer->zip_code = $request->zip_code;
         $Customer->country = $request->country;
-        $Customer->dob = $request->dob;
         $Customer->notes = $request->notes;
 
         $Customer->save(); // Can use update here as well

@@ -2,7 +2,7 @@ export const TRANSLATIONS_AR = {
     "app_title": "عنوان",
     "language": "اللغة",
     "welcome": "أهلا بك",
-    "hello":"أهلا",
+    "hello": "أهلا",
     "welcome_message": "مرحبًا بك في لوحة القيادة!",
 
     "sidebar": {
@@ -39,8 +39,38 @@ export const TRANSLATIONS_AR = {
     "save": "يحفظ",
     "enter": "أدخل",
 
-    "edit_user":"تحرير العضو",
+    "edit_user": "تحرير العضو",
     "my_account": "حسابي",
 
-    "sign_in":"تسجيل الدخول"
+    "sign_in": "تسجيل الدخول",
+
+    "add_new_customer": "Add New Customer",
+    "edit_customer": "Edit Customer",
+    "customers_list": "Customers List",
+    "website": "Website",
+    "company_name": "Company Name",
+    "phone": "Phone",
+    "city": "City",
+    "state": "State",
+    "street": "Street",
+    "zip_code": "Zip Code",
+    "country": "Country",
+
+
+    "add_new_invoice": "Add New Invoice",
+    "edit_invoice": "Edit Invoice",
+    "invoices_list": "Invoices List",
+    "customer": "Customer",
+    "add_more": "Add More",
+    "invoice_no": "Invoice No",
+    "invoice_date": "Invoice Date",
+    "invioce_due_date": "Invoice Due Date",
+    "item": "Item",
+    "description": "Description",
+    "price": "Price",
+    "qty": "Qty",
+    "total": "Total",
+    "vat_15": "Vat 15%",
+    "sub_total": "Sub Total",
+    "unit_price": "Unit Price",
 }

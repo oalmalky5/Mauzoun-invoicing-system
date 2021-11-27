@@ -7,6 +7,7 @@ use App\Models\InvoiceDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class InvoiceController extends Controller
@@ -22,9 +23,8 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'invoice_no' => 'required',
             'customer_id' => 'required',
-            'invoice_date' => 'required'
+            'date' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -34,75 +34,46 @@ class InvoiceController extends Controller
             ]);
         }
 
-        /*$is_infinity_cycle = $recurring_interval_value = $recurring_cycle = $recurring_cycle = 0;
-        $recurring_interval_unit = NULL;
-        if ($request->is_recurring) {
-            $recurring_interval_value = $request->recurring_interval_value;
-            $recurring_interval_unit = $request->recurring_interval_unit;
-            if ($request->is_infinity_cycle) {
-                $is_infinity_cycle = 1;
-            } else {
-                $recurring_cycle = $request->recurring_cycle;
-            }
-        }*/
-
         $Invoice = Invoice::create([
-            'invoice_no' => $request->invoice_no,
-            'invoice_date' => Carbon::createFromFormat('d/m/Y', $request->invoice_date)->format('Y-m-d'),
-            'due_date' => Carbon::createFromFormat('d/m/Y', $request->due_date)->format('Y-m-d'),
-            'is_recurring' => $request->is_recurring,
+            'sr_no' => $request->sr_no,
+            'date' => $request->date,//Carbon::createFromFormat('Y-m-d', $request->date)->format('Y-m-d'),
+            'due_date' => $request->due_date, //Carbon::createFromFormat('Y-m-d', $request->due_date)->format('Y-m-d'),
+            'billing_name' => $request->billing_name,
+            'billing_company_name' => $request->billing_company_name,
+            'billing_email' => $request->billing_email,
+            'billing_street' => $request->billing_street,
             'billing_city' => $request->billing_city,
             'billing_state' => $request->billing_state,
             'billing_zip_code' => $request->billing_zip_code,
-            'billing_address' => $request->billing_address,
-            'billing_country_id' => $request->billing_country_id,
-            'shipping_city' => $request->shipping_city,
-            'shipping_state' => $request->shipping_state,
-            'shipping_zip_code' => $request->shipping_zip_code,
-            'shipping_address' => $request->shipping_address,
-            'shipping_country_id' => $request->shipping_country_id,
-            'quantity_type' => $request->quantity_type,
-            'discount_type' => $request->discount_type,
-            'total_amount' => $request->total_amount,
-            'discount_unit' => $request->discount_unit,
-            'discount_value' => $request->discount_value,
-            'discount_amount' => $request->discount_amount,
-            'adjustment_amount' => $request->adjustment_amount,
-            'net_amount' => $request->net_amount,
-            'admin_notes' => $request->admin_notes,
-            'client_notes' => $request->client_notes,
-            'terms_and_conditions' => $request->terms_and_conditions,
-            'currency_id' => $request->currency_id,
+            'billing_country' => $request->billing_country,
+            'total' => $request->total,
+            'vat' => $request->vat,
+            'sub_total' => $request->sub_total,
+            'notes' => $request->notes,
+            'currency' => $request->currency,
             'customer_id' => $request->customer_id,
-            'sale_agent_id' => $request->sale_agent_id
+            'created_by' => Auth::id()
         ]);
 
-        $Invoice->save();
+        if (empty($request->sr_no)) {
+            $sr_no = date('y') . str_pad(date("z"), 3, "0", STR_PAD_LEFT);
+            $Invoice->sr_no = $sr_no . str_pad($Invoice->id, 5, '0', STR_PAD_LEFT);
+            $Invoice->save();
+        }
 
-        /*foreach ($request->taxes as $tax) {
-            $tax_id = Arr::pull($tax, 'id');
-            $Invoice->taxes()->attach([$tax_id => $tax])->save();
-        }*/
 
-        foreach ($request->details as $key => $detail) {
+        foreach ($request->items as $key => $detail) {
 
             $details = [
-                'item_id' => $detail['item_id'],
+                'item' => $detail['item'],
                 'description' => $detail['description'],
-                'long_description' => $detail['long_description'],
                 'qty' => $detail['qty'],
-                'unit' => $detail['unit'],
-                'unit_id' => $detail['unit_id'],
-                'rate' => $detail['rate'],
-                'total_amount' => $detail['net_amount'], //same as net amount
-                'net_amount' => $detail['net_amount'],
+                'price' => $detail['price'],
+                'total' => $detail['total']
             ];
-            $InvoiceDetail = $Invoice->details()->create($details);
 
-            /*foreach ($detail['taxes'] as $tax) {
-                $tax_id = Arr::pull($tax, 'id');
-                $InvoiceDetail->taxes()->attach([$tax_id => $tax])->save();
-            }*/
+            $Invoice->details()->create($details);
+            //InvoiceDetail::created($details);
         }
 
         return response()->json([
@@ -129,9 +100,8 @@ class InvoiceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id' => 'required',
-            'invoice_no' => 'required',
             'customer_id' => 'required',
-            'invoice_date' => 'required'
+            'date' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -141,21 +111,9 @@ class InvoiceController extends Controller
             ]);
         }
 
-        $is_infinity_cycle = $recurring_interval_value = $recurring_cycle = $recurring_cycle = 0;
-        $recurring_interval_unit = NULL;
-        if ($request->is_recurring) {
-            $recurring_interval_value = $request->recurring_interval_value;
-            $recurring_interval_unit = $request->recurring_interval_unit;
-            if ($request->is_infinity_cycle) {
-                $is_infinity_cycle = 1;
-            } else {
-                $recurring_cycle = $request->recurring_cycle;
-            }
-        }
-
         $Invoice = Invoice::find($request->id);
         $Invoice->invoice_no = $request->invoice_no;
-        $Invoice->invoice_date = Carbon::createFromFormat('d/m/Y', $request->invoice_date)->format('Y-m-d');
+        $Invoice->date = Carbon::createFromFormat('d/m/Y', $request->date)->format('Y-m-d');
         $Invoice->due_date = Carbon::createFromFormat('d/m/Y', $request->due_date)->format('Y-m-d');
         $Invoice->is_recurring = $request->is_recurring;
         $Invoice->recurring_interval_value = $recurring_interval_value;
@@ -165,8 +123,8 @@ class InvoiceController extends Controller
         $Invoice->billing_city = $request->billing_city;
         $Invoice->billing_state = $request->billing_state;
         $Invoice->billing_zip_code = $request->billing_zip_code;
-        $Invoice->billing_address = $request->billing_address;
-        $Invoice->billing_country_id = $request->billing_country_id;
+        $Invoice->billing_street = $request->billing_street;
+        $Invoice->billing_country = $request->billing_country;
         $Invoice->shipping_city = $request->shipping_city;
         $Invoice->shipping_state = $request->shipping_state;
         $Invoice->shipping_zip_code = $request->shipping_zip_code;
@@ -174,7 +132,7 @@ class InvoiceController extends Controller
         $Invoice->shipping_country_id = $request->shipping_country_id;
         $Invoice->quantity_type = $request->quantity_type;
         $Invoice->discount_type = $request->discount_type;
-        $Invoice->total_amount = $request->total_amount;
+        $Invoice->total = $request->total;
         $Invoice->discount_unit = $request->discount_unit;
         $Invoice->discount_value = $request->discount_value;
         $Invoice->discount_amount = $request->discount_amount;
@@ -188,14 +146,7 @@ class InvoiceController extends Controller
         $Invoice->sale_agent_id = $request->sale_agent_id;
 
         $Invoice->save();
-        $Invoice->paymentMethods()->sync($request->payment_methods)->save();
 
-        $taxes = [];
-        foreach ($request->taxes as $tax) {
-            $tax_id = Arr::pull($tax, 'id');
-            $taxes[$tax_id] = $tax;
-        }
-        $Invoice->taxes()->sync($taxes)->save();
 
         $items = array_filter(array_column($request->details, 'item_id'));
         InvoiceDetail::where('invoice_id', $request->id)->whereNotIn('item_id', $items)->delete();
@@ -215,7 +166,7 @@ class InvoiceController extends Controller
                     'unit' => $detail['unit'],
                     'unit_id' => $detail['unit_id'],
                     'rate' => $detail['rate'],
-                    'total_amount' => $detail['net_amount'], //same as net amount
+                    'total' => $detail['net_amount'], //same as net amount
                     'net_amount' => $detail['net_amount'],
                 ]
             );

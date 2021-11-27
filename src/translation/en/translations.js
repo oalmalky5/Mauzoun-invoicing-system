@@ -2,7 +2,7 @@ export const TRANSLATIONS_EN = {
     "app_title": "Title",
     "language": "Language",
     "welcome": "Welcome!",
-    "hello":"Hello",
+    "hello": "Hello",
     "welcome_message": "Welcome to the dashboard!",
 
     "sidebar": {
@@ -13,9 +13,9 @@ export const TRANSLATIONS_EN = {
         "invoice_management": "Invoice Management"
     },
 
-    "search":"Search",
-    "edit":"Edit",
-    "delete":"Delete",
+    "search": "Search",
+    "edit": "Edit",
+    "delete": "Delete",
     "my_profile": "My Profile",
     "settings": "Settings",
     "logout": "Logout",
@@ -30,8 +30,8 @@ export const TRANSLATIONS_EN = {
     "add_new_user": "Add New User",
     "user_information": "user information",
     "about_me": "About Me",
-    "few_words":"A few words about you ...",
-    "change_password":"Change Password",
+    "few_words": "A few words about you ...",
+    "change_password": "Change Password",
     "password": "Password",
     "old_password": "Old Password",
     "new_password": "New Password",
@@ -39,10 +39,40 @@ export const TRANSLATIONS_EN = {
     "save": "Save",
     "enter": "Enter",
 
-    "edit_user":"Edit User",
+    "edit_user": "Edit User",
 
-    "my_account":"My Account",
+    "my_account": "My Account",
 
-    "sign_in":"Sign In"
+    "sign_in": "Sign In",
+
+    "add_new_customer": "Add New Customer",
+    "edit_customer": "Edit Customer",
+    "customers_list": "Customers List",
+    "website": "Website",
+    "company_name": "Company Name",
+    "phone": "Phone",
+    "city": "City",
+    "state": "State",
+    "street": "Street",
+    "zip_code": "Zip Code",
+    "country": "Country",
+
+
+    "add_new_invoice": "Add New Invoice",
+    "edit_invoice": "Edit Invoice",
+    "invoices_list": "Invoices List",
+    "customer": "Customer",
+    "add_more": "Add More",
+    "invoice_no": "Invoice No",
+    "invoice_date": "Invoice Date",
+    "invioce_due_date": "Invoice Due Date",
+    "item": "Item",
+    "description": "Description",
+    "price": "Price",
+    "qty": "Qty",
+    "total": "Total",
+    "vat_15": "Vat 15%",
+    "sub_total": "Sub Total",
+    "unit_price": "Unit Price",
 
 };

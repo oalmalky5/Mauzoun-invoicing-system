@@ -61,8 +61,11 @@ const Login = () => {
                     // localStorage.setItem("lang", "en");
 
 
-
-                    axios.get(API_URL + 'account/me').then((response) => {
+                    axios.get(API_URL + 'account/me', {
+                        headers: {
+                            Authorization: 'Bearer ' + response.data.token.token //the token is a variable which holds the token
+                        }
+                    }).then((response) => {
                         if (response.data.status) {
                             console.log(response.data.data);
                             localStorage.setItem("user-data", JSON.stringify(response.data.data));

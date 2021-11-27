@@ -36,6 +36,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/all', 'App\Http\Controllers\CustomerController@all');
     });
 
+    Route::prefix('/invoices')->group(function () {
+        Route::post('/store', 'App\Http\Controllers\InvoiceController@store');
+        Route::post('/{id}/delete', 'App\Http\Controllers\InvoiceController@destroy');
+        Route::get('/{id}/show', 'App\Http\Controllers\InvoiceController@show');
+        Route::post('/update', 'App\Http\Controllers\InvoiceController@update');
+        Route::get('/all', 'App\Http\Controllers\InvoiceController@all');
+    });
+
     Route::prefix('/account')->group(function () {
         Route::post('/change-password', 'App\Http\Controllers\UserController@changePassword');
         Route::get('/me', 'App\Http\Controllers\UserController@me');

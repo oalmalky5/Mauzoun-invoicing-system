@@ -16,18 +16,12 @@ class CreateInvoiceDetailsTable extends Migration
         Schema::create('invoice_details', function (Blueprint $table) {
             $table->id();
 
+            $table->text('item')->nullable();
             $table->string('description')->nullable();
-            $table->text('long_description')->nullable();
             $table->decimal('qty')->nullable();
-            $table->decimal('rate')->nullable();
-            $table->string('unit')->nullable();
+            $table->decimal('price')->nullable();
+            $table->decimal('total')->nullable();
 
-            $table->decimal('total_amount')->nullable();
-            $table->json('taxes')->nullable();
-            $table->decimal('net_amount')->nullable();
-
-            $table->foreignId('item_id')->constrained();
-            $table->foreignId('unit_id')->constrained();
             $table->foreignId('invoice_id')->constrained();
 
             $table->softDeletes();

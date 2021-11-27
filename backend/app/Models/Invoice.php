@@ -11,40 +11,9 @@ class Invoice extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use \Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
 
     protected $guarded = [];
-    protected $appends = ['paymentMethodIds', 'InvoiceDateFormatted', 'DueDateFormatted'];
-    protected $casts = [
-        'taxes' => 'json',
-        'payment_methods' => 'json'
-    ];
-
-    public function getPaymentMethodIdsAttribute()
-    {
-        return $this->paymentMethods()->pluck('id')->toArray();
-    }
-
-    public function taxes()
-    {
-        return $this->belongsToJson(Tax::class, 'taxes->list[]->id');
-    }
-
-    public function paymentMethods()
-    {
-        return $this->belongsToJson(PaymentMethod::class, 'payment_methods->pm_ids');
-    }
-
-    public function billingCountry()
-    {
-        return $this->belongsTo(Country::class, 'billing_country_id', 'id');
-    }
-
-    public function shippingCountry()
-    {
-        return $this->belongsTo(Country::class, 'shipping_country_id', 'id');
-    }
-
+    protected $with = ['details', 'customer'];
     public function details()
     {
         return $this->hasMany(InvoiceDetail::class);
@@ -53,11 +22,6 @@ class Invoice extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
-    }
-
-    public function currency()
-    {
-        return $this->belongsTo(Currency::class);
     }
 
     public function getInvoiceDateFormattedAttribute()

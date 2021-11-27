@@ -30,6 +30,15 @@ import InvoiceManagement from "./views/examples/InvoiceManagement";
 import {EditUser} from "./views/Users/EditUser";
 
 
+import {CreateCustomer} from "views/Customers/CreateCustomer.js";
+import {CustomerList} from "views/Customers/CustomerList.js";
+import {EditCustomer} from "./views/Customers/EditCustomer";
+
+import {CreateInvoice} from "views/Invoices/CreateInvoice.js";
+import {InvoiceList} from "views/Invoices/InvoiceList.js";
+import {EditInvoice} from "./views/Invoices/EditInvoice";
+
+
 var routes = [
     {
         path: "/index",
@@ -53,11 +62,46 @@ var routes = [
         layout: "/admin",
     },
     {
-        path: "/customers-management",
+        path: "/customers/list",
         name: "Customers List",
-        icon: "fas fa-users-cog",
-        component: CustomersManagement,
+        icon: "fas fa-users ",
+        component: CustomerList,
         layout: "/admin",
+    },
+    {
+        path: "/customers/create",
+        name: "Create Customer",
+        icon: "fas fa-plus  ",
+        component: CreateCustomer,
+        layout: "/admin",
+    },
+    {
+        path: "/customers/edit/:id",
+        name: "Edit Customer",
+        icon: "ni ni-single-02 ",
+        component: EditCustomer,
+        layout: "/default",
+    },
+    {
+        path: "/invoices/list",
+        name: "Invoices List",
+        icon: "fas fa-users ",
+        component: InvoiceList,
+        layout: "/admin",
+    },
+    {
+        path: "/invoices/create",
+        name: "Create Invoice",
+        icon: "fas fa-plus  ",
+        component: CreateInvoice,
+        layout: "/admin",
+    },
+    {
+        path: "/invoices/edit/:id",
+        name: "Edit Invoice",
+        icon: "ni ni-single-02 ",
+        component: EditInvoice,
+        layout: "/default",
     },
     {
         path: "/invoice-management",
