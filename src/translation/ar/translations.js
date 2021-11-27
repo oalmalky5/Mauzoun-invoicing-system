@@ -2,6 +2,7 @@ export const TRANSLATIONS_AR = {
     "app_title": "عنوان",
     "language": "اللغة",
     "welcome": "أهلا بك",
+    "hello":"أهلا",
     "welcome_message": "مرحبًا بك في لوحة القيادة!",
 
     "sidebar": {

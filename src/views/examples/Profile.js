@@ -284,7 +284,6 @@ export function Profile(props) {
                                             </Col>
                                         </Row>
                                         <Row>
-
                                             <Col lg="12">
                                                 <FormGroup>
                                                     <label

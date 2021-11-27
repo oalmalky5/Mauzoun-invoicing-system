@@ -18,8 +18,10 @@
 
 // reactstrap components
 import { Button, Container, Row, Col } from "reactstrap";
+import {useTranslation} from "react-i18next";
 
 const UserHeader = ({user}) => {
+    const {t} = useTranslation();
   return (
     <>
       <div
@@ -35,13 +37,13 @@ const UserHeader = ({user}) => {
         }}
       >
         {/* Mask */}
-        <span className="mask bg-gradient-default opacity-8" />
+        <span className="mask bg-gradient-info opacity-8" />
         {/* Header container */}
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Hello {user.first_name}</h1>
-              <p className="text-white mt-0 mb-5">
+              <h1 className="display-2">{t("hello")} {user.first_name}</h1>
+              <p className="mt-0 mb-5">
                   {user.notes}
               </p>
             </Col>
