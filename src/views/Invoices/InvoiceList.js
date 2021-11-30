@@ -28,7 +28,7 @@ import {
 } from "reactstrap";
 import Header from "components/Headers/Header.js";
 
-import {API_URL, STATIC_TOKEN} from '../../constants.js';
+import {API_URL, BACKEND_URL} from '../../constants.js';
 
 
 export function InvoiceList(props) {
@@ -114,7 +114,7 @@ export function InvoiceList(props) {
                                         <th>{t("address")}</th>
                                         <th>{t("email")}</th>
                                         <th>{t("phone")}</th>
-                                        <th>{t("tota_amount")}</th>
+                                        <th>{t("total_amount")}</th>
                                         <th>{t("notes")}</th>
                                         <th>{t("actions")}</th>
                                     </tr>
@@ -149,6 +149,12 @@ export function InvoiceList(props) {
                                                             <i className="fas fa-ellipsis-v"/>
                                                         </DropdownToggle>
                                                         <DropdownMenu className="dropdown-menu-arrow" right>
+                                                            <DropdownItem
+                                                                href={`${BACKEND_URL}invoice_pdf/${invoice.id}`}
+                                                                target={"_blank"}
+                                                                tag="a">
+                                                                {t("preview")}
+                                                            </DropdownItem>
                                                             <DropdownItem
                                                                 tag={Link} to={`/admin/invoices/edit/${invoice.id}`}
                                                             >

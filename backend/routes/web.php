@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/invoice_view', 'App\Http\Controllers\InvoiceController@invoice_view');
-Route::get('/invoice_pdf', 'App\Http\Controllers\InvoiceController@invoice_pdf');
+Route::get('/invoice_view/{id}', 'App\Http\Controllers\InvoiceController@invoice_view');
+Route::get('/invoice_pdf/{id}', 'App\Http\Controllers\InvoiceController@invoice_pdf');

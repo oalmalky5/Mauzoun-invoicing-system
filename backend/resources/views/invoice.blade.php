@@ -3,11 +3,114 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Mauzoun QT2021MMDDNN Client</title>
+    <title>Mauzoun Invoice # {{$invoice->sr_no}}</title>
     <style>
+        /* Alegreya */
         @font-face {
-            font-family: 'Merriweather', serif;
-            src: url('vendor/mpdf/ttfonts/Merriweather-Regular.ttf');
+            font-family: "Alegreya";
+            src: url("{{url('fonts/Alegreya-Regular.ttf')}}");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        ​
+
+        @font-face {
+            font-family: "Alegreya";
+            src: url("{{url('fonts/Alegreya-Italic.ttf')}}");
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        ​
+
+        @font-face {
+            font-family: "Alegreya";
+            src: url("{{url('fonts/Alegreya-Medium.ttf')}}");
+            font-style: normal;
+        }
+
+        ​
+
+        @font-face {
+            font-family: "Alegreya";
+            src: url("{{url('fonts/Alegreya-SemiBold.ttf')}}");
+            font-style: normal;
+        }
+
+        ​
+
+        @font-face {
+            font-family: "Alegreya";
+            src: url("{{url('fonts/Alegreya-Bold.ttf')}}");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        ​
+
+        /* Alegreya Sans */
+        @font-face {
+            font-family: "Alegreya Sans";
+            src: url("{{url('fonts/AlegreyaSans-Regular.ttf')}}");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        ​
+
+        @font-face {
+            font-family: "Alegreya Sans";
+            src: url("{{url('fonts/AlegreyaSans-Light.ttf')}}");
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        ​
+
+        @font-face {
+            font-family: "Alegreya Sans";
+            src: url("{{url('fonts/AlegreyaSans-Bold.ttf')}}");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        ​
+
+        /* GE Dinar One */
+        @font-face {
+            font-family: "GE Dinar One";
+            src: url("{{url('fonts/GE Dinar One Light.otf')}}");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        ​
+
+        @font-face {
+            font-family: "GE Dinar One";
+            src: url("{{url('fonts/GE Dinar One Medium.otf')}}");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        ​
+
+        /* GE Dinar Two */
+        @font-face {
+            font-family: "GE Dinar Two";
+            src: url("{{url('fonts/GE Dinar Two Light.otf')}}");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        ​
+
+        @font-face {
+            font-family: "GE Dinar Two";
+            src: url("{{url('fonts/GE Dinar Two Medium.otf')}}");
+            font-weight: bold;
+            font-style: normal;
         }
 
         body {
@@ -17,12 +120,13 @@
             padding: 0;
             margin-left: -20px;
             background-color: #fff;
-            font: 9pt "Verdana";
+            font-size: 9pt;
         }
 
         * {
             box-sizing: border-box;
             -moz-box-sizing: border-box;
+            font-family: "Alegreya Sans", sans-serif;
         }
 
         .book .page {
@@ -71,7 +175,7 @@
         .book .h-right {
             width: 40%;
             float: right;
-            margin-bottom: 14%;
+            margin-bottom: 40px;
             text-align: right;
         }
 
@@ -107,7 +211,7 @@
 
         .book .bill-name {
             font-size: 18px;
-            font-weight: bold;
+            /*font-weight: bold;*/
         }
 
         .book .bill-to-info {
@@ -128,7 +232,7 @@
 
         .book .bill-to-name {
             font-size: 18px;
-            font-weight: bold;
+            /*font-weight: bold;*/
         }
 
         .book table {
@@ -154,6 +258,7 @@
             line-height: 10px;
             text-align: center;
             padding: 12px;
+            font-weight: lighter;
         }
 
         .book .maintable td {
@@ -163,9 +268,9 @@
         }
 
         .book .table {
-            width: 285px;
+            width: 284px;
             /*float: right;*/
-            margin-left: 423px;
+            margin-left: 424px;
             border-top: 0px;
         }
 
@@ -272,9 +377,21 @@
                 </div>
                 <div class="h-right">
                     @if(!empty($is_pdf))
-                        <img src="{{ './images/main-logo.png'}}" height="130px">
+                        <img src="{{ './images/main-logo.png'}}" height="130px" style="margin-right: 10px">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <img src="{{public_path('qrcodes/' . $invoice->id . '.svg')}}" height="100px"
+                             style="margin-right: 10px">
                     @else
+
                         <img class="web-logo" src="{{ asset('images/main-logo.png')}}" height="130px">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        {!! QrCode::generate(env('BASE_URL') . 'invoice_pdf/' . $invoice->id); !!}
                     @endif
 
                 </div>
@@ -306,21 +423,29 @@
             </div>
             <div class="clear"></div>
             <div class="maintablediv">
-                <table class="maintable">
+                <table class="maintable" cellpadding="5">
                     <thead>
                     <tr>
-                        <th>ITEM</th>
-                        <th>DESCRIPTION</th>
-                        <th>QTY.</th>
-                        <th>UNIT PRICE</th>
-                        <th>TOTAL</th>
+                        <th style="width: 30%!important;">ITEM</th>
+                        <th style="width: 30%!important;">DESCRIPTION</th>
+                        <th style="width: 10%!important;">QTY.</th>
+                        <th style="width: 20%!important;">UNIT PRICE</th>
+                        <th style="width: 10%!important;">TOTAL</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($invoice->details as $detail)
+                    @foreach($invoice->details as $index => $detail)
                         <tr>
-                            <td class="text-center">{{$detail->item}}</td>
-                            <td class="text-center">{{$detail->description}}</td>
+                            <td class="text-start">
+                                <u>
+                                    <strong>
+                                        Phase {{$index + 1}}:
+                                    </strong>
+                                </u> <br/>
+                                {{$detail->item}}
+
+                            </td>
+                            <td class="text-start">{{$detail->description}}</td>
                             <td class="text-center">{{$detail->price}}</td>
                             <td class="text-center">{{$detail->qty}}</td>
                             <td class="text-center">{{$detail->total}}</td>
@@ -336,7 +461,7 @@
                     </tr>
                     <tr>
                         <th>VAT 15%</th>
-                        <td>{{$invoice->vat}}</td>
+                        <td>{{$invoice->total * 15/100}}</td>
                     </tr>
                     <tr>
                         <th>SUBTOTAL</th>

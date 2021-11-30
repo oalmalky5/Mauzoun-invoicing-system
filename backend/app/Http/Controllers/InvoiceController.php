@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Meneses\LaravelMpdf\LaravelMpdf;
 use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class InvoiceController extends Controller
 {
@@ -23,24 +24,32 @@ class InvoiceController extends Controller
         ]);
     }
 
-    public function invoice_view(Request $request)
+    public function invoice_view($id = 0)
     {
-        return view('invoice', ['invoice' => Invoice::find($request->id)]);
+        $Invoice = Invoice::find($id);
+        return view('invoice', ['invoice' => $Invoice]);
     }
 
-    public function invoice_pdf(Request $request)
+    public function invoice_pdf($id = 0)
     {
-        $Invoice = Invoice::find($request->id);
+        $Invoice = Invoice::find($id);
 
-        $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
+        $filename = $Invoice->sr_no . '.pdf';
         //File::delete($filename);
+
+        $report_url = env('BASE_URL') . 'invoice_pdf/' . $Invoice->id;
+
+        QrCode::format('svg')->size(100)->errorCorrection('H')->encoding('UTF-8')->generate($report_url, public_path('qrcodes/' . $Invoice->id . '.svg'));
 
         $view = "invoice";
         $pdf = PDF::loadView($view, array(
             'invoice' => $Invoice,
-            'is_pdf' => true
+            'title' => $filename,
+            'is_pdf' => true,
+            'qrcode' => env('BASE_URL') . 'qrcodes/' . $Invoice->id . '.svg',
+            'report_url' => $report_url
         ));
-        return $pdf->stream($view);
+        return $pdf->stream($filename);
     }
 
     public function store(Request $request)
@@ -79,8 +88,8 @@ class InvoiceController extends Controller
         ]);
 
         if (empty($request->sr_no)) {
-            $sr_no = date('y') . str_pad(date("z"), 3, "0", STR_PAD_LEFT);
-            $Invoice->sr_no = $sr_no . str_pad($Invoice->id, 5, '0', STR_PAD_LEFT);
+            $sr_no = date('Y');
+            $Invoice->sr_no = 'QT' . date('Y') . $Invoice->id;
             $Invoice->save();
         }
 
@@ -100,19 +109,17 @@ class InvoiceController extends Controller
         }
 
         $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
+        $report_url = env('BASE_URL') . 'invoice_pdf/' . $Invoice->id;
+        $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($report_url));
         File::delete($filename);
 
         $view = "invoice";
         PDF::loadView($view, array(
             'invoice' => $Invoice,
-            'is_pdf' => true
+            'is_pdf' => true,
+            'qrcode' => $qrcode,
+            'report_url' => $report_url
         ))->save(public_path() . '/invoices/' . $filename, 'F');
-
-        exit();
-//        PDF::loadView($view, array(
-//            'invoice' => $Invoice
-//        ))->Output(public_path() . '/invoices/' . $filename, 'F');
-
 
         return response()->json([
             'status' => true,

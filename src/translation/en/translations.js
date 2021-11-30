@@ -76,5 +76,6 @@ export const TRANSLATIONS_EN = {
     "vat_15": "Vat 15%",
     "sub_total": "Sub Total",
     "unit_price": "Unit Price",
+    "preview": "Preview",
 
 };

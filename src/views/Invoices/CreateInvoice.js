@@ -31,18 +31,17 @@ export function CreateInvoice(props) {
     const billing_state = useRef();
     const billing_zip_code = useRef();
     const billing_country = useRef();
-    const vat = useRef();
     const notes = useRef();
 
     const [customers, setCustomers] = useState([]);
     const [customer, setCustomer] = useState({});
     const [disabled, setDisabled] = useState(false);
     const [total, setTotal] = useState(0);
+    const [vat, setVat] = useState(0);
     const [subTotal, setSubTotal] = useState(0);
     const [subTotal60, setSubTotal60] = useState(0);
     const [subTotal40, setSubTotal40] = useState(0);
     const [iconDisabled, setIconDisabled] = useState(false);
-    const [invoiceItems, setInvoiceItems] = useState([]);
 
     const initialInvoiceItem = {
         "item": "",
@@ -51,7 +50,8 @@ export function CreateInvoice(props) {
         "price": "",
         "total": 0
     };
-    const [invoiceItem, setInvoiceItem] = useState([initialInvoiceItem]);
+
+    const [invoiceItems, setInvoiceItems] = useState([initialInvoiceItem]);
 
     const config = {
         headers: {
@@ -92,7 +92,6 @@ export function CreateInvoice(props) {
                 billing_state: billing_state.current.value,
                 billing_zip_code: billing_zip_code.current.value,
                 billing_country: billing_country.current.value,
-                vat: vat.current.value,
                 total: total,
                 sub_total: subTotal,
                 notes: notes.current.value,
@@ -173,13 +172,16 @@ export function CreateInvoice(props) {
     const calculateTotal = () => {
         let total_amount = 0;
         let sub_total_amount = 0;
+
         invoiceItems.map((element, index) => {
             total_amount += parseFloat(element.price * element.qty);
         });
 
-        sub_total_amount = total_amount + parseFloat(vat.current.value);
+        let vat_amount = total_amount * 15 / 100;
+        sub_total_amount = total_amount + vat_amount;
 
         setTotal(total_amount);
+        setVat(vat_amount);
         setSubTotal(sub_total_amount);
         setSubTotal60(sub_total_amount * 60 / 100);
         setSubTotal40(sub_total_amount * 40 / 100);
@@ -238,11 +240,11 @@ export function CreateInvoice(props) {
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>{t("invoce_due_date")}</label>
+                                                    <label>{t("invoice_due_date")}</label>
                                                     <input ref={due_date}
                                                            type="date"
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("invoce_due_date")}/>
+                                                           placeholder={t("enter") + " " + t("invoice_due_date")}/>
                                                 </FormGroup>
                                             </Col>
 
@@ -375,7 +377,7 @@ export function CreateInvoice(props) {
                                                         <td>{t("qty")}</td>
                                                         <td>{t("unit_price")}</td>
                                                         <td>{t("total")}</td>
-                                                        <td>{t("action")}</td>
+                                                        <td>{t("actions")}</td>
                                                     </tr>
 
                                                     {invoiceItems.length > 0 ? (
@@ -448,34 +450,23 @@ export function CreateInvoice(props) {
                                                             ""
                                                         )}
                                                     <tr>
-                                                        <td colSpan={4} className='text-right'>Total</td>
+                                                        <th colSpan={4} className='text-right'>Total</th>
                                                         <td colSpan={2}>{total}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td colSpan={4} className='text-right'>Vat 15%</td>
-                                                        <td colSpan={2}>
-                                                            <input ref={vat}
-                                                                   defaultValue={0}
-                                                                   className="form-control-alternative form-control"
-                                                                   placeholder={t("enter") + " " + t("vat")}
-                                                                   onKeyDown={(e) => calculateTotal()}
-                                                                   onKeyUp={(e) => calculateTotal()}
-                                                                   onKeyPress={(e) => calculateTotal()}
-                                                                   onClick={(e) => calculateTotal()}
-                                                                   onChange={(e) => calculateTotal()}
-                                                            />
-                                                        </td>
+                                                        <th colSpan={4} className='text-right'>Vat 15%</th>
+                                                        <td colSpan={2}>{vat}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td colSpan={4} className='text-right'>Sub Total</td>
+                                                        <th colSpan={4} className='text-right'>Sub Total</th>
                                                         <td colSpan={2}>{subTotal}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td colSpan={4} className='text-right'>60%</td>
+                                                        <th colSpan={4} className='text-right'>60%</th>
                                                         <td colSpan={2}>{subTotal60}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td colSpan={4} className='text-right'>40%</td>
+                                                        <th colSpan={4} className='text-right'>40%</th>
                                                         <td colSpan={2}>{subTotal40}</td>
                                                     </tr>
 
