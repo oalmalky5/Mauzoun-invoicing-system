@@ -67,7 +67,6 @@ const Login = () => {
                         }
                     }).then((response) => {
                         if (response.data.status) {
-                            console.log(response.data.data);
                             localStorage.setItem("user-data", JSON.stringify(response.data.data));
                             history.push('/admin/index');
 

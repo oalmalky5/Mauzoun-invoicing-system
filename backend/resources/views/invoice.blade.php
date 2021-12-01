@@ -75,44 +75,13 @@
             font-style: normal;
         }
 
-        ​
-
-        /* GE Dinar One */
         @font-face {
-            font-family: "GE Dinar One";
-            src: url("{{url('fonts/GE Dinar One Light.otf')}}");
-            font-weight: normal;
+            font-family: "Eurostile";
+            src: url("{{url('fonts/EurostileNormal.ttf')}}");
             font-style: normal;
         }
 
         ​
-
-        @font-face {
-            font-family: "GE Dinar One";
-            src: url("{{url('fonts/GE Dinar One Medium.otf')}}");
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        ​
-
-        /* GE Dinar Two */
-        @font-face {
-            font-family: "GE Dinar Two";
-            src: url("{{url('fonts/GE Dinar Two Light.otf')}}");
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        ​
-
-        @font-face {
-            font-family: "GE Dinar Two";
-            src: url("{{url('fonts/GE Dinar Two Medium.otf')}}");
-            font-weight: bold;
-            font-style: normal;
-        }
-
         body {
             width: 100%;
             /*height: 100%;*/
@@ -121,12 +90,12 @@
             margin-left: -20px;
             background-color: #fff;
             font-size: 9pt;
+            font-family: 'Alegreya', sans-serif !important;
         }
 
         * {
             box-sizing: border-box;
             -moz-box-sizing: border-box;
-            font-family: "Alegreya Sans", sans-serif;
         }
 
         .book .page {
@@ -360,6 +329,10 @@
         .book .web-logo {
             width: auto !important;
         }
+
+        table tr td {
+            font-family: "Eurostile" !important;
+        }
     </style>
 </head>
 <body>
@@ -368,7 +341,7 @@
         <div class="subpage">
             <div class="logo">
                 <div class="h-left">
-                    <h1>QUOTATION</h1>
+                    <h1>Invoice</h1>
                     <h3>{{$invoice->sr_no}}</h3>
                     <p>Invoice Prepared On</p>
                     <p>{{$invoice->date}}</p>
@@ -450,7 +423,7 @@
                             <td class="text-center">{{$detail->qty}}</td>
                             <td class="text-center">{{$detail->total}}</td>
                         </tr>
-                    @endforeach;
+                    @endforeach
                     </tbody>
                 </table>
                 <table class="maintable table">

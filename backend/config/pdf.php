@@ -4,7 +4,7 @@ return [
     'mode' => '',
     'format' => 'A4',
     'default_font_size' => '12',
-    'default_font' => 'sans-serif',
+    'default_font' => '"Alegreya Sans", sans-serif',
     'margin_left' => 0,
     'margin_right' => 0,
     'margin_top' => 10,
@@ -25,8 +25,22 @@ return [
     'watermark_image_alpha' => 0.2,
     'watermark_image_size' => 'D',
     'watermark_image_position' => 'P',
-    'custom_font_dir' => '',
-    'custom_font_data' => [],
+    'custom_font_dir' => base_path('fonts/'), // don't forget the trailing slash!
+    'custom_font_data' => [
+        'Alegreya' => [
+            'R' => 'Alegreya-Regular.ttf',    // regular font
+            'B' => 'Alegreya-Bold.ttf',       // optional: bold font
+            'I' => 'Alegreya-Italic.ttf',     // optional: italic font
+            'BI' => 'Alegreya-SemiBold.ttf' // optional: bold-italic font
+        ],
+        'Eurostile' => [
+            'R' => 'EurostileNormal.ttf',    // regular font
+            'B' => 'EurostileBold.ttf',       // optional: bold font
+            'I' => 'EurostileExtended.ttf',     // optional: italic font
+            'BI' => 'EurostileOblique.ttf' // optional: bold-italic font
+        ]
+        // ...add as many as you want.
+    ],
     'auto_language_detection' => false,
     'temp_dir' => rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR),
     'pdfa' => false,
