@@ -142,6 +142,11 @@ export function CustomerList(props) {
                                                         </DropdownToggle>
                                                         <DropdownMenu className="dropdown-menu-arrow" right>
                                                             <DropdownItem
+                                                                tag={Link} to={`/admin/invoices/list/${customer.id}`}
+                                                            >
+                                                                {t("invoices")}
+                                                            </DropdownItem>
+                                                            <DropdownItem
                                                                 tag={Link} to={`/admin/customers/edit/${customer.id}`}
                                                             >
                                                                 {t("edit")}

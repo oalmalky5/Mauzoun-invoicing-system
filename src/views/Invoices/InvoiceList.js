@@ -40,6 +40,9 @@ export function InvoiceList(props) {
     const [disabled, setDisabled] = useState(false);
     const [iconDisabled, setIconDisabled] = useState(true);
 
+    const customer_id = props.match.params.customer_id;
+    console.log(props.match.params);
+
     // const {t} = useTranslation();
 
     const toggle = () => setModal(!modal);
@@ -74,7 +77,11 @@ export function InvoiceList(props) {
 
     useEffect(() => {
 
-        axios.get(API_URL + 'invoices/all').then((response) => {
+        let url = API_URL + 'invoices/all/';
+        if (customer_id != undefined)
+            url += customer_id;
+
+        axios.get(url).then((response) => {
             if (response.data.status) {
 
                 setInvoices(response.data.data);
@@ -109,6 +116,7 @@ export function InvoiceList(props) {
                                        className="stratprop_datatable table table-bordered align-items-center table-flush table">
                                     <thead className="thead-light">
                                     <tr>
+                                        <th>{t("actions")}</th>
                                         <th>{t("invoice_no")}</th>
                                         <th>{t("customer_name")}</th>
                                         <th>{t("address")}</th>
@@ -116,26 +124,12 @@ export function InvoiceList(props) {
                                         <th>{t("phone")}</th>
                                         <th>{t("total_amount")}</th>
                                         <th>{t("notes")}</th>
-                                        <th>{t("actions")}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {invoices.length > 0 ? (
                                         invoices.map((invoice, index) => (
                                             <tr key={invoice.id}>
-                                                <td>{invoice.sr_no}</td>
-                                                <td>{invoice.customer.name}</td>
-                                                <td>
-                                                    {invoice.billing_street},
-                                                    {invoice.billing_city},
-                                                    {invoice.billing_state},
-                                                    {invoice.billing_zip_code},
-                                                    {invoice.billing_country}
-                                                </td>
-                                                <td>{invoice.billing_email}</td>
-                                                <td>{invoice.billing_phone}</td>
-                                                <td>{invoice.total}</td>
-                                                <td>{invoice.notes}</td>
                                                 <td>
                                                     <UncontrolledDropdown>
                                                         <DropdownToggle
@@ -150,27 +144,54 @@ export function InvoiceList(props) {
                                                         </DropdownToggle>
                                                         <DropdownMenu className="dropdown-menu-arrow" right>
                                                             <DropdownItem
-                                                                href={`${BACKEND_URL}invoice_pdf/${invoice.id}`}
+                                                                href={`/invoice/${invoice.sr_no}/paid`}
                                                                 target={"_blank"}
                                                                 tag="a">
-                                                                {t("preview")}
+                                                                {t("paid_preview")}
                                                             </DropdownItem>
                                                             <DropdownItem
+                                                                href={`/invoice/${invoice.sr_no}/due`}
+                                                                target={"_blank"}
+                                                                tag="a">
+                                                                {t("due_preview")}
+                                                            </DropdownItem>
+                                                            <DropdownItem
+                                                                href={`/invoice/${invoice.sr_no}/unpaid`}
+                                                                target={"_blank"}
+                                                                tag="a">
+                                                                {t("unpaid_preview")}
+                                                            </DropdownItem>
+                                                            {/*<DropdownItem
                                                                 tag={Link} to={`/admin/invoices/edit/${invoice.id}`}
                                                             >
                                                                 {t("edit")}
-                                                            </DropdownItem>
-                                                            <DropdownItem
-                                                                onClick={() => setCurrentInvoice(invoice)}
-                                                                key={invoice.id}
-                                                            >
-                                                                {t("delete")}
-                                                            </DropdownItem>
-
+                                                            </DropdownItem>*/}
+                                                            {
+                                                                !invoice.has_approved ? (
+                                                                    <DropdownItem
+                                                                        onClick={() => setCurrentInvoice(invoice)}
+                                                                        key={invoice.id}
+                                                                    >
+                                                                        {t("delete")}
+                                                                    </DropdownItem>
+                                                                ) : ("")
+                                                            }
                                                         </DropdownMenu>
                                                     </UncontrolledDropdown>
                                                 </td>
-
+                                                <td>{invoice.sr_no}</td>
+                                                <td>{invoice.customer.name}</td>
+                                                <td>
+                                                    {invoice.billing_street},
+                                                    {invoice.billing_city},
+                                                    {invoice.billing_state},
+                                                    {invoice.billing_zip_code},
+                                                    {invoice.billing_country}
+                                                </td>
+                                                <td>{invoice.billing_email}</td>
+                                                <td>{invoice.billing_phone}</td>
+                                                <td>{invoice.total}</td>
+                                                <td>{invoice.notes}</td>
                                             </tr>
                                         ))
                                     ) : (

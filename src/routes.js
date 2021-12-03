@@ -37,6 +37,7 @@ import {EditCustomer} from "./views/Customers/EditCustomer";
 import {CreateInvoice} from "views/Invoices/CreateInvoice.js";
 import {InvoiceList} from "views/Invoices/InvoiceList.js";
 import {EditInvoice} from "./views/Invoices/EditInvoice";
+import {PreviewInvoice} from "./views/Invoices/PreviewInvoice";
 
 
 var routes = [
@@ -90,6 +91,13 @@ var routes = [
         layout: "/admin",
     },
     {
+        path: "/invoices/list/:customer_id",
+        name: "Invoices List",
+        icon: "fas fa-scroll ",
+        component: InvoiceList,
+        layout: "/default",
+    },
+    {
         path: "/invoices/list",
         name: "Invoices List",
         icon: "fas fa-scroll ",
@@ -123,8 +131,14 @@ var routes = [
         icon: "ni ni-single-02",
         component: EditUser,
         layout: "/default",
-    }
-
+    },
+    {
+        path: "/invoice/:sr_no/:status",
+        name: "Preview Invoice",
+        icon: "ni ni-single-02",
+        component: PreviewInvoice,
+        layout: "/invoice",
+    },
 
 ];
 export default routes;

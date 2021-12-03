@@ -5,15 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Mauzoun Invoice # {{$invoice->sr_no}}</title>
     <style>
-        /* Alegreya */
+
+        @if(empty($is_pdf))
+                                       /* Alegreya */
         @font-face {
             font-family: "Alegreya";
             src: url("{{url('fonts/Alegreya-Regular.ttf')}}");
             font-weight: normal;
             font-style: normal;
         }
-
-        ​
 
         @font-face {
             font-family: "Alegreya";
@@ -22,15 +22,11 @@
             font-style: italic;
         }
 
-        ​
-
         @font-face {
             font-family: "Alegreya";
             src: url("{{url('fonts/Alegreya-Medium.ttf')}}");
             font-style: normal;
         }
-
-        ​
 
         @font-face {
             font-family: "Alegreya";
@@ -38,16 +34,12 @@
             font-style: normal;
         }
 
-        ​
-
         @font-face {
             font-family: "Alegreya";
             src: url("{{url('fonts/Alegreya-Bold.ttf')}}");
             font-weight: bold;
             font-style: normal;
         }
-
-        ​
 
         /* Alegreya Sans */
         @font-face {
@@ -57,16 +49,12 @@
             font-style: normal;
         }
 
-        ​
-
         @font-face {
             font-family: "Alegreya Sans";
             src: url("{{url('fonts/AlegreyaSans-Light.ttf')}}");
             font-weight: 300;
             font-style: normal;
         }
-
-        ​
 
         @font-face {
             font-family: "Alegreya Sans";
@@ -79,18 +67,41 @@
             font-family: "Eurostile";
             src: url("{{url('fonts/EurostileNormal.ttf')}}");
             font-style: normal;
+            font-weight: normal;
         }
 
-        ​
+        body {
+            font-family: 'Alegreya', sans-serif;
+        }
+
+        table tr td {
+            font-family: "Eurostile" !important;
+        }
+
+        @else
+
+        body {
+            font-family: 'alegreya-sans', sans-serif;
+        }
+
+        table tr td {
+            font-family: "eurostile" !important;
+        }
+
+        @endif
+
         body {
             width: 100%;
-            /*height: 100%;*/
             margin: 0;
             padding: 0;
             margin-left: -20px;
             background-color: #fff;
-            font-size: 9pt;
-            font-family: 'Alegreya', sans-serif !important;
+        }
+
+        table tr td {
+            font-family: "eurostile" !important;
+            letter-spacing: 1px;
+            font-size: 16px;
         }
 
         * {
@@ -121,6 +132,7 @@
             margin-top: 0px !important;
             margin-bottom: 0px !important;
             margin: 4px;
+            line-height: 1rem;
         }
 
         .book .clear {
@@ -170,7 +182,7 @@
 
         .book .bill-address {
             /*width: 50%;*/
-            font-size: 11.5px;
+
         }
 
         .book .bill-address p {
@@ -180,7 +192,7 @@
 
         .book .bill-name {
             font-size: 18px;
-            /*font-weight: bold;*/
+            font-weight: 800;
         }
 
         .book .bill-to-info {
@@ -191,7 +203,6 @@
         .book .bill-to-address {
             float: left;
             width: 70mm;
-            font-size: 11.5px;
         }
 
         .book .bill-to-address p {
@@ -214,6 +225,7 @@
 
         .book .maintablediv {
             min-height: 300px;
+            margin-top: 20px;
             /*border-bottom:1px solid #cecece;*/
         }
 
@@ -234,6 +246,7 @@
             border: 1px solid #7f7f7f;
             font-size: 14px;
             text-align: center;
+            vertical-align: baseline;
         }
 
         .book .table {
@@ -253,7 +266,7 @@
         }
 
         .book p {
-            color: #88685d;
+
             margin-top: 5px;
             margin-bottom: 0px;
         }
@@ -311,11 +324,11 @@
         .book .footer p {
             margin-top: 0px;
             margin-bottom: 0px;
-            color: #88685d;
+            /*color: #88685d;*/
         }
 
         .book .text-start {
-            text-align: start;
+            text-align: left !important;
         }
 
         .book .m-t {
@@ -330,9 +343,12 @@
             width: auto !important;
         }
 
-        table tr td {
-            font-family: "Eurostile" !important;
+        .maintable th {
+            font-family: "alegreya";
+            font-size: 18px !important;
         }
+
+
     </style>
 </head>
 <body>
@@ -341,20 +357,21 @@
         <div class="subpage">
             <div class="logo">
                 <div class="h-left">
-                    <h1>Invoice</h1>
-                    <h3>{{$invoice->sr_no}}</h3>
-                    <p>Invoice Prepared On</p>
-                    <p>{{$invoice->date}}</p>
-                    <p>Due On</p>
-                    <p>{{$invoice->due_date}}</p>
+                    <h1 style="font-weight: bold; font-size: 40px; margin-bottom: 20px">INVOICE</h1>
+                    <p style="line-height: 1rem; font-weight: bold;">QT2021MMDDNN</p>
+                    <p>
+                        <span style="font-style: italic; font-weight: lighter">Invoice Prepared On</span><br/>
+                        {{\Carbon\Carbon::parse($invoice->date)->format('l, F d, Y')}}<br/>
+                        <span style="font-style: italic">Invoice Due On</span><br/>
+                        {{\Carbon\Carbon::parse($invoice->due_date)->format('l, F d, Y')}}<br/>
+                    </p>
                 </div>
                 <div class="h-right">
                     @if(!empty($is_pdf))
                         <img src="{{ './images/main-logo.png'}}" height="130px" style="margin-right: 10px">
                         <br/>
                         <br/>
-                        <br/>
-                        <br/>
+
                         <img src="{{public_path('qrcodes/' . $invoice->id . '.svg')}}" height="100px"
                              style="margin-right: 10px">
                     @else
@@ -362,8 +379,7 @@
                         <img class="web-logo" src="{{ asset('images/main-logo.png')}}" height="130px">
                         <br/>
                         <br/>
-                        <br/>
-                        <br/>
+
                         {!! QrCode::generate(env('BASE_URL') . 'invoice_pdf/' . $invoice->id); !!}
                     @endif
 
@@ -372,10 +388,10 @@
             <div class="clear"></div>
             <div class="h-row2">
                 <div class="bill-info">
-                    <div class="bill-name">Bill From</div>
+                    <div class="bill-name" style="font-weight: bold">Bill From</div>
                     <div class="bill-address">
                         <p>
-                            layan@mauzoun.com<br/>
+                            <span style="font-style: italic;">layan@mauzoun.com</span><br/>
                             Layan Abdul Shakoor<br/>
                             Mauzoun Est.<br/>
                             Jeddah, Saudi Arabia
@@ -383,10 +399,10 @@
                     </div>
                 </div>
                 <div class="bill-to-info">
-                    <div class="bill-to-name">Bill To</div>
+                    <div class="bill-to-name" style="font-weight: bold">Bill To</div>
                     <div class="bill-to-address">
                         <p>
-                            {{$invoice->billing_email}}<br/>
+                            <span style="font-style: italic;">{{$invoice->billing_email}}</span><br/>
                             {{$invoice->customer->name}}<br/>
                             {{$invoice->billing_company_name}}<br/>
                             {{$invoice->billing_email}}
@@ -399,11 +415,11 @@
                 <table class="maintable" cellpadding="5">
                     <thead>
                     <tr>
-                        <th style="width: 30%!important;">ITEM</th>
-                        <th style="width: 30%!important;">DESCRIPTION</th>
+                        <th style="width: 20%!important;">ITEM</th>
+                        <th style="width: 40%!important;">DESCRIPTION</th>
                         <th style="width: 10%!important;">QTY.</th>
-                        <th style="width: 20%!important;">UNIT PRICE</th>
-                        <th style="width: 10%!important;">TOTAL</th>
+                        <th style="width: 15%!important;">UNIT PRICE</th>
+                        <th style="width: 15%!important;">TOTAL</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -412,16 +428,18 @@
                             <td class="text-start">
                                 <u>
                                     <strong>
-                                        Phase {{$index + 1}}:
+                                        <span style="letter-spacing: 0.8px !important; line-height: 2rem !important;">Phase {{$index + 1}}:</span>
                                     </strong>
                                 </u> <br/>
                                 {{$detail->item}}
 
                             </td>
-                            <td class="text-start">{{$detail->description}}</td>
-                            <td class="text-center">{{$detail->price}}</td>
-                            <td class="text-center">{{$detail->qty}}</td>
-                            <td class="text-center">{{$detail->total}}</td>
+                            <td class="text-start">Brand Manifesto Writing, in the English language only. Flat rate
+                                only, up to 450 words maximum.
+                            </td>
+                            <td class="text-center">{{(int)$detail->qty}}</td>
+                            <td class="text-center">{{number_format($detail->price, 2)}} SR</td>
+                            <td class="text-center">{{number_format($detail->total, 2)}} SR</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -430,24 +448,36 @@
 
                     <tr>
                         <th>TOTAL</th>
-                        <td>{{$invoice->total}}</td>
+                        <td>{{number_format($invoice->total, 2)}} SR</td>
                     </tr>
                     <tr>
                         <th>VAT 15%</th>
-                        <td>{{$invoice->total * 15/100}}</td>
+                        <td>{{number_format($invoice->total * 15/100, 2)}} SR</td>
                     </tr>
                     <tr>
                         <th>SUBTOTAL</th>
-                        <td>{{$invoice->sub_total}}</td>
+                        <td>{{number_format($invoice->sub_total, 2)}} SR</td>
                     </tr>
-                    <tr>
-                        <th>60%</th>
-                        <td>{{$invoice->sub_total*60/100}}</td>
-                    </tr>
-                    <tr>
-                        <th>40%</th>
-                        <td>{{$invoice->sub_total*40/100}}</td>
-                    </tr>
+                    @if(!empty($status))
+                        @if($status == 'paid' || $status == 'due')
+                            <tr>
+                                <th>AMOUNT PAID 60%</th>
+                                <td>{{number_format($invoice->sub_total*60/100, 2)}} SR</td>
+                            </tr>
+                        @endif
+                        @if($status == 'unpaid')
+                            <tr>
+                                <th>AMOUNT DUE 60%</th>
+                                <td>{{number_format($invoice->sub_total*60/100, 2)}} SR</td>
+                            </tr>
+                        @endif
+                        @if($status == 'due')
+                            <tr>
+                                <th>DUE 40%</th>
+                                <td>{{number_format($invoice->sub_total*40/100, 2)}} SR</td>
+                            </tr>
+                        @endif
+                    @endif
                 </table>
             </div>
             <div class="clear"></div>
@@ -503,7 +533,8 @@
                     prerequisites stated above. Booking will be completed within maximum (2) business days.
                 </p>
                 <p>
-                    – Timeline of the project will be <b>(X)</b> business days from booking date.
+                    – Timeline of the project will be <b>({{$invoice->business_days}})</b> business days from booking
+                    date.
                 </p>
                 <p>
                     – If a client provides additional documents halfway through a work’s progress, and after finalized
@@ -533,7 +564,9 @@
             <div class="guidelines">
                 <h5>V. Project Guidelines</h5>
                 <p>
-                    – This project’s expiry date is on <b>2021/MM/DD</b> regardless of services or rounds of changes
+                    – This project’s expiry date is on
+                    <b>{{\Carbon\Carbon::parse($invoice->expiry_date)->format("Y/m/d")}}</b> regardless of services or
+                    rounds of changes
                     fulfilled. Upon
                     project expiry, full pending payment must be paid regardless of project completion status.
                 </p>

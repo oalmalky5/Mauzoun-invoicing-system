@@ -19,6 +19,9 @@ class CreateInvoicesTable extends Migration
             $table->string('sr_no')->nullable();
             $table->date('date')->nullable();
             $table->date('due_date')->nullable();
+            $table->date('expiry_date')->nullable();
+            $table->integer('business_days')->nullable();
+            $table->boolean('approved')->default(0)->nullable();
 
             $table->string('billing_name')->nullable();
             $table->string('billing_company_name')->nullable();

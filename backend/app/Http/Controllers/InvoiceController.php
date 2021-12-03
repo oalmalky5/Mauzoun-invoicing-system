@@ -16,11 +16,16 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class InvoiceController extends Controller
 {
-    public function all()
+    public function all(Request $request)
     {
+        $Invoice = Invoice::with('customer')->latest();
+
+        if ($request->customer_id)
+            $Invoice->where('customer_id', $request->customer_id);
+        
         return response()->json([
             'status' => true,
-            'data' => Invoice::with('customer')->get()
+            'data' => $Invoice->get()
         ]);
     }
 
@@ -81,6 +86,9 @@ class InvoiceController extends Controller
             'total' => $request->total,
             'vat' => $request->vat,
             'sub_total' => $request->sub_total,
+            'expiry_date' => $request->expiry_date,
+            'business_days' => $request->business_days,
+            'has_approved' => $request->has_approved,
             'notes' => $request->notes,
             'currency' => $request->currency,
             'customer_id' => $request->customer_id,
@@ -134,11 +142,36 @@ class InvoiceController extends Controller
 
     public function show(Request $request)
     {
+        $Invoice = Invoice::with(['customer', 'details'])->firstWhere('id', $request->id);
+
         return response()->json([
             'status' => true,
-            'data' => Invoice::with(['customer', 'details'])->firstWhere('id', $request->id)
+            'data' => $Invoice
         ]);
+    }
 
+    public function preview(Request $request)
+    {
+        $Invoice = Invoice::with(['customer', 'details'])->firstWhere('sr_no', $request->sr_no);
+
+        $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
+        $report_url = env('BASE_URL') . 'invoice_pdf/' . $Invoice->id;
+        $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($report_url));
+
+        File::delete($filename);
+        $view = "invoice";
+        PDF::loadView($view, array(
+            'invoice' => $Invoice,
+            'is_pdf' => true,
+            'qrcode' => $qrcode,
+            'report_url' => $report_url,
+            'status' => $request->status
+        ))->save(public_path() . '/invoices/' . $filename, 'F');
+
+        return response()->json([
+            'status' => true,
+            'data' => $Invoice
+        ]);
     }
 
     public function update(Request $request)

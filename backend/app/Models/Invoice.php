@@ -14,7 +14,7 @@ class Invoice extends Model
 
     protected $guarded = [];
     protected $with = ['details', 'customer'];
-    protected $appends = ['address'];
+    protected $appends = ['address', 'pdf_url'];
 
     public function details()
     {
@@ -39,6 +39,11 @@ class Invoice extends Model
     public function getDueDateFormattedAttribute()
     {
         return Carbon::parse($this->due_date)->format('d M, Y');
+    }
+
+    public function getPdfUrlAttribute()
+    {
+        return env('BASE_URL') . 'invoices/' . $this->sr_no . '_' . $this->id . '.pdf';
     }
 
     protected static function booted()

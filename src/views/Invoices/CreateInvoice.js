@@ -31,6 +31,9 @@ export function CreateInvoice(props) {
     const billing_state = useRef();
     const billing_zip_code = useRef();
     const billing_country = useRef();
+    const expiry_date = useRef();
+    const business_days = useRef();
+    const has_approved = useRef();
     const notes = useRef();
 
     const [customers, setCustomers] = useState([]);
@@ -94,6 +97,9 @@ export function CreateInvoice(props) {
                 billing_country: billing_country.current.value,
                 total: total,
                 sub_total: subTotal,
+                expiry_date: expiry_date.current.value,
+                business_days: business_days.current.value,
+                has_approved: has_approved.current.value,
                 notes: notes.current.value,
                 items: invoiceItems
             },
@@ -245,6 +251,38 @@ export function CreateInvoice(props) {
                                                            type="date"
                                                            className="form-control-alternative form-control"
                                                            placeholder={t("enter") + " " + t("invoice_due_date")}/>
+                                                </FormGroup>
+                                            </Col>
+
+                                        </Row>
+                                        <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("expiry_date")}</label>
+                                                    <input ref={expiry_date}
+                                                           type="date"
+                                                           className="form-control-alternative form-control"
+                                                           placeholder={t("enter") + " " + t("expiry_date")}/>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="3">
+                                                <FormGroup>
+                                                    <label>{t("business_days")}</label>
+                                                    <input ref={business_days}
+                                                           type="number"
+                                                           className="form-control-alternative form-control"
+                                                           placeholder={t("enter") + " " + t("business_days")}/>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="3">
+                                                <FormGroup>
+                                                    <label>{t("approved?")}</label>
+                                                    <select ref={has_approved}
+                                                            className="form-control-alternative form-control"
+                                                            placeholder={t("enter") + " " + t("business_days")}>
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
                                                 </FormGroup>
                                             </Col>
 
