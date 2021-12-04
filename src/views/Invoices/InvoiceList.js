@@ -77,9 +77,9 @@ export function InvoiceList(props) {
 
     useEffect(() => {
 
-        let url = API_URL + 'invoices/all/';
+        let url = API_URL + 'invoices/all';
         if (customer_id != undefined)
-            url += customer_id;
+            url += "/" + customer_id;
 
         axios.get(url).then((response) => {
             if (response.data.status) {
