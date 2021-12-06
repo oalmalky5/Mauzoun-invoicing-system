@@ -168,14 +168,16 @@ export function InvoiceList(props) {
                                                             </DropdownItem>*/}
                                                             {
                                                                 !invoice.has_approved ? (
-                                                                    <DropdownItem
-                                                                        onClick={() => setCurrentInvoice(invoice)}
-                                                                        key={invoice.id}
-                                                                    >
-                                                                        {t("delete")}
-                                                                    </DropdownItem>
+                                                                    ""
                                                                 ) : ("")
                                                             }
+
+                                                            <DropdownItem
+                                                                onClick={() => setCurrentInvoice(invoice)}
+                                                                key={invoice.id}
+                                                            >
+                                                                {t("delete")}
+                                                            </DropdownItem>
                                                         </DropdownMenu>
                                                     </UncontrolledDropdown>
                                                 </td>
