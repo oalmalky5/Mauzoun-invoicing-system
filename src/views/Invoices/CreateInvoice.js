@@ -159,6 +159,11 @@ export function CreateInvoice(props) {
         setInvoiceItems(invoiceItems);
     };
 
+    const totalHandler = (e, value) => {
+        invoiceItems[e].total = value;
+        setInvoiceItems(invoiceItems);
+    };
+
     const qtyHandler = (e, value) => {
         let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
         invoice_items[e].qty = value;
@@ -441,10 +446,10 @@ export function CreateInvoice(props) {
                                                     <tbody>
                                                     <tr>
                                                         <td width={"15%"}>{t("item")}</td>
-                                                        <td width={"45%"} colSpan={2}>{t("description")}</td>
+                                                        <td width={"30%"} colSpan={2}>{t("description")}</td>
                                                         <td width={"15%"}>{t("qty")}</td>
                                                         <td width={"15%"}>{t("unit_price")}</td>
-                                                        {/*<td width={"15%"}>{t("total")}</td>*/}
+                                                        <td width={"15%"}>{t("total")}</td>
                                                         <td width={"10%"}>{t("actions")}</td>
                                                     </tr>
 
@@ -472,14 +477,14 @@ export function CreateInvoice(props) {
                                                                     </td>
                                                                     <td>
                                                                         <input
-                                                                               defaultValue={invoiceItem.qty}
-                                                                               className="form-control-alternative form-control"
-                                                                               placeholder={t("qty")}
-                                                                               onKeyDown={(e) => qtyHandler(index, e.target.value)}
-                                                                               onKeyUp={(e) => qtyHandler(index, e.target.value)}
-                                                                               onKeyPress={(e) => qtyHandler(index, e.target.value)}
-                                                                               onClick={(e) => qtyHandler(index, e.target.value)}
-                                                                               onChange={(e) => qtyHandler(index, e.target.value)}
+                                                                            defaultValue={invoiceItem.qty}
+                                                                            className="form-control-alternative form-control"
+                                                                            placeholder={t("qty")}
+                                                                            onKeyDown={(e) => qtyHandler(index, e.target.value)}
+                                                                            onKeyUp={(e) => qtyHandler(index, e.target.value)}
+                                                                            onKeyPress={(e) => qtyHandler(index, e.target.value)}
+                                                                            onClick={(e) => qtyHandler(index, e.target.value)}
+                                                                            onChange={(e) => qtyHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
                                                                     <td>
@@ -503,6 +508,18 @@ export function CreateInvoice(props) {
                                                                         />
                                                                         {invoiceItem.total}
                                                                     </td>*/}
+                                                                    <td>
+                                                                        <input
+                                                                            defaultValue={invoiceItem.total}
+                                                                            className="form-control-alternative form-control"
+                                                                            placeholder={t("total")}
+                                                                            onKeyDown={(e) => totalHandler(index, e.target.value)}
+                                                                            onKeyUp={(e) => totalHandler(index, e.target.value)}
+                                                                            onKeyPress={(e) => totalHandler(index, e.target.value)}
+                                                                            onClick={(e) => totalHandler(index, e.target.value)}
+                                                                            onChange={(e) => totalHandler(index, e.target.value)}
+                                                                        />
+                                                                    </td>
                                                                     <td>
                                                                         <a
                                                                             onClick={() => removeInvoiceItem(index)}
