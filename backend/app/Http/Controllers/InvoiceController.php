@@ -22,27 +22,27 @@ class InvoiceController extends Controller
 
         if ($request->customer_id)
             $Invoice->where('customer_id', $request->customer_id);
-        
+
         return response()->json([
             'status' => true,
             'data' => $Invoice->get()
         ]);
     }
 
-    public function invoice_view($id = 0)
+    public function invoice_view($id = 0, $status)
     {
-        $Invoice = Invoice::find($id);
-        return view('invoice', ['invoice' => $Invoice]);
+        $Invoice = Invoice::firstWhere('sr_no', $id);
+        return view('invoice', ['invoice' => $Invoice, 'status' => $status]);
     }
 
     public function invoice_pdf($id = 0)
     {
-        $Invoice = Invoice::find($id);
+        $Invoice = Invoice::firstWhere('sr_no', $id);
 
         $filename = $Invoice->sr_no . '.pdf';
         //File::delete($filename);
 
-        $report_url = env('BASE_URL') . 'invoice_pdf/' . $Invoice->id;
+        $report_url = env('BASE_URL') . 'invoice_pdf/' . $id;
 
         QrCode::format('svg')->size(100)->errorCorrection('H')->encoding('UTF-8')->generate($report_url, public_path('qrcodes/' . $Invoice->id . '.svg'));
 
@@ -88,7 +88,7 @@ class InvoiceController extends Controller
             'sub_total' => $request->sub_total,
             'expiry_date' => $request->expiry_date,
             'business_days' => $request->business_days,
-            'has_approved' => $request->has_approved,
+            'has_approved' => 0,
             'notes' => $request->notes,
             'currency' => $request->currency,
             'customer_id' => $request->customer_id,
@@ -113,13 +113,23 @@ class InvoiceController extends Controller
             ];
 
             $Invoice->details()->create($details);
-            //InvoiceDetail::created($details);
         }
 
-        $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
+        foreach ($request->custom_fields as $key => $custom_field) {
+
+            $custom_field_data = [
+                'name' => $custom_field['name'],
+                'value' => $custom_field['value'],
+            ];
+
+            $Invoice->custom_fields()->create($custom_field_data);
+        }
+
         $report_url = env('BASE_URL') . 'invoice_pdf/' . $Invoice->id;
         $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($report_url));
-        File::delete($filename);
+
+        $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
+        File::delete(public_path() . '/invoices/' . $filename);
 
         $view = "invoice";
         PDF::loadView($view, array(
@@ -154,11 +164,13 @@ class InvoiceController extends Controller
     {
         $Invoice = Invoice::with(['customer', 'details'])->firstWhere('sr_no', $request->sr_no);
 
-        $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
-        $report_url = env('BASE_URL') . 'invoice_pdf/' . $Invoice->id;
-        $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($report_url));
+        $report_url = $Invoice->report_url . '/' . $request->status;
+        File::delete(public_path('qrcodes/' . $Invoice->id . '.svg'));
+        $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($report_url, public_path('qrcodes/' . $Invoice->id . '.svg')));
 
-        File::delete($filename);
+        $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
+        File::delete(public_path() . 'invoices/' . $filename);
+
         $view = "invoice";
         PDF::loadView($view, array(
             'invoice' => $Invoice,

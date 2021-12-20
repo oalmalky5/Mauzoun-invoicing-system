@@ -83,3 +83,11 @@
     font-weight: bold;
     font-style: normal;
 }
+
+
+@font-face {
+    font-family: "Eurostile";
+    src: url("../fonts/EurostileNormal.ttf");
+    font-style: normal;
+    font-weight: normal;
+}

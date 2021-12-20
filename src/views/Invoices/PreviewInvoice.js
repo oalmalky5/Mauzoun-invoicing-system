@@ -26,7 +26,7 @@ export function PreviewInvoice(props) {
 
     return (
         <>
-            <iframe src={invoice.pdf_url} height={"800px"} width={"100%"}></iframe>
+            <iframe src={invoice.pdf_url} height={"800px"} width={"100%"} allowfullscreen></iframe>
         </>
 
     );

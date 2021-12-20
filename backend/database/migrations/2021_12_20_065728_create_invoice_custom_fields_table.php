@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoiceDetailsTable extends Migration
+class CreateInvoiceCustomFieldsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateInvoiceDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_details', function (Blueprint $table) {
+        Schema::create('invoice_custom_fields', function (Blueprint $table) {
             $table->id();
 
-            $table->text('item')->nullable();
-            $table->text('description')->nullable();
-            $table->decimal('qty')->nullable();
-            $table->decimal('price')->nullable();
-            $table->decimal('total')->nullable();
-
+            $table->string('name');
+            $table->string('value');
+            $table->integer('sorting_order');
+            
             $table->foreignId('invoice_id')->constrained();
 
             $table->softDeletes();
@@ -36,6 +34,6 @@ class CreateInvoiceDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_details');
+        Schema::dropIfExists('invoice_custom_fields');
     }
 }

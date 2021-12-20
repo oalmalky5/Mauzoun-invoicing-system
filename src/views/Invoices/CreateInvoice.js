@@ -16,6 +16,7 @@ import {
     Row,
     Col,
 } from "reactstrap";
+import {Prompt} from 'react-router'
 
 export function CreateInvoice(props) {
     const {t} = useTranslation();
@@ -33,7 +34,7 @@ export function CreateInvoice(props) {
     const billing_country = useRef();
     const expiry_date = useRef();
     const business_days = useRef();
-    const has_approved = useRef();
+    /*const has_approved = useRef();*/
     const notes = useRef();
 
     const [customers, setCustomers] = useState([]);
@@ -53,8 +54,14 @@ export function CreateInvoice(props) {
         "price": "",
         "total": 0
     };
-
     const [invoiceItems, setInvoiceItems] = useState([initialInvoiceItem]);
+
+
+    const initialInvoiceCustomField = {
+        "name": "",
+        "value": 0
+    };
+    const [invoiceCustomFields, setInvoiceCustomFields] = useState([initialInvoiceCustomField]);
 
     const config = {
         headers: {
@@ -99,9 +106,10 @@ export function CreateInvoice(props) {
                 sub_total: subTotal,
                 expiry_date: expiry_date.current.value,
                 business_days: business_days.current.value,
-                has_approved: has_approved.current.value,
+                /*has_approved: has_approved.current.value,*/
                 notes: notes.current.value,
-                items: invoiceItems
+                items: invoiceItems,
+                custom_fields: invoiceCustomFields
             },
         ).then((response) => {
             setDisabled(false);
@@ -137,6 +145,10 @@ export function CreateInvoice(props) {
         setInvoiceItems([...invoiceItems, initialInvoiceItem]);
     };
 
+    const addMoreInvoiceCustomFields = (element) => {
+        setInvoiceCustomFields([...invoiceCustomFields, initialInvoiceCustomField]);
+    }
+
     const itemHandler = (e, value) => {
         invoiceItems[e].item = value;
         setInvoiceItems(invoiceItems);
@@ -153,8 +165,6 @@ export function CreateInvoice(props) {
         invoice_items[e].total = value * invoice_items[e].price;
 
         setInvoiceItems(invoice_items);
-
-        calculateTotal();
     };
 
     const priceHandler = (e, value) => {
@@ -164,16 +174,32 @@ export function CreateInvoice(props) {
         invoice_items[e].total = value * invoice_items[e].qty;
 
         setInvoiceItems(invoice_items);
+    };
 
-        calculateTotal();
+    const nameFieldHandler = (e, value) => {
+        let invoice_custom_fields = JSON.parse(JSON.stringify(invoiceCustomFields));
+        invoice_custom_fields[e].name = value;
+        setInvoiceCustomFields(invoice_custom_fields);
+    };
+
+    const valueFieldHandler = (e, value) => {
+        let invoice_custom_fields = JSON.parse(JSON.stringify(invoiceCustomFields));
+        invoice_custom_fields[e].value = value;
+        setInvoiceCustomFields(invoice_custom_fields);
+        console.log(invoice_custom_fields);
     };
 
     const removeInvoiceItem = (index) => {
         let invoiceItemsClone = invoiceItems;
         setInvoiceItems(invoiceItemsClone => invoiceItemsClone.filter((elem, ind) => ind !== index));
-        calculateTotal();
     };
 
+
+    const removeInvoiceCustomField = (index) => {
+        let invoiceCustomFieldsClone = invoiceCustomFields;
+        setInvoiceCustomFields(invoiceCustomFieldsClone => invoiceCustomFieldsClone.filter((elem, ind) => ind !== index));
+
+    };
 
     const calculateTotal = () => {
         let total_amount = 0;
@@ -195,6 +221,10 @@ export function CreateInvoice(props) {
 
     return (
         <>
+            {/*<Prompt
+                when={shouldBlockNavigation}
+                message='You have unsaved changes, are you sure you want to leave?'
+            />*/}
             <Header/>
             <Container className="mt--7" fluid>
                 <Row>
@@ -246,11 +276,11 @@ export function CreateInvoice(props) {
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>{t("invoice_due_date")}</label>
+                                                    <label>{t("invoice_expiry_date")}</label>
                                                     <input ref={due_date}
                                                            type="date"
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("invoice_due_date")}/>
+                                                           placeholder={t("enter") + " " + t("invoice_expiry_date")}/>
                                                 </FormGroup>
                                             </Col>
 
@@ -258,14 +288,14 @@ export function CreateInvoice(props) {
                                         <Row>
                                             <Col lg="6">
                                                 <FormGroup>
-                                                    <label>{t("expiry_date")}</label>
+                                                    <label>{t("project_expiry_date")}</label>
                                                     <input ref={expiry_date}
                                                            type="date"
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("expiry_date")}/>
+                                                           placeholder={t("enter") + " " + t("project_expiry_date")}/>
                                                 </FormGroup>
                                             </Col>
-                                            <Col lg="3">
+                                            <Col lg="6">
                                                 <FormGroup>
                                                     <label>{t("business_days")}</label>
                                                     <input ref={business_days}
@@ -274,7 +304,7 @@ export function CreateInvoice(props) {
                                                            placeholder={t("enter") + " " + t("business_days")}/>
                                                 </FormGroup>
                                             </Col>
-                                            <Col lg="3">
+                                            {/*<Col lg="3">
                                                 <FormGroup>
                                                     <label>{t("approved?")}</label>
                                                     <select ref={has_approved}
@@ -284,7 +314,7 @@ export function CreateInvoice(props) {
                                                         <option value="1">Yes</option>
                                                     </select>
                                                 </FormGroup>
-                                            </Col>
+                                            </Col>*/}
 
                                         </Row>
                                         <Row>
@@ -410,12 +440,12 @@ export function CreateInvoice(props) {
                                                     className="stratprop_datatable table table-bordered align-items-center table-flush table">
                                                     <tbody>
                                                     <tr>
-                                                        <td>{t("item")}</td>
-                                                        <td>{t("description")}</td>
-                                                        <td>{t("qty")}</td>
-                                                        <td>{t("unit_price")}</td>
-                                                        <td>{t("total")}</td>
-                                                        <td>{t("actions")}</td>
+                                                        <td width={"15%"}>{t("item")}</td>
+                                                        <td width={"45%"} colSpan={2}>{t("description")}</td>
+                                                        <td width={"15%"}>{t("qty")}</td>
+                                                        <td width={"15%"}>{t("unit_price")}</td>
+                                                        {/*<td width={"15%"}>{t("total")}</td>*/}
+                                                        <td width={"10%"}>{t("actions")}</td>
                                                     </tr>
 
                                                     {invoiceItems.length > 0 ? (
@@ -431,8 +461,8 @@ export function CreateInvoice(props) {
                                                                             onKeyUp={(e) => itemHandler(index, e.target.value)}
                                                                             onKeyPress={(e) => itemHandler(index, e.target.value)}/>
                                                                     </td>
-                                                                    <td>
-                                                                        <input
+                                                                    <td colSpan={2}>
+                                                                        <textarea
                                                                             defaultValue={invoiceItem.description}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("description")}
@@ -464,7 +494,7 @@ export function CreateInvoice(props) {
                                                                             onChange={(e) => priceHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
-                                                                    <td>
+                                                                    {/*<td>
                                                                         <input type={"hidden"}
                                                                                value={invoiceItem.total}
                                                                                className="form-control-alternative form-control"
@@ -472,12 +502,12 @@ export function CreateInvoice(props) {
                                                                                readOnly={'readonly'}
                                                                         />
                                                                         {invoiceItem.total}
-                                                                    </td>
+                                                                    </td>*/}
                                                                     <td>
                                                                         <a
                                                                             onClick={() => removeInvoiceItem(index)}
                                                                             className="float-right btn btn-dark">
-                                                                            Remove
+                                                                            <i className={"fa fa-trash"}></i>
                                                                         </a>
                                                                     </td>
                                                                 </tr>
@@ -487,23 +517,79 @@ export function CreateInvoice(props) {
                                                         (
                                                             ""
                                                         )}
-                                                    <tr>
-                                                        <th colSpan={4} className='text-right'>Total</th>
+                                                    {/*<tr>
+                                                        <th colSpan={2}></th>
+                                                        <th className='text-right'>
+                                                            <a
+                                                                onClick={() => addMoreInvoiceCustomFields(0)}
+                                                                className="float-right btn btn-dark btn-small">
+                                                                <i className={"fa fa-plus"}></i>
+                                                            </a>
+                                                        </th>
+                                                        <th className='text-right'>Total</th>
                                                         <td colSpan={2}>{total}</td>
-                                                    </tr>
-                                                    <tr>
+                                                    </tr>*/}
+                                                    {invoiceCustomFields.length > 0 ? (
+                                                            invoiceCustomFields.map((field, index) => (
+                                                                    <tr>
+                                                                        <th colSpan={2}></th>
+                                                                        <th className='text-right'>
+                                                                            <a
+                                                                                onClick={() => addMoreInvoiceCustomFields(index)}
+                                                                                className="float-right btn btn-dark btn-small">
+                                                                                <i className={"fa fa-plus"}></i>
+                                                                            </a>
+                                                                        </th>
+                                                                        <th className='text-right'>
+                                                                            <input
+                                                                                className="form-control-alternative form-control"
+                                                                                placeholder={t("enter") + " " + t("name")}
+                                                                                defaultValue={field.name}
+                                                                                onKeyDown={(e) => nameFieldHandler(index, e.target.value)}
+                                                                                onKeyUp={(e) => nameFieldHandler(index, e.target.value)}
+                                                                                onKeyPress={(e) => nameFieldHandler(index, e.target.value)}
+                                                                                onClick={(e) => nameFieldHandler(index, e.target.value)}
+                                                                                onChange={(e) => nameFieldHandler(index, e.target.value)}
+
+                                                                            />
+                                                                        </th>
+                                                                        <td>
+                                                                            <input
+                                                                                className="form-control-alternative form-control"
+                                                                                placeholder={t("enter") + " " + t("value")}
+                                                                                defaultValue={field.value}
+                                                                                onKeyDown={(e) => valueFieldHandler(index, e.target.value)}
+                                                                                onKeyUp={(e) => valueFieldHandler(index, e.target.value)}
+                                                                                onKeyPress={(e) => valueFieldHandler(index, e.target.value)}
+                                                                                onClick={(e) => valueFieldHandler(index, e.target.value)}
+                                                                                onChange={(e) => valueFieldHandler(index, e.target.value)}
+                                                                            />
+                                                                        </td>
+                                                                        <td>
+                                                                            <a
+                                                                                onClick={() => removeInvoiceCustomField(index)}
+                                                                                className="float-right btn btn-dark btn-small">
+                                                                                <i className={"fa fa-trash"}></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            ))
+                                                        : ("")
+                                                    }
+                                                    <tr className={"d-none"}>
                                                         <th colSpan={4} className='text-right'>Vat 15%</th>
                                                         <td colSpan={2}>{vat}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr className={"d-none"}>
                                                         <th colSpan={4} className='text-right'>Sub Total</th>
                                                         <td colSpan={2}>{subTotal}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr className={"d-none"}>
                                                         <th colSpan={4} className='text-right'>60%</th>
                                                         <td colSpan={2}>{subTotal60}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr className={"d-none"}>
                                                         <th colSpan={4} className='text-right'>40%</th>
                                                         <td colSpan={2}>{subTotal40}</td>
                                                     </tr>

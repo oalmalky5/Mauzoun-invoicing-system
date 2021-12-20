@@ -7,78 +7,415 @@
     <style>
 
         @if(empty($is_pdf))
-                                       /* Alegreya */
-        @font-face {
+                                                                          /* Alegreya */
+        /*@font-face {
+            font-family: "alegreya";
+            src: url("
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{url('resources/fonts/Alegreya-Regular.ttf')}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ");
+                                                                                                                                                            font-weight: normal;
+                                                                                                                                                            font-style: normal;
+                                                                                                                                                        }
+
+                                                                                                                                                        @font-face {
+                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                            src: url("
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{url('resources/fonts/Alegreya-Italic.ttf')}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ");
+                                                                                                                                                            font-weight: normal;
+                                                                                                                                                            font-style: italic;
+                                                                                                                                                        }
+
+                                                                                                                                                        @font-face {
+                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                            src: url("
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{url('resources/fonts/Alegreya-Medium.ttf')}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ");
+                                                                                                                                                            font-style: normal;
+                                                                                                                                                        }
+
+                                                                                                                                                        @font-face {
+                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                            src: url("
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{url('resources/fonts/Alegreya-SemiBold.ttf')}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ");
+                                                                                                                                                            font-style: normal;
+                                                                                                                                                        }
+
+                                                                                                                                                        @font-face {
+                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                            src: url("
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{url('resources/fonts/Alegreya-Bold.ttf')}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ");
+                                                                                                                                                            font-weight: bold;
+                                                                                                                                                            font-style: normal;
+                                                                                                                                                        }
+
+                                                                                                                                                        !* Alegreya Sans *!
+
+                                                                                                                                                        @font-face {
+                                                                                                                                                            font-family: "alegreya-sans";
+                                                                                                                                                            src: url("
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{url('resources/fonts/AlegreyaSans-Light.ttf')}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ");
+                                                                                                                                                            font-weight: normal;
+                                                                                                                                                            font-style: normal;
+                                                                                                                                                        }
+
+                                                                                                                                                        @font-face {
+                                                                                                                                                            font-family: "alegreya-sans";
+                                                                                                                                                            src: url("
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{url('resources/fonts/AlegreyaSans-Bold.ttf')}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ");
+                                                                                                                                                            font-weight: bold;
+                                                                                                                                                            font-style: normal;
+                                                                                                                                                        }
+
+                                                                                                                                                        @font-face {
+                                                                                                                                                            font-family: "alegreya-sans";
+                                                                                                                                                            src: url("
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{url('resources/fonts/AlegreyaSans-LightItalic.ttf')}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ");
+                                                                                                                                                            font-weight: normal;
+                                                                                                                                                            font-style: italic;
+                                                                                                                                                        }
+
+                                                                                                                                                        @font-face {
+                                                                                                                                                            font-family: "eurostile";
+                                                                                                                                                            src: url("
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{url('resources/fonts/EurostileNormal.ttf')}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ");
+                                                                                                                                                            font-style: normal;
+                                                                                                                                                            font-weight: normal;
+                                                                                                                                                        }*/
+
+        .maintable th {
             font-family: "Alegreya";
-            src: url("{{url('fonts/Alegreya-Regular.ttf')}}");
-            font-weight: normal;
-            font-style: normal;
+            font-size: 15px !important;
         }
 
-        @font-face {
-            font-family: "Alegreya";
-            src: url("{{url('fonts/Alegreya-Italic.ttf')}}");
-            font-weight: normal;
-            font-style: italic;
-        }
-
-        @font-face {
-            font-family: "Alegreya";
-            src: url("{{url('fonts/Alegreya-Medium.ttf')}}");
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "Alegreya";
-            src: url("{{url('fonts/Alegreya-SemiBold.ttf')}}");
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "Alegreya";
-            src: url("{{url('fonts/Alegreya-Bold.ttf')}}");
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        /* Alegreya Sans */
-        @font-face {
-            font-family: "Alegreya Sans";
-            src: url("{{url('fonts/AlegreyaSans-Regular.ttf')}}");
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "Alegreya Sans";
-            src: url("{{url('fonts/AlegreyaSans-Light.ttf')}}");
-            font-weight: 300;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "Alegreya Sans";
-            src: url("{{url('fonts/AlegreyaSans-Bold.ttf')}}");
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "Eurostile";
-            src: url("{{url('fonts/EurostileNormal.ttf')}}");
-            font-style: normal;
-            font-weight: normal;
-        }
-
-        body {
-            font-family: 'Alegreya', sans-serif;
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: 'Alegreya-Sans', sans-serif;
         }
 
         table tr td {
             font-family: "Eurostile" !important;
+            letter-spacing: 1px;
+            font-size: 16px;
         }
 
         @else
+
+        .maintable th {
+            font-family: "alegreya";
+            font-size: 14px !important;
+        }
 
         body {
             font-family: 'alegreya-sans', sans-serif;
@@ -86,6 +423,8 @@
 
         table tr td {
             font-family: "eurostile" !important;
+            letter-spacing: 1px;
+            font-size: 16px;
         }
 
         @endif
@@ -96,12 +435,6 @@
             padding: 0;
             margin-left: -20px;
             background-color: #fff;
-        }
-
-        table tr td {
-            font-family: "eurostile" !important;
-            letter-spacing: 1px;
-            font-size: 16px;
         }
 
         * {
@@ -235,7 +568,7 @@
 
         .book .maintable th {
             border: 1px solid #7f7f7f;
-            font-size: 14px;
+            /*font-size: 14px;*/
             line-height: 10px;
             text-align: center;
             padding: 12px;
@@ -263,6 +596,9 @@
         .book .table td {
             width: 100px;
             background-color: #aad1ed;
+            text-align: left;
+            padding: 5px;
+            color: white;
         }
 
         .book p {
@@ -343,44 +679,66 @@
             width: auto !important;
         }
 
-        .maintable th {
-            font-family: "alegreya";
+        div h5 {
             font-size: 18px !important;
+            font-weight: lighter;
+
         }
 
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Alegreya" !important;
+        }
+
+        .maintable-one th {
+            font-size: 18px;
+        }
+
+        @page {
+            footer: page-footer;
+        }
 
     </style>
 </head>
 <body>
+<htmlpagefooter name="page-footer">
+    <div style="font-size: 10px; margin-left: 50px; padding-bottom: 50px">
+        <p>VAT Registration 310145806100003</p>
+        <p>C.R. 4030360838</p>
+        <p>P.O. Box 23435, Jeddah, Saudi Arabia</p>
+        <p>Email hello@mauzoun.com</p>
+        <p><strong>www.mauzoun.com</strong></p>
+    </div>
+</htmlpagefooter>
 <div class="book">
     <div class="page">
         <div class="subpage">
             <div class="logo">
                 <div class="h-left">
-                    <h1 style="font-weight: bold; font-size: 40px; margin-bottom: 20px">INVOICE</h1>
-                    <p style="line-height: 1rem; font-weight: bold;">QT2021MMDDNN</p>
+                    <h1 style="font-weight: bold; font-size: 40px; margin-bottom: 20px; font-family: 'alegreya' !important; font-weight: 500">
+                        INVOICE</h1>
+                    <p style="line-height: 1rem; font-weight: bold;">{{$invoice->sr_no}}</p>
                     <p>
                         <span style="font-style: italic; font-weight: lighter">Invoice Prepared On</span><br/>
                         {{\Carbon\Carbon::parse($invoice->date)->format('l, F d, Y')}}<br/>
-                        <span style="font-style: italic">Invoice Due On</span><br/>
+                        <span style="font-style: italic">Invoice Expires On</span><br/>
                         {{\Carbon\Carbon::parse($invoice->due_date)->format('l, F d, Y')}}<br/>
                     </p>
                 </div>
                 <div class="h-right">
                     @if(!empty($is_pdf))
-                        <img src="{{ './images/main-logo.png'}}" height="130px" style="margin-right: 10px">
+                        <img src="{{public_path('images/main-logo.png')}}" height="130px" style="margin-right: 10px">
                         <br/>
                         <br/>
 
                         <img src="{{public_path('qrcodes/' . $invoice->id . '.svg')}}" height="100px"
-                             style="margin-right: 10px">
+                             style="margin-right: 25px">
                     @else
 
-                        <img class="web-logo" src="{{ asset('images/main-logo.png')}}" height="130px">
+                        <img class="web-logo" src="{{ asset('public/images/main-logo.png')}}" height="130px">
                         <br/>
                         <br/>
 
-                        {!! QrCode::generate(env('BASE_URL') . 'invoice_pdf/' . $invoice->id); !!}
+                        {!! QrCode::generate($invoice->report_url . '/' . ($request->status ?? ($status ?? ''))); !!}
                     @endif
 
                 </div>
@@ -388,7 +746,7 @@
             <div class="clear"></div>
             <div class="h-row2">
                 <div class="bill-info">
-                    <div class="bill-name" style="font-weight: bold">Bill From</div>
+                    <div class="bill-name" style="font-weight: 500; font-family: 'alegreya'; ">Bill From</div>
                     <div class="bill-address">
                         <p>
                             <span style="font-style: italic;">layan@mauzoun.com</span><br/>
@@ -399,33 +757,33 @@
                     </div>
                 </div>
                 <div class="bill-to-info">
-                    <div class="bill-to-name" style="font-weight: bold">Bill To</div>
+                    <div class="bill-to-name" style="font-weight: 500; font-family: 'alegreya'">Bill To</div>
                     <div class="bill-to-address">
                         <p>
                             <span style="font-style: italic;">{{$invoice->billing_email}}</span><br/>
                             {{$invoice->customer->name}}<br/>
                             {{$invoice->billing_company_name}}<br/>
-                            {{$invoice->billing_email}}
+                            {{$invoice->billing_city}}, {{$invoice->billing_country}}
                         </p>
                     </div>
                 </div>
             </div>
             <div class="clear"></div>
             <div class="maintablediv">
-                <table class="maintable" cellpadding="5">
+                <table class="maintable maintable-one" cellpadding="5">
                     <thead>
                     <tr>
                         <th style="width: 20%!important;">ITEM</th>
-                        <th style="width: 40%!important;">DESCRIPTION</th>
+                        <th style="width: 35%!important;">DESCRIPTION</th>
                         <th style="width: 10%!important;">QTY.</th>
-                        <th style="width: 15%!important;">UNIT PRICE</th>
-                        <th style="width: 15%!important;">TOTAL</th>
+                        <th style="width: 19.2%!important;">UNIT PRICE</th>
+                        <th style="width: 15.8%!important;">TOTAL</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($invoice->details as $index => $detail)
                         <tr>
-                            <td class="text-start">
+                            <td class="text-start" style="color: #f3c2c8">
                                 <u>
                                     <strong>
                                         <span style="letter-spacing: 0.8px !important; line-height: 2rem !important;">Phase {{$index + 1}}:</span>
@@ -434,8 +792,8 @@
                                 {{$detail->item}}
 
                             </td>
-                            <td class="text-start">Brand Manifesto Writing, in the English language only. Flat rate
-                                only, up to 450 words maximum.
+                            <td class="text-start">
+                                {!!nl2br($detail->description)!!}
                             </td>
                             <td class="text-center">{{(int)$detail->qty}}</td>
                             <td class="text-center">{{number_format($detail->price, 2)}} SR</td>
@@ -450,7 +808,14 @@
                         <th>TOTAL</th>
                         <td>{{number_format($invoice->total, 2)}} SR</td>
                     </tr>
-                    <tr>
+
+                    @foreach($invoice->custom_fields as $custom_field)
+                        <tr>
+                            <th>{{$custom_field->name}}</th>
+                            <td>{{number_format($custom_field->value, 2)}} SR</td>
+                        </tr>
+                    @endforeach
+                    {{--<tr>
                         <th>VAT 15%</th>
                         <td>{{number_format($invoice->total * 15/100, 2)}} SR</td>
                     </tr>
@@ -477,7 +842,7 @@
                                 <td>{{number_format($invoice->sub_total*40/100, 2)}} SR</td>
                             </tr>
                         @endif
-                    @endif
+                    @endif--}}
                 </table>
             </div>
             <div class="clear"></div>
@@ -492,6 +857,7 @@
                 </div>
 
                 <div class="confidentiality">
+                    <br/>
                     <h5>II. Confidentiality</h5>
                     <p>
                         – All exchanges between Mauzoun and the client will remain strictly confidential and will only
@@ -627,6 +993,7 @@
             @endif
 
             <div class="project">
+                <br/>
                 <h5>VI. Communication Guidelines</h5>
                 <p>
                     – Mauzoun communication hours are from Sundays to Wednesdays, 9am to 5pm, in local Saudi Arabian

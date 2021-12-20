@@ -8,7 +8,7 @@ return [
     'margin_left' => 0,
     'margin_right' => 0,
     'margin_top' => 10,
-    'margin_bottom' => 10,
+    'margin_bottom' => 40,
     'margin_header' => 0,
     'margin_footer' => 0,
     'orientation' => 'P',
@@ -31,13 +31,15 @@ return [
             'R' => 'AlegreyaSans-Light.ttf',    // regular font
             'B' => 'AlegreyaSans-Bold.ttf',       // optional: bold font
             'I' => 'AlegreyaSans-LightItalic.ttf',     // optional: italic font
+            'M' => 'AlegreyaSans-Medium.ttf',     // optional: italic font
             'BI' => 'AlegreyaSans-SemiBold.ttf' // optional: bold-italic font
         ],
         'alegreya' => [
             'R' => 'Alegreya-Medium.ttf',    // regular font
             'B' => 'Alegreya-Bold.ttf',       // optional: bold font
             'I' => 'Alegreya-LightItalic.ttf',     // optional: italic font
-            'BI' => 'Alegreya-SemiBold.ttf' // optional: bold-italic font
+            'BI' => 'Alegreya-SemiBold.ttf', // optional: bold-italic font
+            'M' => 'Alegreya-Medium.ttf' // optional: bold-italic font
         ],
         'eurostile' => [
             'R' => 'EurostileNormal.ttf',    // regular font

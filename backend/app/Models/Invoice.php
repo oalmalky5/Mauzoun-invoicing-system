@@ -14,11 +14,16 @@ class Invoice extends Model
 
     protected $guarded = [];
     protected $with = ['details', 'customer'];
-    protected $appends = ['address', 'pdf_url'];
+    protected $appends = ['address', 'pdf_url', 'report_url'];
 
     public function details()
     {
         return $this->hasMany(InvoiceDetail::class);
+    }
+
+    public function custom_fields()
+    {
+        return $this->hasMany(InvoiceCustomField::class)->orderBy('sorting_order');
     }
 
     public function customer()
@@ -28,7 +33,7 @@ class Invoice extends Model
 
     public function getAddressAttribute()
     {
-        return $this->street . ', ' . $this->city . ', ' . $this->state . ', ' . $this->zip_code . ', ' . $this->country;
+        return $this->billing_street . ', ' . $this->billing_city . ', ' . $this->billing_state . ', ' . $this->billing_zip_code . ', ' . $this->billing_country;
     }
 
     public function getInvoiceDateFormattedAttribute()
@@ -43,7 +48,13 @@ class Invoice extends Model
 
     public function getPdfUrlAttribute()
     {
-        return env('BASE_URL') . 'invoices/' . $this->sr_no . '_' . $this->id . '.pdf';
+        return env('BASE_URL') . 'invoices/' . $this->sr_no . '_' . $this->id . '.pdf?v=' . date('YmdHis');
+    }
+
+    public function getReportUrlAttribute()
+    {
+//        return 'https://pay.mauzoun.com/invoice/' . $this->sr_no;
+        return env('BASE_URL') . 'invoice_view/' . $this->sr_no;
     }
 
     protected static function booted()

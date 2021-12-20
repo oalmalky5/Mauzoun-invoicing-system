@@ -36,6 +36,7 @@ export function InvoiceList(props) {
     const [invoice, setInvoice] = useState(-1);
     // const [show, setShow] = useState(false);
     const [modal, setModal] = useState(false);
+    const [approveModal, setApproveModal] = useState(false);
     const history = useHistory();
     const [disabled, setDisabled] = useState(false);
     const [iconDisabled, setIconDisabled] = useState(true);
@@ -46,9 +47,16 @@ export function InvoiceList(props) {
     // const {t} = useTranslation();
 
     const toggle = () => setModal(!modal);
+    const toggleApprove = () => setApproveModal(!approveModal);
+
     const setCurrentInvoice = (invoice) => {
         setInvoice(invoice);
         setModal(!modal);
+    };
+
+    const setCurrentInvoiceForApprove = (invoice) => {
+        setInvoice(invoice);
+        setApproveModal(!modal);
     };
 
 
@@ -178,6 +186,12 @@ export function InvoiceList(props) {
                                                             >
                                                                 {t("delete")}
                                                             </DropdownItem>
+                                                            <DropdownItem
+                                                                onClick={() => setCurrentInvoiceForApprove(invoice)}
+                                                                key={invoice.id}
+                                                            >
+                                                                {t("mark_as_approved")}
+                                                            </DropdownItem>
                                                         </DropdownMenu>
                                                     </UncontrolledDropdown>
                                                 </td>
@@ -228,6 +242,32 @@ export function InvoiceList(props) {
                         </Button>
                         {' '}
                         <Button onClick={toggle}>
+                            Cancel
+                        </Button>
+                    </ModalFooter>
+                </Modal>
+
+                <Modal
+                    centered
+                    isOpen={approveModal}
+                    toggle={toggleApprove}
+                >
+                    <ModalHeader toggle={toggleApprove}>
+                        Approve Invoice
+                    </ModalHeader>
+                    <ModalBody>
+                        Are you sure you want to Approve?
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button
+                            color="primary"
+                            onClick={deleteInvoice} disabled={disabled}
+                        >
+                            Confirm <span
+                            dangerouslySetInnerHTML={{__html: disabled ? `<i class='fas fa-spinner fa-spin'></i>` : ``}}/>
+                        </Button>
+                        {' '}
+                        <Button onClick={toggleApprove}>
                             Cancel
                         </Button>
                     </ModalFooter>
