@@ -7,10 +7,14 @@
     <style>
 
         @if(empty($is_pdf))
-                                                                          /* Alegreya */
+                                                                              /* Alegreya */
         /*@font-face {
             font-family: "alegreya";
             src: url("
+
+
+
+
 
 
 
@@ -46,14 +50,22 @@
 
 
 
-        ");
-                                                                                                                                                            font-weight: normal;
-                                                                                                                                                            font-style: normal;
-                                                                                                                                                        }
 
-                                                                                                                                                        @font-face {
-                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                            src: url("
+
+
+
+        ");
+                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                        }
+
+                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                                                            src: url("
+
+
+
+
 
 
 
@@ -89,14 +101,22 @@
 
 
 
-        ");
-                                                                                                                                                            font-weight: normal;
-                                                                                                                                                            font-style: italic;
-                                                                                                                                                        }
 
-                                                                                                                                                        @font-face {
-                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                            src: url("
+
+
+
+        ");
+                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                            font-style: italic;
+                                                                                                                                                                                        }
+
+                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                                                            src: url("
+
+
+
+
 
 
 
@@ -132,13 +152,21 @@
 
 
 
-        ");
-                                                                                                                                                            font-style: normal;
-                                                                                                                                                        }
 
-                                                                                                                                                        @font-face {
-                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                            src: url("
+
+
+
+        ");
+                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                        }
+
+                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                                                            src: url("
+
+
+
+
 
 
 
@@ -174,13 +202,21 @@
 
 
 
-        ");
-                                                                                                                                                            font-style: normal;
-                                                                                                                                                        }
 
-                                                                                                                                                        @font-face {
-                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                            src: url("
+
+
+
+        ");
+                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                        }
+
+                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                                                            src: url("
+
+
+
+
 
 
 
@@ -216,16 +252,24 @@
 
 
 
+
+
+
+
         ");
-                                                                                                                                                            font-weight: bold;
-                                                                                                                                                            font-style: normal;
-                                                                                                                                                        }
+                                                                                                                                                                                            font-weight: bold;
+                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                        }
 
-                                                                                                                                                        !* Alegreya Sans *!
+                                                                                                                                                                                        !* Alegreya Sans *!
 
-                                                                                                                                                        @font-face {
-                                                                                                                                                            font-family: "alegreya-sans";
-                                                                                                                                                            src: url("
+                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                            font-family: "alegreya-sans";
+                                                                                                                                                                                            src: url("
+
+
+
+
 
 
 
@@ -261,14 +305,22 @@
 
 
 
-        ");
-                                                                                                                                                            font-weight: normal;
-                                                                                                                                                            font-style: normal;
-                                                                                                                                                        }
 
-                                                                                                                                                        @font-face {
-                                                                                                                                                            font-family: "alegreya-sans";
-                                                                                                                                                            src: url("
+
+
+
+        ");
+                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                        }
+
+                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                            font-family: "alegreya-sans";
+                                                                                                                                                                                            src: url("
+
+
+
+
 
 
 
@@ -304,14 +356,22 @@
 
 
 
-        ");
-                                                                                                                                                            font-weight: bold;
-                                                                                                                                                            font-style: normal;
-                                                                                                                                                        }
 
-                                                                                                                                                        @font-face {
-                                                                                                                                                            font-family: "alegreya-sans";
-                                                                                                                                                            src: url("
+
+
+
+        ");
+                                                                                                                                                                                            font-weight: bold;
+                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                        }
+
+                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                            font-family: "alegreya-sans";
+                                                                                                                                                                                            src: url("
+
+
+
+
 
 
 
@@ -347,14 +407,22 @@
 
 
 
-        ");
-                                                                                                                                                            font-weight: normal;
-                                                                                                                                                            font-style: italic;
-                                                                                                                                                        }
 
-                                                                                                                                                        @font-face {
-                                                                                                                                                            font-family: "eurostile";
-                                                                                                                                                            src: url("
+
+
+
+        ");
+                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                            font-style: italic;
+                                                                                                                                                                                        }
+
+                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                            font-family: "eurostile";
+                                                                                                                                                                                            src: url("
+
+
+
+
 
 
 
@@ -390,10 +458,14 @@
 
 
 
+
+
+
+
         ");
-                                                                                                                                                            font-style: normal;
-                                                                                                                                                            font-weight: normal;
-                                                                                                                                                        }*/
+                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                        }*/
 
         .maintable th {
             font-family: "Alegreya";
@@ -700,15 +772,17 @@
     </style>
 </head>
 <body>
-<htmlpagefooter name="page-footer">
-    <div style="font-size: 10px; margin-left: 50px; padding-bottom: 50px">
-        <p>VAT Registration 310145806100003</p>
-        <p>C.R. 4030360838</p>
-        <p>P.O. Box 23435, Jeddah, Saudi Arabia</p>
-        <p>Email hello@mauzoun.com</p>
-        <p><strong>www.mauzoun.com</strong></p>
-    </div>
-</htmlpagefooter>
+@if(empty($is_pdf))
+    <htmlpagefooter name="page-footer">
+        <div style="font-size: 10px; margin-left: 50px; padding-bottom: 50px">
+            <p>VAT Registration 310145806100003</p>
+            <p>C.R. 4030360838</p>
+            <p>P.O. Box 23435, Jeddah, Saudi Arabia</p>
+            <p>Email hello@mauzoun.com</p>
+            <p><strong>www.mauzoun.com</strong></p>
+        </div>
+    </htmlpagefooter>
+@endif
 <div class="book">
     <div class="page">
         <div class="subpage">
@@ -726,7 +800,8 @@
                 </div>
                 <div class="h-right">
                     @if(!empty($is_pdf))
-                        <img src="{{public_path('images/main-logo.png')}}" height="130px" style="margin-right: 10px">
+                        <img src="{{public_path('images/main-logo.png')}}" height="130px"
+                             style="margin-right: 10px">
                         <br/>
                         <br/>
 
@@ -786,7 +861,8 @@
                             <td class="text-start" style="color: #f3c2c8">
                                 <u>
                                     <strong>
-                                        <span style="letter-spacing: 0.8px !important; line-height: 2rem !important;">Phase {{$index + 1}}:</span>
+                                            <span
+                                                style="letter-spacing: 0.8px !important; line-height: 2rem !important;">Phase {{$index + 1}}:</span>
                                     </strong>
                                 </u> <br/>
                                 {{$detail->item}}
@@ -851,7 +927,8 @@
                 <div>
                     <h5>I. Legality</h5>
                     <p>
-                        – All of the terms and conditions stated in this quotation are legally binding upon the client
+                        – All of the terms and conditions stated in this quotation are legally binding upon the
+                        client
                         wiring any down payment to Mauzoun
                     </p>
                 </div>
@@ -860,12 +937,16 @@
                     <br/>
                     <h5>II. Confidentiality</h5>
                     <p>
-                        – All exchanges between Mauzoun and the client will remain strictly confidential and will only
-                        be discussed between the client and Mauzoun, or with third-party vendors approved by the client.
+                        – All exchanges between Mauzoun and the client will remain strictly confidential and will
+                        only
+                        be discussed between the client and Mauzoun, or with third-party vendors approved by the
+                        client.
                     </p>
                     <p>
-                        – The client adheres to maintaining strict confidentiality with Mauzoun and will not share with
-                        any external party, under any circumstances, any internal Mauzoun documents, or any transcripts
+                        – The client adheres to maintaining strict confidentiality with Mauzoun and will not share
+                        with
+                        any external party, under any circumstances, any internal Mauzoun documents, or any
+                        transcripts
                         of communications with any member of the Mauzoun Team.
                     </p>
                 </div>
@@ -894,16 +975,19 @@
                     Mauzoun Team
                 </p>
                 <p>
-                    – To book your project’s timeline, reply to your e-mail thread with Mauzoun confirming completion of
+                    – To book your project’s timeline, reply to your e-mail thread with Mauzoun confirming
+                    completion of
                     the
                     prerequisites stated above. Booking will be completed within maximum (2) business days.
                 </p>
                 <p>
-                    – Timeline of the project will be <b>({{$invoice->business_days}})</b> business days from booking
+                    – Timeline of the project will be <b>({{$invoice->business_days}})</b> business days from
+                    booking
                     date.
                 </p>
                 <p>
-                    – If a client provides additional documents halfway through a work’s progress, and after finalized
+                    – If a client provides additional documents halfway through a work’s progress, and after
+                    finalized
                     information handover, an additional charge may be incurred, and the project timeline may be
                     extended.
                 </p>
@@ -916,7 +1000,8 @@
                     requested,
                     the project is considered completed and full pending payment is due.</p>
                 <p>– Additional rounds of changes are available, but are subject to additional charge.</p>
-                <p>– Rounds of changes will be implemented only upon receiving the full scope, and not partial scope, of
+                <p>– Rounds of changes will be implemented only upon receiving the full scope, and not partial
+                    scope, of
                     the
                     feedback.</p>
                 <p>– Feedback must be submitted as direct comments annotated on the deliverable file written by
@@ -931,13 +1016,15 @@
                 <h5>V. Project Guidelines</h5>
                 <p>
                     – This project’s expiry date is on
-                    <b>{{\Carbon\Carbon::parse($invoice->expiry_date)->format("Y/m/d")}}</b> regardless of services or
+                    <b>{{\Carbon\Carbon::parse($invoice->expiry_date)->format("Y/m/d")}}</b> regardless of services
+                    or
                     rounds of changes
                     fulfilled. Upon
                     project expiry, full pending payment must be paid regardless of project completion status.
                 </p>
                 <p>
-                    – If a client fails to provide feedback on a deliverable within (3) months, then the entire project
+                    – If a client fails to provide feedback on a deliverable within (3) months, then the entire
+                    project
                     is considered
                     complete, and the remaining payment will be invoiced. The client will only be able to resume the
                     project
@@ -960,19 +1047,22 @@
                     circumstances.
                 </p>
                 <p>
-                    – Mauzoun reserves the right to showcase the final approved work, all documents pertaining to the
+                    – Mauzoun reserves the right to showcase the final approved work, all documents pertaining to
+                    the
                     work
                     produced by Mauzoun, the Mauzoun creative process, the client's logos, and affiliate logos
                     pertaining to the
                     project, in our portfolio, website, and all other Mauzoun platforms.
                 </p>
                 <p>
-                    – Words are defined as total document word count. Pages refer to the pages of the final deliverable
+                    – Words are defined as total document word count. Pages refer to the pages of the final
+                    deliverable
                     after
                     design implementation, and not the pages of the document’s PDF content blueprint.
                 </p>
                 <p>
-                    – For all recurring monthly services (including but not limited to monthly social media content, or
+                    – For all recurring monthly services (including but not limited to monthly social media content,
+                    or
                     monthly
                     newsletters), each month’s allocated quantity of content is only applicable to that particular
                     month.
@@ -1016,7 +1106,8 @@
                     e-mail request
                 </p>
                 <p>
-                    – Scheduling short-notice online meetings is possible via e-mail, but is subject to availability.
+                    – Scheduling short-notice online meetings is possible via e-mail, but is subject to
+                    availability.
                 </p>
                 <p>
                     – The client ensures appropriate professional behavior when communicating with any member of the
@@ -1047,8 +1138,10 @@
                     to forward a proof of payment may result in timeline delays.
                 </p>
                 <p>
-                    – Upon paying the down payment, the client cannot change any of the quoted services. Any additional
-                    services requested will be quoted in a separate quotation. Any cancelled services must be paid in
+                    – Upon paying the down payment, the client cannot change any of the quoted services. Any
+                    additional
+                    services requested will be quoted in a separate quotation. Any cancelled services must be paid
+                    in
                     full.
                 </p>
                 <p>

@@ -162,7 +162,7 @@ export function CreateInvoice(props) {
     const qtyHandler = (e, value) => {
         let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
         invoice_items[e].qty = value;
-        invoice_items[e].total = value * invoice_items[e].price;
+        // invoice_items[e].total = value * invoice_items[e].price;
 
         setInvoiceItems(invoice_items);
     };
@@ -171,7 +171,7 @@ export function CreateInvoice(props) {
 
         let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
         invoice_items[e].price = value;
-        invoice_items[e].total = value * invoice_items[e].qty;
+        // invoice_items[e].total = value * invoice_items[e].qty;
 
         setInvoiceItems(invoice_items);
     };
@@ -471,7 +471,7 @@ export function CreateInvoice(props) {
                                                                             onKeyPress={(e) => descriptionHandler(index, e.target.value)}/>
                                                                     </td>
                                                                     <td>
-                                                                        <input type={"number"}
+                                                                        <input
                                                                                defaultValue={invoiceItem.qty}
                                                                                className="form-control-alternative form-control"
                                                                                placeholder={t("qty")}

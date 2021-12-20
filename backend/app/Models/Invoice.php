@@ -48,7 +48,7 @@ class Invoice extends Model
 
     public function getPdfUrlAttribute()
     {
-        return env('BASE_URL') . 'invoices/' . $this->sr_no . '_' . $this->id . '.pdf?v=' . date('YmdHis');
+        return env('BASE_URL') . 'public/invoices/' . $this->sr_no . '_' . $this->id . '.pdf?v=' . date('YmdHis');
     }
 
     public function getReportUrlAttribute()
