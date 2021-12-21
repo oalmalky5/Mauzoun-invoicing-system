@@ -878,7 +878,7 @@
         }
 
         .text-right {
-            text-align: right;
+            text-align: right !important;
         }
 
     </style>
@@ -983,9 +983,9 @@
                             <td class="text-start">
                                 {!!nl2br($detail->description)!!}
                             </td>
-                            <td class="text-right">{{$detail->qty}}</td>
-                            <td class="text-right">{{$detail->price}}</td>
-                            <td class="text-right">{{$detail->total}}</td>
+                            <td class="text-right" align="right">{{$detail->qty}}</td>
+                            <td class="text-right" align="right">{{$detail->price}}</td>
+                            <td class="text-right" align="right">{{$detail->total}}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -1000,7 +1000,7 @@
                     @foreach($invoice->custom_fields as $custom_field)
                         <tr>
                             <th>{{$custom_field->name}}</th>
-                            <td class="text-right">{{$custom_field->value}}</td>
+                            <td class="text-right" align="right">{{$custom_field->value}}</td>
                         </tr>
                     @endforeach
                     {{--<tr>

@@ -467,9 +467,9 @@ export function CreateInvoice(props) {
                                                                             onKeyUp={(e) => itemHandler(index, e.target.value)}
                                                                             onKeyPress={(e) => itemHandler(index, e.target.value)}/>
                                                                     </td>
-                                                                    <td colSpan={4}>
+                                                                    <td colSpan={2}>
                                                                         <textarea
-                                                                            rows={5}
+                                                                            rows={4}
                                                                             defaultValue={invoiceItem.description}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("description")}
