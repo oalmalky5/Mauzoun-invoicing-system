@@ -32,7 +32,7 @@ class InvoiceController extends Controller
     public function invoice_view($id = 0, $status)
     {
         $Invoice = Invoice::firstWhere('sr_no', $id);
-        return view('invoice', ['invoice' => $Invoice, 'status' => $status]);
+        return view('invoice', ['invoice' => $Invoice, 'status' => $status, 'web_view' => true]);
     }
 
     public function invoice_pdf($id = 0)

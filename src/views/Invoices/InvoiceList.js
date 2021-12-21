@@ -155,9 +155,9 @@ export function InvoiceList(props) {
                                                                 href={`/invoice/${invoice.sr_no}/paid`}
                                                                 target={"_blank"}
                                                                 tag="a">
-                                                                {t("paid_preview")}
+                                                                {t("preview")}
                                                             </DropdownItem>
-                                                            <DropdownItem
+                                                            {/*<DropdownItem
                                                                 href={`/invoice/${invoice.sr_no}/due`}
                                                                 target={"_blank"}
                                                                 tag="a">
@@ -168,7 +168,7 @@ export function InvoiceList(props) {
                                                                 target={"_blank"}
                                                                 tag="a">
                                                                 {t("unpaid_preview")}
-                                                            </DropdownItem>
+                                                            </DropdownItem>*/}
                                                             {/*<DropdownItem
                                                                 tag={Link} to={`/admin/invoices/edit/${invoice.id}`}
                                                             >

@@ -7,10 +7,16 @@
     <style>
 
         @if(empty($is_pdf))
-                                                                              /* Alegreya */
+                                                                                    /* Alegreya */
         /*@font-face {
             font-family: "alegreya";
             src: url("
+
+
+
+
+
+
 
 
 
@@ -54,14 +60,26 @@
 
 
 
-        ");
-                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                        }
 
-                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                                                            src: url("
+
+
+
+
+
+        ");
+                                                                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                                                                                                            src: url("
+
+
+
+
+
+
 
 
 
@@ -105,14 +123,26 @@
 
 
 
-        ");
-                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                            font-style: italic;
-                                                                                                                                                                                        }
 
-                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                                                            src: url("
+
+
+
+
+
+        ");
+                                                                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                                                                            font-style: italic;
+                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                                                                                                            src: url("
+
+
+
+
+
+
 
 
 
@@ -156,13 +186,25 @@
 
 
 
-        ");
-                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                        }
 
-                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                                                            src: url("
+
+
+
+
+
+        ");
+                                                                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                                                                                                            src: url("
+
+
+
+
+
+
 
 
 
@@ -206,13 +248,25 @@
 
 
 
-        ");
-                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                        }
 
-                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                                                            src: url("
+
+
+
+
+
+        ");
+                                                                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                                                                            font-family: "alegreya";
+                                                                                                                                                                                                                                            src: url("
+
+
+
+
+
+
 
 
 
@@ -256,16 +310,28 @@
 
 
 
+
+
+
+
+
+
         ");
-                                                                                                                                                                                            font-weight: bold;
-                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                        }
+                                                                                                                                                                                                                                            font-weight: bold;
+                                                                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                                                                        }
 
-                                                                                                                                                                                        !* Alegreya Sans *!
+                                                                                                                                                                                                                                        !* Alegreya Sans *!
 
-                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                            font-family: "alegreya-sans";
-                                                                                                                                                                                            src: url("
+                                                                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                                                                            font-family: "alegreya-sans";
+                                                                                                                                                                                                                                            src: url("
+
+
+
+
+
+
 
 
 
@@ -309,14 +375,26 @@
 
 
 
-        ");
-                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                        }
 
-                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                            font-family: "alegreya-sans";
-                                                                                                                                                                                            src: url("
+
+
+
+
+
+        ");
+                                                                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                                                                            font-family: "alegreya-sans";
+                                                                                                                                                                                                                                            src: url("
+
+
+
+
+
+
 
 
 
@@ -360,14 +438,26 @@
 
 
 
-        ");
-                                                                                                                                                                                            font-weight: bold;
-                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                        }
 
-                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                            font-family: "alegreya-sans";
-                                                                                                                                                                                            src: url("
+
+
+
+
+
+        ");
+                                                                                                                                                                                                                                            font-weight: bold;
+                                                                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                                                                            font-family: "alegreya-sans";
+                                                                                                                                                                                                                                            src: url("
+
+
+
+
+
+
 
 
 
@@ -411,14 +501,26 @@
 
 
 
-        ");
-                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                            font-style: italic;
-                                                                                                                                                                                        }
 
-                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                            font-family: "eurostile";
-                                                                                                                                                                                            src: url("
+
+
+
+
+
+        ");
+                                                                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                                                                            font-style: italic;
+                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                        @font-face {
+                                                                                                                                                                                                                                            font-family: "eurostile";
+                                                                                                                                                                                                                                            src: url("
+
+
+
+
+
+
 
 
 
@@ -462,10 +564,16 @@
 
 
 
+
+
+
+
+
+
         ");
-                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                        }*/
+                                                                                                                                                                                                                                            font-style: normal;
+                                                                                                                                                                                                                                            font-weight: normal;
+                                                                                                                                                                                                                                        }*/
 
         .maintable th {
             font-family: "Alegreya";
@@ -772,7 +880,7 @@
     </style>
 </head>
 <body>
-@if(empty($is_pdf))
+@if(empty($web_view))
     <htmlpagefooter name="page-footer">
         <div style="font-size: 10px; margin-left: 50px; padding-bottom: 50px">
             <p>VAT Registration 310145806100003</p>
@@ -872,8 +980,8 @@
                                 {!!nl2br($detail->description)!!}
                             </td>
                             <td class="text-center">{{(int)$detail->qty}}</td>
-                            <td class="text-center">{{number_format($detail->price, 2)}} SR</td>
-                            <td class="text-center">{{number_format($detail->total, 2)}} SR</td>
+                            <td class="text-center">{{$detail->price}} SR</td>
+                            <td class="text-center">{{$detail->total}} SR</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -882,13 +990,13 @@
 
                     <tr>
                         <th>TOTAL</th>
-                        <td>{{number_format($invoice->total, 2)}} SR</td>
+                        <td>{{$invoice->total}} SR</td>
                     </tr>
 
                     @foreach($invoice->custom_fields as $custom_field)
                         <tr>
                             <th>{{$custom_field->name}}</th>
-                            <td>{{number_format($custom_field->value, 2)}} SR</td>
+                            <td>{{$custom_field->value}} SR</td>
                         </tr>
                     @endforeach
                     {{--<tr>
@@ -980,11 +1088,11 @@
                     the
                     prerequisites stated above. Booking will be completed within maximum (2) business days.
                 </p>
-                <p>
+                {{--<p>
                     – Timeline of the project will be <b>({{$invoice->business_days}})</b> business days from
                     booking
                     date.
-                </p>
+                </p>--}}
                 <p>
                     – If a client provides additional documents halfway through a work’s progress, and after
                     finalized
