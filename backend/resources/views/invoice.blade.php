@@ -869,12 +869,16 @@
             font-family: "Alegreya" !important;
         }
 
-        .maintable-one th {
+        .maintable-one th, .maintable-two th{
             font-size: 18px;
         }
 
         @page {
             footer: page-footer;
+        }
+
+        .text-right {
+            text-align: right;
         }
 
     </style>
@@ -979,24 +983,24 @@
                             <td class="text-start">
                                 {!!nl2br($detail->description)!!}
                             </td>
-                            <td class="text-center">{{(int)$detail->qty}}</td>
-                            <td class="text-center">{{$detail->price}} SR</td>
-                            <td class="text-center">{{$detail->total}} SR</td>
+                            <td class="text-right">{{$detail->qty}}</td>
+                            <td class="text-right">{{$detail->price}}</td>
+                            <td class="text-right">{{$detail->total}}</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                <table class="maintable table">
+                <table class="maintable table maintable-two">
 
-                    <tr>
+                    {{--<tr>
                         <th>TOTAL</th>
                         <td>{{$invoice->total}} SR</td>
-                    </tr>
+                    </tr>--}}
 
                     @foreach($invoice->custom_fields as $custom_field)
                         <tr>
                             <th>{{$custom_field->name}}</th>
-                            <td>{{$custom_field->value}} SR</td>
+                            <td class="text-right">{{$custom_field->value}}</td>
                         </tr>
                     @endforeach
                     {{--<tr>
