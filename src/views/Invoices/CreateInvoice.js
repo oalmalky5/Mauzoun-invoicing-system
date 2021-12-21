@@ -459,7 +459,7 @@ export function CreateInvoice(props) {
 
                                                                     <td>
                                                                         <textarea
-                                                                            rows={2}
+                                                                            rows={4}
                                                                             defaultValue={invoiceItem.item}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("item")}
@@ -467,7 +467,7 @@ export function CreateInvoice(props) {
                                                                             onKeyUp={(e) => itemHandler(index, e.target.value)}
                                                                             onKeyPress={(e) => itemHandler(index, e.target.value)}/>
                                                                     </td>
-                                                                    <td colSpan={2}>
+                                                                    <td colSpan={4}>
                                                                         <textarea
                                                                             rows={5}
                                                                             defaultValue={invoiceItem.description}
@@ -479,7 +479,7 @@ export function CreateInvoice(props) {
                                                                     </td>
                                                                     <td>
                                                                         <textarea
-                                                                            rows={2}
+                                                                            rows={4}
                                                                             defaultValue={invoiceItem.qty}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("qty")}
@@ -492,7 +492,7 @@ export function CreateInvoice(props) {
                                                                     </td>
                                                                     <td>
                                                                         <textarea
-                                                                            rows={2}
+                                                                            rows={4}
                                                                             defaultValue={invoiceItem.price}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("price")}
