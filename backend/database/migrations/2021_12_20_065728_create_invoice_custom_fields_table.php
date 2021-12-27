@@ -17,9 +17,10 @@ class CreateInvoiceCustomFieldsTable extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('name_arabic')->nullable();
             $table->string('value');
             $table->integer('sorting_order');
-            
+
             $table->foreignId('invoice_id')->constrained();
 
             $table->softDeletes();

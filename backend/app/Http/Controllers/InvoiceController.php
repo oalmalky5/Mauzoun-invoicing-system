@@ -46,7 +46,7 @@ class InvoiceController extends Controller
 
         QrCode::format('svg')->size(100)->errorCorrection('H')->encoding('UTF-8')->generate($report_url, public_path('qrcodes/' . $Invoice->id . '.svg'));
 
-        $view = "invoice";
+        $view = "invoice_new";
         $pdf = PDF::loadView($view, array(
             'invoice' => $Invoice,
             'title' => $filename,
@@ -75,14 +75,34 @@ class InvoiceController extends Controller
             'sr_no' => $request->sr_no,
             'date' => $request->date,//Carbon::createFromFormat('Y-m-d', $request->date)->format('Y-m-d'),
             'due_date' => $request->due_date, //Carbon::createFromFormat('Y-m-d', $request->due_date)->format('Y-m-d'),
-            'billing_name' => $request->billing_name,
-            'billing_company_name' => $request->billing_company_name,
+
+            'billing_first_name' => $request->billing_first_name,
+            'billing_first_name_arabic' => $request->billing_first_name_arabic,
+            'billing_last_name' => $request->billing_last_name,
+            'billing_last_name_arabic' => $request->billing_last_name_arabic,
             'billing_email' => $request->billing_email,
+            'billing_phone' => $request->billing_phone,
+            'billing_website' => $request->billing_website,
+            'billing_company_name' => $request->billing_company_name,
+            'billing_company_name_arabic' => $request->billing_company_name_arabic,
             'billing_street' => $request->billing_street,
+            'billing_street_arabic' => $request->billing_street_arabic,
             'billing_city' => $request->billing_city,
+            'billing_city_arabic' => $request->billing_city_arabic,
             'billing_state' => $request->billing_state,
+            'billing_state_arabic' => $request->billing_state_arabic,
             'billing_zip_code' => $request->billing_zip_code,
             'billing_country' => $request->billing_country,
+            'billing_country_arabic' => $request->billing_country_arabic,
+            'billing_notes' => $request->billing_notes,
+            'billing_notes_arabic' => $request->billing_notes_arabic,
+            'billing_district' => $request->billing_district,
+            'billing_district_arabic' => $request->billing_district_arabic,
+            'billing_building_no' => $request->billing_building_no,
+            'billing_building_no_arabic' => $request->billing_building_no_arabic,
+            'billing_vat_number' => $request->billing_vat_number,
+            'billing_other_buyer_id' => $request->billing_other_buyer_id,
+
             'total' => $request->total,
             'vat' => $request->vat,
             'sub_total' => $request->sub_total,
@@ -109,6 +129,10 @@ class InvoiceController extends Controller
                 'description' => $detail['description'],
                 'qty' => $detail['qty'],
                 'price' => $detail['price'],
+                'taxable_amount' => $detail['taxable_amount'],
+                'discount' => $detail['discount'],
+                'tax_rate' => $detail['qty'],
+                'tax_amount' => $detail['tax_amount'],
                 'total' => $detail['total']
             ];
 
@@ -119,6 +143,7 @@ class InvoiceController extends Controller
 
             $custom_field_data = [
                 'name' => $custom_field['name'],
+                'name_arabic' => $custom_field['name_arabic'],
                 'value' => $custom_field['value'],
             ];
 

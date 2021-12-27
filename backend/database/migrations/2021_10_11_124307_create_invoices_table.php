@@ -23,15 +23,34 @@ class CreateInvoicesTable extends Migration
             $table->integer('business_days')->nullable();
             $table->boolean('has_approved')->default(0)->nullable();
 
-            $table->string('billing_name')->nullable();
-            $table->string('billing_company_name')->nullable();
+            $table->string('billing_first_name')->nullable();
+            $table->string('billing_first_name_arabic')->nullable();
+            $table->string('billing_last_name')->nullable();
+            $table->string('billing_last_name_arabic')->nullable();
             $table->string('billing_email')->nullable();
             $table->string('billing_phone')->nullable();
+            $table->string('billing_website')->nullable();
+            $table->string('billing_company_name')->nullable();
+            $table->string('billing_company_name_arabic')->nullable();
+
             $table->string('billing_street')->nullable();
+            $table->string('billing_street_arabic')->nullable();
             $table->string('billing_city')->nullable();
+            $table->string('billing_city_arabic')->nullable();
             $table->string('billing_state')->nullable();
+            $table->string('billing_state_arabic')->nullable();
             $table->string('billing_zip_code')->nullable();
             $table->string('billing_country')->nullable();
+            $table->string('billing_country_arabic')->nullable();
+            $table->string('billing_district')->nullable();
+            $table->string('billing_district_arabic')->nullable();
+            $table->string('billing_building_no')->nullable();
+            $table->string('billing_building_no_arabic')->nullable();
+            $table->text('billing_notes')->nullable();
+            $table->text('billing_notes_arabic')->nullable();
+            $table->string('billing_vat_number')->nullable();
+            $table->string('billing_other_buyer_id')->nullable();
+
             $table->string('vat')->nullable();
             $table->string('sub_total')->nullable();
             $table->decimal('total')->nullable();

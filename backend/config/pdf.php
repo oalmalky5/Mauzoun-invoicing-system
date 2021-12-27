@@ -2,11 +2,11 @@
 
 return [
     'mode' => '',
-    'format' => [210, 397],
+    'format' => [290, 397],
     'default_font_size' => '12',
     'default_font' => '"alegreya-sans"',
-    'margin_left' => 0,
-    'margin_right' => 0,
+    'margin_left' => 5,
+    'margin_right' => 5,
     'margin_top' => 10,
     'margin_bottom' => 40,
     'margin_header' => 0,

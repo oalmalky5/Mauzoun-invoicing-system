@@ -24,18 +24,37 @@ export function CreateInvoice(props) {
     const sr_no = useRef();
     const date = useRef();
     const due_date = useRef();
+    const expiry_date = useRef();
+    const business_days = useRef();
+    /*const has_approved = useRef();*/
+    const notes = useRef();
+
+    const billing_first_name = useRef();
+    const billing_first_name_arabic = useRef();
+    const billing_last_name = useRef();
+    const billing_last_name_arabic = useRef();
     const billing_email = useRef();
     const billing_phone = useRef();
+    const billing_website = useRef();
     const billing_company_name = useRef();
+    const billing_company_name_arabic = useRef();
     const billing_street = useRef();
     const billing_city = useRef();
     const billing_state = useRef();
     const billing_zip_code = useRef();
     const billing_country = useRef();
-    const expiry_date = useRef();
-    const business_days = useRef();
-    /*const has_approved = useRef();*/
-    const notes = useRef();
+    const billing_notes = useRef();
+    const billing_building_no = useRef();
+    const billing_building_no_arabic = useRef();
+    const billing_street_arabic = useRef();
+    const billing_district = useRef();
+    const billing_district_arabic = useRef();
+    const billing_city_arabic = useRef();
+    const billing_state_arabic = useRef();
+    const billing_country_arabic = useRef();
+    const billing_vat_number = useRef();
+    const billing_other_buyer_id = useRef();
+    const billing_notes_arabic = useRef();
 
     const [customers, setCustomers] = useState([]);
     const [customer, setCustomer] = useState({});
@@ -52,6 +71,10 @@ export function CreateInvoice(props) {
         "description": "",
         "qty": "",
         "price": "",
+        "taxable_amount": "",
+        "discount": "",
+        "tax_rate": "",
+        "tax_amount": "",
         "total": 0
     };
     const [invoiceItems, setInvoiceItems] = useState([initialInvoiceItem]);
@@ -59,6 +82,7 @@ export function CreateInvoice(props) {
 
     const initialInvoiceCustomField = {
         "name": "",
+        "name_arabic": "",
         "value": 0
     };
     const [invoiceCustomFields, setInvoiceCustomFields] = useState([initialInvoiceCustomField]);
@@ -86,6 +110,7 @@ export function CreateInvoice(props) {
 
     const createInvoiceHandler = (e) => {
         e.preventDefault();
+
         setDisabled(true);
         setIconDisabled(false);
         axios.post(API_URL + "invoices/store",
@@ -94,20 +119,40 @@ export function CreateInvoice(props) {
                 sr_no: sr_no.current.value,
                 date: date.current.value,
                 due_date: due_date.current.value,
+
+                billing_first_name: billing_first_name.current.value,
+                billing_last_name: billing_last_name.current.value,
+                billing_first_name_arabic: billing_first_name_arabic.current.value,
+                billing_last_name_arabic: billing_last_name_arabic.current.value,
                 billing_email: billing_email.current.value,
                 billing_phone: billing_phone.current.value,
+                billing_website: billing_website.current.value,
                 billing_company_name: billing_company_name.current.value,
+                billing_company_name_arabic: billing_company_name_arabic.current.value,
                 billing_street: billing_street.current.value,
+                billing_street_arabic: billing_street_arabic.current.value,
                 billing_city: billing_city.current.value,
+                billing_city_arabic: billing_city_arabic.current.value,
                 billing_state: billing_state.current.value,
+                billing_state_arabic: billing_state_arabic.current.value,
                 billing_zip_code: billing_zip_code.current.value,
                 billing_country: billing_country.current.value,
+                billing_country_arabic: billing_country_arabic.current.value,
+                billing_notes: billing_notes.current.value,
+                billing_notes_arabic: billing_notes_arabic.current.value,
+                billing_district: billing_district.current.value,
+                billing_district_arabic: billing_district_arabic.current.value,
+                billing_building_no: billing_building_no.current.value,
+                billing_building_no_arabic: billing_building_no_arabic.current.value,
+                billing_vat_number: billing_vat_number.current.value,
+                billing_other_buyer_id: billing_other_buyer_id.current.value,
+
                 total: total,
                 sub_total: subTotal,
                 expiry_date: expiry_date.current.value,
                 business_days: business_days.current.value,
                 /*has_approved: has_approved.current.value,*/
-                notes: notes.current.value,
+                //notes: notes.current.value,
                 items: invoiceItems,
                 custom_fields: invoiceCustomFields
             },
@@ -181,9 +226,45 @@ export function CreateInvoice(props) {
         setInvoiceItems(invoice_items);
     };
 
+    const taxableAmountHandler = (e, value) => {
+        let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
+        invoice_items[e].taxable_amount = value;
+        // invoice_items[e].total = value * invoice_items[e].price;
+
+        setInvoiceItems(invoice_items);
+    };
+    const discountHandler = (e, value) => {
+        let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
+        invoice_items[e].discount = value;
+        // invoice_items[e].total = value * invoice_items[e].price;
+
+        setInvoiceItems(invoice_items);
+    };
+    const taxRateHandler = (e, value) => {
+        let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
+        invoice_items[e].tax_rate = value;
+        // invoice_items[e].total = value * invoice_items[e].price;
+
+        setInvoiceItems(invoice_items);
+    };
+
+    const taxAmountHandler = (e, value) => {
+        let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
+        invoice_items[e].tax_amount = value;
+        // invoice_items[e].total = value * invoice_items[e].price;
+
+        setInvoiceItems(invoice_items);
+    };
+
     const nameFieldHandler = (e, value) => {
         let invoice_custom_fields = JSON.parse(JSON.stringify(invoiceCustomFields));
         invoice_custom_fields[e].name = value;
+        setInvoiceCustomFields(invoice_custom_fields);
+    };
+
+    const nameArabicFieldHandler = (e, value) => {
+        let invoice_custom_fields = JSON.parse(JSON.stringify(invoiceCustomFields));
+        invoice_custom_fields[e].name_arabic = value;
         setInvoiceCustomFields(invoice_custom_fields);
     };
 
@@ -332,12 +413,56 @@ export function CreateInvoice(props) {
                                         <Row>
                                             <Col lg="6">
                                                 <FormGroup>
+                                                    <label>{t("first_name")}</label>
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_first_name}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("first_name")}
+                                                                   defaultValue={customer.first_name}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_first_name_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("first_name_arabic")}
+                                                                   defaultValue={customer.first_name_arabic}/>
+                                                        </Col>
+                                                    </Row>
+
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("last_name")}</label>
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_last_name}
+                                                                   className="form-control-alternative form-control"
+                                                                   rows={1}
+                                                                   placeholder={t("enter") + " " + t("last_name")}
+                                                                   defaultValue={customer.last_name}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_last_name_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   rows={1}
+                                                                   placeholder={t("enter") + " " + t("last_name_arabic")}
+                                                                   defaultValue={customer.last_name_arabic}/>
+                                                        </Col>
+                                                    </Row>
+                                                </FormGroup>
+                                            </Col>
+
+                                        </Row>
+
+                                        <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
                                                     <label>{t("email")}</label>
                                                     <input ref={billing_email}
                                                            className="form-control-alternative form-control"
                                                            placeholder={t("enter") + " " + t("email")}
-                                                           defaultValue={customer.email}
-                                                    />
+                                                           defaultValue={customer.email}/>
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
@@ -346,8 +471,7 @@ export function CreateInvoice(props) {
                                                     <input ref={billing_phone}
                                                            className="form-control-alternative form-control"
                                                            placeholder={t("enter") + " " + t("phone")}
-                                                           defaultValue={customer.phone}
-                                                    />
+                                                           defaultValue={customer.phone}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -356,78 +480,212 @@ export function CreateInvoice(props) {
                                             <Col lg="6">
                                                 <FormGroup>
                                                     <label>{t("company_name")}</label>
-                                                    <input ref={billing_company_name}
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_company_name}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("company_name")}
+                                                                   defaultValue={customer.company_name}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_company_name_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("company_name_arabic")}
+                                                                   defaultValue={customer.company_name_arabic}/>
+                                                        </Col>
+                                                    </Row>
+
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("website")}</label>
+                                                    <input ref={billing_website}
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("company_name")}
-                                                           defaultValue={customer.company_name}
-                                                    />
+                                                           placeholder={t("enter") + " " + t("website")}
+                                                           defaultValue={customer.website}/>
+                                                </FormGroup>
+                                            </Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("building_no")}</label>
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_building_no}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("building_no")}
+                                                                   defaultValue={customer.building_no}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_building_no_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("building_no_arabic")}
+                                                                   defaultValue={customer.building_no_arabic}/>
+                                                        </Col>
+                                                    </Row>
+
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup>
                                                     <label>{t("street")}</label>
-                                                    <input ref={billing_street}
-                                                           className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("street")}
-                                                           defaultValue={customer.street}
-                                                    />
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_street}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("street")}
+                                                                   defaultValue={customer.street}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_street_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("street_arabic")}
+                                                                   defaultValue={customer.street_arabic}/>
+                                                        </Col>
+                                                    </Row>
+
                                                 </FormGroup>
                                             </Col>
                                         </Row>
-
                                         <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("district")}</label>
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_district}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("district")}
+                                                                   defaultValue={customer.district}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_district_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("district_arabic")}
+                                                                   defaultValue={customer.district_arabic}/>
+                                                        </Col>
+                                                    </Row>
+
+                                                </FormGroup>
+                                            </Col>
                                             <Col lg="6">
                                                 <FormGroup>
                                                     <label>{t("city")}</label>
-                                                    <input ref={billing_city}
-                                                           className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("city")}
-                                                           defaultValue={customer.city}
-                                                    />
-                                                </FormGroup>
-                                            </Col>
-                                            <Col lg="6">
-                                                <FormGroup>
-                                                    <label>{t("state")}</label>
-                                                    <input ref={billing_state}
-                                                           className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("state")}
-                                                           defaultValue={customer.state}
-                                                    />
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_city}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("city")}
+                                                                   defaultValue={customer.city}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_city_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("city_arabic")}
+                                                                   defaultValue={customer.city_arabic}/>
+                                                        </Col>
+                                                    </Row>
+
                                                 </FormGroup>
                                             </Col>
                                         </Row>
-
                                         <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("state")}</label>
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_state}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("state")}
+                                                                   defaultValue={customer.state}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_state_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("state_arabic")}
+                                                                   defaultValue={customer.state_arabic}/>
+                                                        </Col>
+                                                    </Row>
+
+                                                </FormGroup>
+                                            </Col>
                                             <Col lg="6">
                                                 <FormGroup>
                                                     <label>{t("zip_code")}</label>
                                                     <input ref={billing_zip_code}
                                                            className="form-control-alternative form-control"
                                                            placeholder={t("enter") + " " + t("zip_code")}
-                                                           defaultValue={customer.zip_code}
-                                                    />
-                                                </FormGroup>
-                                            </Col>
-                                            <Col lg="6">
-                                                <FormGroup>
-                                                    <label>{t("country")}</label>
-                                                    <input ref={billing_country}
-                                                           className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("country")}
-                                                           defaultValue={customer.country}
-                                                    />
+                                                           defaultValue={customer.zip_code}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>
 
                                         <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("country")}</label>
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_country}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("country")}
+                                                                   defaultValue={customer.country}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_country_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("country_arabic")}
+                                                                   defaultValue={customer.country_arabic}/>
+                                                        </Col>
+                                                    </Row>
+
+                                                </FormGroup>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("vat_number")}</label>
+                                                    <textarea ref={billing_vat_number} rows={4}
+                                                              className="form-control-alternative form-control"
+                                                              placeholder={t("enter") + " " + t("vat_number")}
+                                                              defaultValue={customer.vat_number}/>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("other_buyer_id")}</label>
+                                                    <textarea ref={billing_other_buyer_id} rows={4}
+                                                              className="form-control-alternative form-control"
+                                                              placeholder={t("enter") + " " + t("other_buyer_id")}
+                                                              defaultValue={customer.other_buyer_id}/>
+                                                </FormGroup>
+                                            </Col>
+
+                                        </Row>
+                                        <Row>
                                             <Col lg="12">
                                                 <FormGroup>
                                                     <label>{t("notes")}</label>
-                                                    <textarea ref={notes} rows={4}
-                                                              className="form-control-alternative form-control"
-                                                              placeholder={t("enter") + " " + t("notes")}/>
+                                                    <Row>
+                                                        <Col>
+                                                            <textarea ref={billing_notes} rows={4}
+                                                                      className="form-control-alternative form-control"
+                                                                      placeholder={t("enter") + " " + t("notes")}
+                                                                      defaultValue={customer.notes}/>
+                                                        </Col>
+                                                        <Col>
+                                                            <textarea ref={billing_notes_arabic} dir={'rtl'} rows={4}
+                                                                      className="form-control-alternative form-control"
+                                                                      placeholder={t("enter") + " " + t("notes_arabic")}
+                                                                      defaultValue={customer.notes_arabic}/>
+                                                        </Col>
+                                                    </Row>
+
                                                 </FormGroup>
                                             </Col>
 
@@ -449,15 +707,19 @@ export function CreateInvoice(props) {
                                                         <td width={"30%"} colSpan={2}>{t("description")}</td>
                                                         <td width={"15%"}>{t("qty")}</td>
                                                         <td width={"15%"}>{t("unit_price")}</td>
+                                                        <td width={"15%"}>{t("taxable_amount")}</td>
+                                                        <td width={"15%"}>{t("discount")}</td>
+                                                        <td width={"15%"}>{t("tax_rate")}</td>
+                                                        <td width={"15%"}>{t("tax_amount")}</td>
                                                         <td width={"15%"}>{t("total")}</td>
-                                                        <td width={"10%"}>{t("actions")}</td>
+                                                        <td width={"5%"}>{t("actions")}</td>
                                                     </tr>
 
                                                     {invoiceItems.length > 0 ? (
                                                             invoiceItems.map((invoiceItem, index) => (
                                                                 <tr>
 
-                                                                    <td>
+                                                                    <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
                                                                             defaultValue={invoiceItem.item}
@@ -467,7 +729,7 @@ export function CreateInvoice(props) {
                                                                             onKeyUp={(e) => itemHandler(index, e.target.value)}
                                                                             onKeyPress={(e) => itemHandler(index, e.target.value)}/>
                                                                     </td>
-                                                                    <td colSpan={2}>
+                                                                    <td className={'invoice-td'} colSpan={2}>
                                                                         <textarea
                                                                             rows={4}
                                                                             defaultValue={invoiceItem.description}
@@ -477,7 +739,7 @@ export function CreateInvoice(props) {
                                                                             onKeyUp={(e) => descriptionHandler(index, e.target.value)}
                                                                             onKeyPress={(e) => descriptionHandler(index, e.target.value)}/>
                                                                     </td>
-                                                                    <td>
+                                                                    <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
                                                                             defaultValue={invoiceItem.qty}
@@ -490,7 +752,7 @@ export function CreateInvoice(props) {
                                                                             onChange={(e) => qtyHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
-                                                                    <td>
+                                                                    <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
                                                                             defaultValue={invoiceItem.price}
@@ -503,6 +765,58 @@ export function CreateInvoice(props) {
                                                                             onChange={(e) => priceHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
+                                                                    <td className={'invoice-td'}>
+                                                                        <textarea
+                                                                            rows={4}
+                                                                            defaultValue={invoiceItem.taxable_amount}
+                                                                            className="form-control-alternative form-control"
+                                                                            placeholder={t("taxable_amount")}
+                                                                            onKeyDown={(e) => taxableAmountHandler(index, e.target.value)}
+                                                                            onKeyUp={(e) => taxableAmountHandler(index, e.target.value)}
+                                                                            onKeyPress={(e) => taxableAmountHandler(index, e.target.value)}
+                                                                            onClick={(e) => taxableAmountHandler(index, e.target.value)}
+                                                                            onChange={(e) => taxableAmountHandler(index, e.target.value)}
+                                                                        />
+                                                                    </td>
+                                                                    <td className={'invoice-td'}>
+                                                                        <textarea
+                                                                            rows={4}
+                                                                            defaultValue={invoiceItem.discount}
+                                                                            className="form-control-alternative form-control"
+                                                                            placeholder={t("discount")}
+                                                                            onKeyDown={(e) => discountHandler(index, e.target.value)}
+                                                                            onKeyUp={(e) => discountHandler(index, e.target.value)}
+                                                                            onKeyPress={(e) => discountHandler(index, e.target.value)}
+                                                                            onClick={(e) => discountHandler(index, e.target.value)}
+                                                                            onChange={(e) => discountHandler(index, e.target.value)}
+                                                                        />
+                                                                    </td>
+                                                                    <td className={'invoice-td'}>
+                                                                        <textarea
+                                                                            rows={4}
+                                                                            defaultValue={invoiceItem.tax_rate}
+                                                                            className="form-control-alternative form-control"
+                                                                            placeholder={t("tax_rate")}
+                                                                            onKeyDown={(e) => taxRateHandler(index, e.target.value)}
+                                                                            onKeyUp={(e) => taxRateHandler(index, e.target.value)}
+                                                                            onKeyPress={(e) => taxRateHandler(index, e.target.value)}
+                                                                            onClick={(e) => taxRateHandler(index, e.target.value)}
+                                                                            onChange={(e) => taxRateHandler(index, e.target.value)}
+                                                                        />
+                                                                    </td>
+                                                                    <td className={'invoice-td'}>
+                                                                        <textarea
+                                                                            rows={4}
+                                                                            defaultValue={invoiceItem.tax_amount}
+                                                                            className="form-control-alternative form-control"
+                                                                            placeholder={t("tax_amount")}
+                                                                            onKeyDown={(e) => taxAmountHandler(index, e.target.value)}
+                                                                            onKeyUp={(e) => taxAmountHandler(index, e.target.value)}
+                                                                            onKeyPress={(e) => taxAmountHandler(index, e.target.value)}
+                                                                            onClick={(e) => taxAmountHandler(index, e.target.value)}
+                                                                            onChange={(e) => taxAmountHandler(index, e.target.value)}
+                                                                        />
+                                                                    </td>
                                                                     {/*<td>
                                                                         <input type={"hidden"}
                                                                                value={invoiceItem.total}
@@ -512,8 +826,9 @@ export function CreateInvoice(props) {
                                                                         />
                                                                         {invoiceItem.total}
                                                                     </td>*/}
-                                                                    <td>
-                                                                        <input
+                                                                    <td className={'invoice-td'}>
+                                                                        <textarea
+                                                                            rows={4}
                                                                             defaultValue={invoiceItem.total}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("total")}
@@ -524,7 +839,7 @@ export function CreateInvoice(props) {
                                                                             onChange={(e) => totalHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
-                                                                    <td>
+                                                                    <td className={'invoice-td'}>
                                                                         <a
                                                                             onClick={() => removeInvoiceItem(index)}
                                                                             className="float-right btn btn-dark">
@@ -561,7 +876,7 @@ export function CreateInvoice(props) {
                                                                                 <i className={"fa fa-plus"}></i>
                                                                             </a>
                                                                         </th>
-                                                                        <th className='text-right'>
+                                                                        <th className='text-right' colSpan={2}>
                                                                             <input
                                                                                 className="form-control-alternative form-control"
                                                                                 placeholder={t("enter") + " " + t("name")}
@@ -574,7 +889,21 @@ export function CreateInvoice(props) {
 
                                                                             />
                                                                         </th>
-                                                                        <td>
+                                                                        <th className='text-right' colSpan={2}>
+                                                                            <input
+                                                                                dir={"rtl"}
+                                                                                className="form-control-alternative form-control"
+                                                                                placeholder={t("enter") + " " + t("name_arabic")}
+                                                                                defaultValue={field.name_arabic}
+                                                                                onKeyDown={(e) => nameArabicFieldHandler(index, e.target.value)}
+                                                                                onKeyUp={(e) => nameArabicFieldHandler(index, e.target.value)}
+                                                                                onKeyPress={(e) => nameArabicFieldHandler(index, e.target.value)}
+                                                                                onClick={(e) => nameArabicFieldHandler(index, e.target.value)}
+                                                                                onChange={(e) => nameArabicFieldHandler(index, e.target.value)}
+
+                                                                            />
+                                                                        </th>
+                                                                        <td colSpan={2}>
                                                                             <input
                                                                                 className="form-control-alternative form-control"
                                                                                 placeholder={t("enter") + " " + t("value")}

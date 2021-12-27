@@ -12,6 +12,5 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/invoice_view/{id}/{status}', 'App\Http\Controllers\InvoiceController@invoice_view');
 Route::get('/invoice_pdf/{id}', 'App\Http\Controllers\InvoiceController@invoice_pdf');

@@ -20,6 +20,10 @@ class CreateInvoiceDetailsTable extends Migration
             $table->text('description')->nullable();
             $table->string('qty')->nullable();
             $table->string('price')->nullable();
+            $table->string('taxable_amount')->nullable();
+            $table->string('discount')->nullable();
+            $table->string('tax_rate')->nullable();
+            $table->string('tax_amount')->nullable();
             $table->string('total')->nullable();
 
             $table->foreignId('invoice_id')->constrained();

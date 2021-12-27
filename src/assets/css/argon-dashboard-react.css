@@ -23465,5 +23465,7 @@ button:focus, :focus {
 .table .badge i {
     margin-right: 10px;
 }
-
+.invoice-td{
+    padding:5px !important;
+}
 /*# sourceMappingURL=argon-dashboard-react.css.map */
