@@ -2,7 +2,7 @@
 
 return [
     'mode' => '',
-    'format' => 'A4',
+    'format' => [210, 397],
     'default_font_size' => '12',
     'default_font' => '"alegreya-sans"',
     'margin_left' => 0,

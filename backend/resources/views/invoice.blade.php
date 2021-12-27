@@ -7,573 +7,106 @@
     <style>
 
         @if(empty($is_pdf))
-                                                                                    /* Alegreya */
-        /*@font-face {
-            font-family: "alegreya";
-            src: url("
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{url('resources/fonts/Alegreya-Regular.ttf')}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ");
-                                                                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                                                                                                            src: url("
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{url('resources/fonts/Alegreya-Italic.ttf')}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ");
-                                                                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                                                                            font-style: italic;
-                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                                                                                                            src: url("
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{url('resources/fonts/Alegreya-Medium.ttf')}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ");
-                                                                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                                                                                                            src: url("
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{url('resources/fonts/Alegreya-SemiBold.ttf')}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ");
-                                                                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                                                                            font-family: "alegreya";
-                                                                                                                                                                                                                                            src: url("
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{url('resources/fonts/Alegreya-Bold.ttf')}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ");
-                                                                                                                                                                                                                                            font-weight: bold;
-                                                                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                        !* Alegreya Sans *!
-
-                                                                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                                                                            font-family: "alegreya-sans";
-                                                                                                                                                                                                                                            src: url("
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{url('resources/fonts/AlegreyaSans-Light.ttf')}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ");
-                                                                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                                                                            font-family: "alegreya-sans";
-                                                                                                                                                                                                                                            src: url("
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{url('resources/fonts/AlegreyaSans-Bold.ttf')}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ");
-                                                                                                                                                                                                                                            font-weight: bold;
-                                                                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                                                                            font-family: "alegreya-sans";
-                                                                                                                                                                                                                                            src: url("
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{url('resources/fonts/AlegreyaSans-LightItalic.ttf')}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ");
-                                                                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                                                                            font-style: italic;
-                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                        @font-face {
-                                                                                                                                                                                                                                            font-family: "eurostile";
-                                                                                                                                                                                                                                            src: url("
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{url('resources/fonts/EurostileNormal.ttf')}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ");
-                                                                                                                                                                                                                                            font-style: normal;
-                                                                                                                                                                                                                                            font-weight: normal;
-                                                                                                                                                                                                                                        }*/
+                 /* Alegreya */
+        @font-face {
+            font-family: "Alegreya";
+            src: url("{{url('resources/fonts/Alegreya-Medium.ttf')}}");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Alegreya";
+            src: url(" {{url('resources/fonts/Alegreya-LightItalic.ttf')}}");
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        @font-face {
+            font-family: "Alegreya" ;
+            src: url(" {{url('resources/fonts/Alegreya-SemiBold.ttf')}}");
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: "Alegreya" ;
+            src: url(" {{url('resources/fonts/Alegreya-Bold.ttf')}}");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Alegreya" ;
+            src: url(" {{url('resources/fonts/Alegreya-Medium.ttf')}}");
+            font-weight: 300;
+            font-style: normal;
+        }
+
+
+        /* Alegreya Sans */
+        @font-face {
+            font-family: "Alegreya-Sans" ;
+            src: url(" {{url('resources/fonts/AlegreyaSans-Light.ttf')}}");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Alegreya-Sans" ;
+            src: url("{{url('resources/fonts/AlegreyaSans-Bold.ttf')}}");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Alegreya-Sans" ;
+            src: url("{{url('resources/fonts/AlegreyaSans-LightItalic.ttf')}}");
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        @font-face {
+            font-family: "Alegreya-Sans" ;
+            src: url("{{url('resources/fonts/AlegreyaSans-SemiBold.ttf')}}");
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Alegreya-Sans" ;
+            src: url("{{url('resources/fonts/AlegreyaSans-Medium.ttf')}}");
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Eurostile" ;
+            src: url("{{url('resources/fonts/EurostileNormal.ttf')}}");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Eurostile" ;
+            src: url("{{url('resources/fonts/EurostileBold.ttf')}}");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Eurostile" ;
+            src: url("{{url('resources/fonts/EurostileExtended.ttf')}}");
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        @font-face {
+            font-family: "Eurostile" ;
+            src: url("{{url('resources/fonts/EurostileOblique.ttf')}}");
+            font-weight: bold;
+            font-style: normal;
+        }
 
         .maintable th {
             font-family: "Alegreya";
@@ -592,7 +125,7 @@
 
         @else
 
-        .maintable th {
+         .maintable th {
             font-family: "alegreya";
             font-size: 14px !important;
         }
@@ -609,7 +142,7 @@
 
         @endif
 
-        body {
+         body {
             width: 100%;
             margin: 0;
             padding: 0;
@@ -623,25 +156,20 @@
         }
 
         .book .page {
-            width: 190mm;
-            /*min-height: 297mm;*/
-            /*padding: 5mm; !*20mm*!*/
+            width: 190mm; /*min-height: 297mm;*/ /*padding: 5mm; !*20mm*!*/
             margin: 0 auto;
             margin-top: 7px;
         }
 
-        .book .subpage {
-            /*height: 287mm;*/
+        .book .subpage { /*height: 287mm;*/
             padding: 5px;
         }
 
-        .book .logo {
-            /*padding-left: 60%;*/
+        .book .logo { /*padding-left: 60%;*/
             width: 100%;
         }
 
-        .book .logo p {
-            /*text-align: center !important;*/
+        .book .logo p { /*text-align: center !important;*/
             margin-top: 0px !important;
             margin-bottom: 0px !important;
             margin: 4px;
@@ -693,9 +221,7 @@
             width: 40mm;
         }
 
-        .book .bill-address {
-            /*width: 50%;*/
-
+        .book .bill-address { /*width: 50%;*/
         }
 
         .book .bill-address p {
@@ -724,22 +250,19 @@
         }
 
         .book .bill-to-name {
-            font-size: 18px;
-            /*font-weight: bold;*/
+            font-size: 18px; /*font-weight: bold;*/
         }
 
         .book table {
             width: 100%;
             line-height: 16pt;
-            text-align: left;
-            /*border-spacing: 0;*/
+            text-align: left; /*border-spacing: 0;*/
             border-collapse: collapse;
         }
 
         .book .maintablediv {
             min-height: 300px;
-            margin-top: 20px;
-            /*border-bottom:1px solid #cecece;*/
+            margin-top: 20px; /*border-bottom:1px solid #cecece;*/
         }
 
         .book .maintable {
@@ -747,8 +270,7 @@
         }
 
         .book .maintable th {
-            border: 1px solid #7f7f7f;
-            /*font-size: 14px;*/
+            border: 1px solid #7f7f7f; /*font-size: 14px;*/
             line-height: 10px;
             text-align: center;
             padding: 12px;
@@ -763,8 +285,7 @@
         }
 
         .book .table {
-            width: 284px;
-            /*float: right;*/
+            width: 284px; /*float: right;*/
             margin-left: 424px;
             border-top: 0px;
         }
@@ -782,7 +303,6 @@
         }
 
         .book p {
-
             margin-top: 5px;
             margin-bottom: 0px;
         }
@@ -793,8 +313,7 @@
             margin-top: 15px;
         }
 
-        .book .confidentiality {
-            /*margin-top: 15px;*/
+        .book .confidentiality { /*margin-top: 15px;*/
         }
 
         .book .terms .confidentiality p {
@@ -816,12 +335,10 @@
 
         .book .guidelines p {
             margin-top: 0px;
-            margin-bottom: 0px;
-            /*line-height: ;*/
+            margin-bottom: 0px; /*line-height: ;*/
         }
 
-        .book .project {
-            /*padding-top: 17%;*/
+        .book .project { /*padding-top: 17%;*/
         }
 
         .book b {
@@ -839,8 +356,7 @@
 
         .book .footer p {
             margin-top: 0px;
-            margin-bottom: 0px;
-            /*color: #88685d;*/
+            margin-bottom: 0px; /*color: #88685d;*/
         }
 
         .book .text-start {
@@ -862,14 +378,13 @@
         div h5 {
             font-size: 18px !important;
             font-weight: lighter;
-
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: "Alegreya" !important;
         }
 
-        .maintable-one th, .maintable-two th{
+        .maintable-one th, .maintable-two th {
             font-size: 18px;
         }
 
