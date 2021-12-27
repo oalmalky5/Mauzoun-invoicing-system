@@ -67,6 +67,7 @@ class CustomerController extends Controller
             'building_no_arabic' => $request->building_no_arabic,
             'vat_number' => $request->vat_number,
             'other_buyer_id' => $request->other_buyer_id,
+            'additional_no' => $request->additional_no,
         ]);
 
         return response()->json([
@@ -116,6 +117,7 @@ class CustomerController extends Controller
         $Customer->building_no_arabic = $request->building_no_arabic;
         $Customer->vat_number = $request->vat_number;
         $Customer->other_buyer_id = $request->other_buyer_id;
+        $Customer->additional_no = $request->additional_no;
 
         $Customer->save(); // Can use update here as well
 

@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.12",
         "laravel/tinker": "^2.5",
         "mpdf/mpdf": "^8.0",
+        "salla/zatca": "^2.0",
         "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {

@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Validator;
 use Meneses\LaravelMpdf\LaravelMpdf;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Salla\ZATCA\GenerateQrCode;
+use Salla\ZATCA\Tags\InvoiceDate;
+use Salla\ZATCA\Tags\InvoiceTaxAmount;
+use Salla\ZATCA\Tags\InvoiceTotalAmount;
+use Salla\ZATCA\Tags\Seller;
+use Salla\ZATCA\Tags\TaxNumber;
 
 class InvoiceController extends Controller
 {
@@ -38,6 +44,7 @@ class InvoiceController extends Controller
     public function invoice_pdf($id = 0)
     {
         $Invoice = Invoice::firstWhere('sr_no', $id);
+        $generatedString = $this->generateSallaQRCode($Invoice);
 
         $filename = $Invoice->sr_no . '.pdf';
         //File::delete($filename);
@@ -51,7 +58,7 @@ class InvoiceController extends Controller
             'invoice' => $Invoice,
             'title' => $filename,
             'is_pdf' => true,
-            'qrcode' => env('BASE_URL') . 'qrcodes/' . $Invoice->id . '.svg',
+            'qrcode' => $generatedString,
             'report_url' => $report_url
         ));
         return $pdf->stream($filename);
@@ -102,7 +109,10 @@ class InvoiceController extends Controller
             'billing_building_no_arabic' => $request->billing_building_no_arabic,
             'billing_vat_number' => $request->billing_vat_number,
             'billing_other_buyer_id' => $request->billing_other_buyer_id,
+            'billing_additional_no' => $request->billing_additional_no,
 
+            'total_amount' => $request->total_amount,
+            'tax_amount' => $request->tax_amount,
             'total' => $request->total,
             'vat' => $request->vat,
             'sub_total' => $request->sub_total,
@@ -190,13 +200,14 @@ class InvoiceController extends Controller
         $Invoice = Invoice::with(['customer', 'details'])->firstWhere('sr_no', $request->sr_no);
 
         $report_url = $Invoice->report_url . '/' . $request->status;
-        File::delete(public_path('qrcodes/' . $Invoice->id . '.svg'));
-        $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($report_url, public_path('qrcodes/' . $Invoice->id . '.svg')));
 
+        // File::delete(public_path('qrcodes/' . $Invoice->id . '.svg'));
+        // $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($report_url, public_path('qrcodes/' . $Invoice->id . '.svg')));
+        $qrcode = $generatedString = $this->generateSallaQRCode($Invoice);
         $filename = '/' . $Invoice->sr_no . '_' . $Invoice->id . '.pdf';
         File::delete(public_path() . 'invoices/' . $filename);
 
-        $view = "invoice";
+        $view = "invoice_new";
         PDF::loadView($view, array(
             'invoice' => $Invoice,
             'is_pdf' => true,
@@ -325,5 +336,16 @@ class InvoiceController extends Controller
             'status' => true,
             'message' => 'Record deleted successfully'
         ]);
+    }
+
+    private function generateSallaQRCode($Invoice)
+    {
+        return $generatedString = GenerateQrCode::fromArray([
+            new Seller('Mauzoun'), // seller name
+            new TaxNumber($Invoice->billing_vat_number), // seller tax number
+            new InvoiceDate(Carbon::parse($Invoice->date)->format('Y-m-d\TH:i:s\Z')), // invoice date as Zulu ISO8601 @see https://en.wikipedia.org/wiki/ISO_8601
+            new InvoiceTotalAmount($Invoice->total_amount), // invoice total amount
+            new InvoiceTaxAmount($Invoice->tax_amount) // invoice tax amount
+        ])->render();
     }
 }

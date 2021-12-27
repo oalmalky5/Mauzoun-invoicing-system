@@ -12,10 +12,15 @@ class Customer extends BaseModel
     use SoftDeletes;
 
     protected $guarded = [];
-    protected $appends = ['name'];
+    protected $appends = ['name','name_arabic'];
 
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getNameArabicAttribute()
+    {
+        return $this->first_name_arabic . ' ' . $this->last_name_arabic;
     }
 }

@@ -44,6 +44,7 @@ class CreateCustomersTable extends Migration
             $table->text('notes_arabic')->nullable();
             $table->string('vat_number')->nullable();
             $table->string('other_buyer_id')->nullable();
+            $table->string('additional_no')->nullable();
 
             $table->foreignId('created_by')->nullable()->constrained('users');
 

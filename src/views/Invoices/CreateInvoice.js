@@ -26,6 +26,8 @@ export function CreateInvoice(props) {
     const due_date = useRef();
     const expiry_date = useRef();
     const business_days = useRef();
+    const total_amount = useRef();
+    const tax_amount = useRef();
     /*const has_approved = useRef();*/
     const notes = useRef();
 
@@ -55,6 +57,7 @@ export function CreateInvoice(props) {
     const billing_vat_number = useRef();
     const billing_other_buyer_id = useRef();
     const billing_notes_arabic = useRef();
+    const billing_additional_no = useRef();
 
     const [customers, setCustomers] = useState([]);
     const [customer, setCustomer] = useState({});
@@ -146,11 +149,14 @@ export function CreateInvoice(props) {
                 billing_building_no_arabic: billing_building_no_arabic.current.value,
                 billing_vat_number: billing_vat_number.current.value,
                 billing_other_buyer_id: billing_other_buyer_id.current.value,
+                billing_additional_no: billing_additional_no.current.value,
 
                 total: total,
                 sub_total: subTotal,
                 expiry_date: expiry_date.current.value,
                 business_days: business_days.current.value,
+                total_amount: total_amount.current.value,
+                tax_amount: tax_amount.current.value,
                 /*has_approved: has_approved.current.value,*/
                 //notes: notes.current.value,
                 items: invoiceItems,
@@ -164,7 +170,7 @@ export function CreateInvoice(props) {
 
                 props.history.push("/admin/invoices/list");
             } else {
-                alertify.error('Please fill form correctly');
+                alertify.error(response.data.message);
                 return null;
             }
         }).catch((error) => {
@@ -388,6 +394,40 @@ export function CreateInvoice(props) {
                                                            type="number"
                                                            className="form-control-alternative form-control"
                                                            placeholder={t("enter") + " " + t("business_days")}/>
+                                                </FormGroup>
+                                            </Col>
+                                            {/*<Col lg="3">
+                                                <FormGroup>
+                                                    <label>{t("approved?")}</label>
+                                                    <select ref={has_approved}
+                                                            className="form-control-alternative form-control"
+                                                            placeholder={t("enter") + " " + t("business_days")}>
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+                                                </FormGroup>
+                                            </Col>*/}
+
+                                        </Row>
+                                        <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("total_amount")}</label>
+                                                    <input ref={total_amount}
+                                                           type="number"
+                                                           step={'0.01'}
+                                                           className="form-control-alternative form-control"
+                                                           placeholder={t("enter") + " " + t("total_amount")}/>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("tax_amount")}</label>
+                                                    <input ref={tax_amount}
+                                                           type="number"
+                                                           step={'0.01'}
+                                                           className="form-control-alternative form-control"
+                                                           placeholder={t("enter") + " " + t("tax_amount")}/>
                                                 </FormGroup>
                                             </Col>
                                             {/*<Col lg="3">
@@ -642,7 +682,15 @@ export function CreateInvoice(props) {
                                                                    defaultValue={customer.country_arabic}/>
                                                         </Col>
                                                     </Row>
-
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("additional_no")}</label>
+                                                    <input ref={billing_additional_no}
+                                                           className="form-control-alternative form-control"
+                                                           placeholder={t("enter") + " " + t("additional_no")}
+                                                           defaultValue={customer.additional_no}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>

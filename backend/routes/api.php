@@ -40,7 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/store', 'App\Http\Controllers\InvoiceController@store');
         Route::post('/{id}/delete', 'App\Http\Controllers\InvoiceController@destroy');
         Route::get('/{id}/show', 'App\Http\Controllers\InvoiceController@show');
-        Route::get('/{sr_no}/{status}/preview', 'App\Http\Controllers\InvoiceController@preview');
         Route::post('/update', 'App\Http\Controllers\InvoiceController@update');
         Route::get('/all/{customer_id?}', 'App\Http\Controllers\InvoiceController@all');
     });
@@ -56,3 +55,5 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('/auth')->group(function () {
     Route::post('/login', '\App\Http\Controllers\AuthController@login');
 });
+
+Route::get('/invoices/{sr_no}/{status}/preview', 'App\Http\Controllers\InvoiceController@preview');

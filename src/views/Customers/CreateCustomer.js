@@ -45,6 +45,7 @@ export function CreateCustomer(props) {
     const vat_number = useRef();
     const other_buyer_id = useRef();
     const notes_arabic = useRef();
+    const additional_no = useRef();
 
     const [disabled, setDisabled] = useState(false);
     const [iconDisabled, setIconDisabled] = useState(true);
@@ -87,6 +88,7 @@ export function CreateCustomer(props) {
                 building_no_arabic: building_no_arabic.current.value,
                 vat_number: vat_number.current.value,
                 other_buyer_id: other_buyer_id.current.value,
+                additional_no: additional_no.current.value,
             },
         ).then((response) => {
             setDisabled(false);
@@ -330,6 +332,14 @@ export function CreateCustomer(props) {
                                                         </Col>
                                                     </Row>
 
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("additional_no")}</label>
+                                                    <input ref={additional_no}
+                                                           className="form-control-alternative form-control"
+                                                           placeholder={t("enter") + " " + t("additional_no")}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>

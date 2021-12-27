@@ -8,7 +8,7 @@ return [
     'margin_left' => 5,
     'margin_right' => 5,
     'margin_top' => 10,
-    'margin_bottom' => 40,
+    'margin_bottom' => 10,
     'margin_header' => 0,
     'margin_footer' => 0,
     'orientation' => 'P',

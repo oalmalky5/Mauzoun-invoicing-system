@@ -149,6 +149,7 @@
     <div class="page">
         <div class="subpage">
             <div class="logo">
+                <img src="{{public_path('images/main-logo.png')}}" height="100px">
                 <h1 class="h1 m-0">فاتورة ضريبية  </h1>
                 <h2 class="m-0 h2">Tax Invoice</h2>
             </div>
@@ -158,8 +159,8 @@
                         <tbody>
                         <tr>
                             <td class="w-200">Invoice Number</td>
-                            <td class="w-200">100</td>
-                            <td class="text-right w-200">100</td>
+                            <td class="w-200">{{$invoice->sr_no}}</td>
+                            <td class="text-right w-200">{{$invoice->sr_no}}</td>
                             <td class="text-right w-200">رقم الفاتورة</td>
                         </tr>
                         </tbody>
@@ -169,21 +170,30 @@
                         <tbody>
                         <tr>
                             <td class="w-25">Invoice Issue Date:</td>
-                            <td class="w-25">25/4/2022</td>
-                            <td class="text-right w-25">25/4/2022</td>
+                            <td class="w-25">{{\Carbon\Carbon::parse($invoice->date)->format('d/m/Y')}}</td>
+                            <td class="text-right w-25">{{\Carbon\Carbon::parse($invoice->date)->format('d/m/Y')}}</td>
                             <td class="text-right w-25">تاريخ إصدار الفاتورة  </td>
                         </tr>
                         <tr>
                             <td class="w-25">Date of Supply</td>
-                            <td class="w-25">25/4/2022</td>
-                            <td class="text-right w-25">25/4/2022</td>
+                            <td class="w-25">{{\Carbon\Carbon::parse($invoice->due_date)->format('d/m/Y')}}</td>
+                            <td class="text-right w-25">{{\Carbon\Carbon::parse($invoice->due_date)->format('d/m/Y')}}</td>
                             <td class="text-right w-25"> تاريخ التوريد   </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="invoice-qrcode">
-{{--                    <img src="images/qr-code.png" width="200" style="float: right;">--}}
+                    @if(!empty($is_pdf))
+                        <img src="{{$qrcode}}" height="200px">
+                    @else
+
+                        <img class="web-logo" src="{{ asset('public/images/main-logo.png')}}" height="130px">
+                        <br/>
+                        <br/>
+
+                        {!! QrCode::generate($invoice->report_url . '/' . ($request->status ?? ($status ?? ''))); !!}
+                    @endif
                 </div>
             </div>
             <div style="clear: both;"></div>
@@ -193,69 +203,69 @@
                     <table class="maintable table-border">
                         <thead>
                         <tr>
-                            <th colspan="2" class="text-left">Seller</th>
-                            <th class="text-right" colspan="2">تاجر </th>
+                            <th colspan="2" class="text-left" style="color: white">Seller</th>
+                            <th class="text-right" colspan="2" style="color: white">تاجر </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td class="w-25">Name:</td>
-                            <td class="w-25">asdjfnasdfn</td>
-                            <td class="w-25"></td>
+                            <td class="w-25">Mauzoun Writing & Publishing</td>
+                            <td class="w-25">الاسم: موزون للطباعة والنشر</td>
                             <td  class="text-right w-25">:اسم </td>
                         </tr>
                         <tr>
                             <td class="w-25">Building No:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
-                            <td  class="text-right w-25">:لا للبناء </td>
+                            <td class="w-25">8603 </td>
+                            <td class="w-25">٨٦٠٣</td>
+                            <td  class="text-right w-25">:رقم المبنى </td>
                         </tr>
                         <tr>
                             <td class="w-25">Street Name:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">Alanbari</td>
+                            <td class="w-25">العنبري</td>
                             <td  class="text-right w-25">:اسم الشارع  </td>
                         </tr>
                         <tr>
                             <td class="w-25">District:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
-                            <td  class="text-right w-25">:يصرف: </td>
+                            <td class="w-25">Rawdah</td>
+                            <td class="w-25">الروضة</td>
+                            <td  class="text-right w-25">الحي: </td>
                         </tr>
                         <tr>
                             <td class="w-25">City:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
-                            <td  class="text-right w-25">:امدينة </td>
+                            <td class="w-25">Jeddah</td>
+                            <td class="w-25">جدة</td>
+                            <td  class="text-right w-25">:المدينة </td>
                         </tr>
                         <tr>
                             <td class="w-25">Country:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
-                            <td  class="text-right w-25">:ادولة </td>
+                            <td class="w-25">Saudi Arabia</td>
+                            <td class="w-25">المملكة العربية السعودية</td>
+                            <td  class="text-right w-25">:الدولة </td>
                         </tr>
                         <tr>
                             <td class="w-25">Postal Code:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">-</td>
+                            <td class="w-25">-</td>
                             <td  class="text-right w-25">:رمز بريدي   </td>
                         </tr>
                         <tr>
                             <td class="w-25">Additional No:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">-</td>
+                            <td class="w-25">-</td>
                             <td  class="text-right w-25">:ارقم إضافي </td>
                         </tr>
                         <tr>
                             <td class="w-25">VAT Number:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">310145806100003</td>
+                            <td class="w-25">310145806100003</td>
                             <td  class="text-right w-25">:اظريبه الشراء </td>
                         </tr>
                         <tr>
                             <td class="w-25">Other Seller ID:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">-</td>
+                            <td class="w-25">-</td>
                             <td  class="text-right w-25">: معرف البائع الآخر  </td>
                         </tr>
                         </tbody>
@@ -265,69 +275,69 @@
                     <table class="maintable table-border">
                         <thead>
                         <tr>
-                            <th colspan="2" class="text-left">Buyer:</th>
-                            <th class="text-right" colspan="2">تمشتر: </th>
+                            <th colspan="2" class="text-left" style="color: white">Buyer:</th>
+                            <th class="text-right" colspan="2" style="color: white">تمشتر: </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td class="w-25">Name:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">{{$invoice->customer->name}}</td>
+                            <td class="w-25">{{$invoice->customer->name_arabic}}</td>
                             <td  class="text-right w-25">:اسم  </td>
                         </tr>
                         <tr>
                             <td class="w-25">Building No:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">{{$invoice->billing_building_no}}</td>
+                            <td class="w-25">{{$invoice->billing_building_no_arabic}}</td>
                             <td  class="text-right w-25">:لا للبناء </td>
                         </tr>
                         <tr>
                             <td class="w-25">Street Name:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">{{$invoice->billing_street}}</td>
+                            <td class="w-25">{{$invoice->billing_street_arabic}}</td>
                             <td  class="text-right w-25">:اسم الشارع</td>
                         </tr>
                         <tr>
                             <td class="w-25">District:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">{{$invoice->billing_district}}</td>
+                            <td class="w-25">{{$invoice->billing_district_arabic}}</td>
                             <td  class="text-right w-25">:يصرف: </td>
                         </tr>
                         <tr>
                             <td class="w-25">City:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">{{$invoice->billing_city}}</td>
+                            <td class="w-25">{{$invoice->billing_city_arabic}}</td>
                             <td  class="text-right w-25">:امدينة </td>
                         </tr>
                         <tr>
                             <td class="w-25">Country:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">{{$invoice->billing_country}}</td>
+                            <td class="w-25">{{$invoice->billing_country_arabic}}</td>
                             <td  class="text-right w-25">:ادولة </td>
                         </tr>
                         <tr>
                             <td class="w-25">Postal Code:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">{{$invoice->billing_zip_code}}</td>
+                            <td class="w-25">{{$invoice->billing_zip_code}}</td>
                             <td  class="text-right w-25">:رمز بريدي  </td>
                         </tr>
                         <tr>
                             <td class="w-25">Additional No:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">xyz</td>
+                            <td class="w-25">xyz</td>
                             <td  class="text-right w-25">:ارقم إضافي </td>
                         </tr>
                         <tr>
                             <td class="w-25">VAT Number:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">{{$invoice->billing_vat_number}}</td>
+                            <td class="w-25">{{$invoice->billing_vat_number}}</td>
                             <td  class="text-right w-25">:اظريبه الشراء</td>
                         </tr>
                         <tr>
                             <td class="w-25">Other Buyer ID:</td>
-                            <td class="w-25"></td>
-                            <td class="w-25"></td>
+                            <td class="w-25">{{$invoice->billing_other_buyer_id}}</td>
+                            <td class="w-25">{{$invoice->billing_other_buyer_id}}</td>
                             <td  class="text-right w-25">:ممعرف المشتري الآخر </td>
                         </tr>
                         </tbody>
@@ -340,8 +350,8 @@
                 <table class="maintable table-border mt-5">
                     <thead>
                     <tr>
-                        <th colspan="4" class="text-left">Line Items:</th>
-                        <th colspan="4" class="text-right">:البنود </th>
+                        <th colspan="4" class="text-left" style="color: white">Line Items:</th>
+                        <th colspan="4" class="text-right" style="color: white">البنود: </th>
                     </tr>
                     <tr>
                         <td class="w-25 text-center bg">Nature of Good of Service <br>طبيعة الخدمة الجيدة  </td>
@@ -355,26 +365,20 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($invoice->details as $index => $detail)
                     <tr>
-                        <td class=" w-25">Item A - البند أ </td>
-                        <td class="text-right w-25">200.00 SAR</td>
-                        <td class="text-right w-25">1</td>
-                        <td class="text-right w-25">200.00 SAR</td>
-                        <td class="text-right w-25">0</td>
-                        <td class="text-right w-25">15%</td>
-                        <td class="text-right w-25">30.00 SAR</td>
-                        <td class="text-right w-25">230.00 SAR</td>
+                        <td class=" w-25">
+                        {{$detail->item}}
+                        </td>
+                        <td class="text-right w-25">{{$detail->price}} SAR</td>
+                        <td class="text-right w-25">{{$detail->qty}}</td>
+                        <td class="text-right w-25">{{$detail->taxable_amount}} SAR</td>
+                        <td class="text-right w-25">{{$detail->discount}}</td>
+                        <td class="text-right w-25">{{$detail->tax_rate}}</td>
+                        <td class="text-right w-25">{{$detail->tax_amount}} SAR</td>
+                        <td class="text-right w-25">{{$detail->total}} SAR</td>
                     </tr>
-                    <tr>
-                        <td class=" w-25">Item B - االبند ب</td>
-                        <td class="text-right w-25">350.00 SAR</td>
-                        <td class="text-right w-25">2</td>
-                        <td class="text-right w-25">700.00 SAR</td>
-                        <td class="text-right w-25">0</td>
-                        <td class="text-right w-25">15%</td>
-                        <td class="text-right w-25">150.00 SAR</td>
-                        <td class="text-right w-25">805.00 SAR</td>
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -384,41 +388,19 @@
                 <table class="maintable table-border mt-5">
                     <thead>
                     <tr>
-                        <th colspan="2" class="text-left">Total Amount:</th>
-                        <th colspan="2" class="text-right">:المبلغ الإجمالي  </th>
+                        <th colspan="2" style="text-align: left;color:white">Total Amount</th>
+                        <th colspan="2" style="text-align: right;color:white">المبلغ الإجمالي</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($invoice->custom_fields as $custom_field)
                     <tr>
-                        <td style="width: 300px"></td>
-                        <td style="width:200px">Total(Excluding VAT)</td>
-                        <td style="width:200px" class="text-right">الإجمالي (باستثناء ضريبة القيمة المضافة)</td>
-                        <td style="width: 100px;" class="text-right">900.00 SAR</td>
+                        <td style="width:40%"></td>
+                        <td style="width:20%">{{$custom_field->name}}</td>
+                        <td style="width:20%" class="text-right">{{$custom_field->name_arabic}}</td>
+                        <td style="width: 20%" class="text-right">{{$custom_field->value}} SAR</td>
                     </tr>
-                    <tr>
-                        <td style="width: 300px"></td>
-                        <td style="width:200px">Discount</td>
-                        <td style="width:200px" class="text-right">اخصم  </td>
-                        <td style="width: 100px;" class="text-right">0.00 SAR</td>
-                    </tr>
-                    <tr>
-                        <td style="width: 300px"></td>
-                        <td style="width:200px">Total Taxable Amount(Excluding VAT)</td>
-                        <td style="width:200px" class="text-right">اإجمالي المبلغ الخاضع للضريبة (باستثناء ضريبة القيمة المضافة) </td>
-                        <td style="width: 100px;" class="text-right">900.00 SAR</td>
-                    </tr>
-                    <tr>
-                        <td style="width: 300px"></td>
-                        <td style="width:200px">Total VAT</td>
-                        <td style="width:200px" class="text-right">اإجمالي ضريبة القيمة المضافة  </td>
-                        <td style="width: 100px;" class="text-right">135.00 SAR</td>
-                    </tr>
-                    <tr>
-                        <td style="width: 300px"></td>
-                        <td style="width:200px">Total Amount Due</td>
-                        <td style="width:200px" class="text-right">إجمالي المبلغ المستحق  </td>
-                        <td style="width: 100px;" class="text-right">1,035.00 SAR</td>
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

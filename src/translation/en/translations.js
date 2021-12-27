@@ -95,6 +95,7 @@ export const TRANSLATIONS_EN = {
     "tax_rate": "Tax Rate",
     "tax_amount": "Tax Amount",
     "name_arabic": "Name (Arabic)",
+    "additional_no": "Additional No",
 
 
 };
