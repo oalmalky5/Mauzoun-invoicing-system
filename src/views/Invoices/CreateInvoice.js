@@ -414,8 +414,6 @@ export function CreateInvoice(props) {
                                                 <FormGroup>
                                                     <label>{t("total_amount")}</label>
                                                     <input ref={total_amount}
-                                                           type="number"
-                                                           step={'0.01'}
                                                            className="form-control-alternative form-control"
                                                            placeholder={t("enter") + " " + t("total_amount")}/>
                                                 </FormGroup>
@@ -424,8 +422,6 @@ export function CreateInvoice(props) {
                                                 <FormGroup>
                                                     <label>{t("tax_amount")}</label>
                                                     <input ref={tax_amount}
-                                                           type="number"
-                                                           step={'0.01'}
                                                            className="form-control-alternative form-control"
                                                            placeholder={t("enter") + " " + t("tax_amount")}/>
                                                 </FormGroup>
