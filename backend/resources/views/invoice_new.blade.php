@@ -175,10 +175,10 @@
                             <td class="text-right w-25">تاريخ إصدار الفاتورة  </td>
                         </tr>
                         <tr>
-                            <td class="w-25">Date of Supply</td>
+                            <td class="w-25">Invoice Due Date:</td>
                             <td class="w-25">{{\Carbon\Carbon::parse($invoice->due_date)->format('d/m/Y')}}</td>
                             <td class="text-right w-25">{{\Carbon\Carbon::parse($invoice->due_date)->format('d/m/Y')}}</td>
-                            <td class="text-right w-25"> تاريخ التوريد   </td>
+                            <td class="text-right w-25"> :تاريخ انتهاء الفاتورة    </td>
                         </tr>
                         </tbody>
                     </table>
@@ -204,7 +204,7 @@
                         <thead>
                         <tr>
                             <th colspan="2" class="text-left" style="color: white">Seller</th>
-                            <th class="text-right" colspan="2" style="color: white">تاجر </th>
+                            <th class="text-right" colspan="2" style="color: white">معلومات البائع  </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -212,7 +212,7 @@
                             <td class="w-25">Name:</td>
                             <td class="w-25">Mauzoun Writing & Publishing</td>
                             <td class="w-25">الاسم: موزون للطباعة والنشر</td>
-                            <td  class="text-right w-25">:اسم </td>
+                            <td  class="text-right w-25">:االاسم  </td>
                         </tr>
                         <tr>
                             <td class="w-25">Building No:</td>
@@ -248,25 +248,13 @@
                             <td class="w-25">Postal Code:</td>
                             <td class="w-25">-</td>
                             <td class="w-25">-</td>
-                            <td  class="text-right w-25">:رمز بريدي   </td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Additional No:</td>
-                            <td class="w-25">-</td>
-                            <td class="w-25">-</td>
-                            <td  class="text-right w-25">:ارقم إضافي </td>
+                            <td  class="text-right w-25">:رالرمز البريدي  </td>
                         </tr>
                         <tr>
                             <td class="w-25">VAT Number:</td>
                             <td class="w-25">310145806100003</td>
                             <td class="w-25">310145806100003</td>
-                            <td  class="text-right w-25">:اظريبه الشراء </td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Other Seller ID:</td>
-                            <td class="w-25">-</td>
-                            <td class="w-25">-</td>
-                            <td  class="text-right w-25">: معرف البائع الآخر  </td>
+                            <td  class="text-right w-25">: رقم تسجيل ضريبة القيمة المضافة  </td>
                         </tr>
                         </tbody>
                     </table>
@@ -276,7 +264,7 @@
                         <thead>
                         <tr>
                             <th colspan="2" class="text-left" style="color: white">Buyer:</th>
-                            <th class="text-right" colspan="2" style="color: white">تمشتر: </th>
+                            <th class="text-right" colspan="2" style="color: white"> :تمعلومات المشتري  </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -290,7 +278,7 @@
                             <td class="w-25">Building No:</td>
                             <td class="w-25">{{$invoice->billing_building_no}}</td>
                             <td class="w-25">{{$invoice->billing_building_no_arabic}}</td>
-                            <td  class="text-right w-25">:لا للبناء </td>
+                            <td  class="text-right w-25">:لرقم المبنى  </td>
                         </tr>
                         <tr>
                             <td class="w-25">Street Name:</td>
@@ -302,43 +290,31 @@
                             <td class="w-25">District:</td>
                             <td class="w-25">{{$invoice->billing_district}}</td>
                             <td class="w-25">{{$invoice->billing_district_arabic}}</td>
-                            <td  class="text-right w-25">:يصرف: </td>
+                            <td  class="text-right w-25">: الحي   </td>
                         </tr>
                         <tr>
                             <td class="w-25">City:</td>
                             <td class="w-25">{{$invoice->billing_city}}</td>
                             <td class="w-25">{{$invoice->billing_city_arabic}}</td>
-                            <td  class="text-right w-25">:امدينة </td>
+                            <td  class="text-right w-25">:المدينة  </td>
                         </tr>
                         <tr>
                             <td class="w-25">Country:</td>
                             <td class="w-25">{{$invoice->billing_country}}</td>
                             <td class="w-25">{{$invoice->billing_country_arabic}}</td>
-                            <td  class="text-right w-25">:ادولة </td>
+                            <td  class="text-right w-25">:الدولة  </td>
                         </tr>
                         <tr>
                             <td class="w-25">Postal Code:</td>
                             <td class="w-25">{{$invoice->billing_zip_code}}</td>
                             <td class="w-25">{{$invoice->billing_zip_code}}</td>
-                            <td  class="text-right w-25">:رمز بريدي  </td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Additional No:</td>
-                            <td class="w-25">xyz</td>
-                            <td class="w-25">xyz</td>
-                            <td  class="text-right w-25">:ارقم إضافي </td>
+                            <td  class="text-right w-25">:رالرمز البريدي  </td>
                         </tr>
                         <tr>
                             <td class="w-25">VAT Number:</td>
                             <td class="w-25">{{$invoice->billing_vat_number}}</td>
                             <td class="w-25">{{$invoice->billing_vat_number}}</td>
-                            <td  class="text-right w-25">:اظريبه الشراء</td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Other Buyer ID:</td>
-                            <td class="w-25">{{$invoice->billing_other_buyer_id}}</td>
-                            <td class="w-25">{{$invoice->billing_other_buyer_id}}</td>
-                            <td  class="text-right w-25">:ممعرف المشتري الآخر </td>
+                            <td  class="text-right w-25">: رقم تسجيل ضريبة القيمة المضافة  </td>
                         </tr>
                         </tbody>
                     </table>
@@ -351,17 +327,17 @@
                     <thead>
                     <tr>
                         <th colspan="4" class="text-left" style="color: white">Line Items:</th>
-                        <th colspan="4" class="text-right" style="color: white">البنود: </th>
+                        <th colspan="4" class="text-right" style="color: white"> :اتوصيف السلعة او الخدمة   </th>
                     </tr>
                     <tr>
-                        <td class="w-25 text-center bg">Nature of Good of Service <br>طبيعة الخدمة الجيدة  </td>
+                        <td class="w-25 text-center bg">Nature of Good of Service <br>طتفاصيل السلع او الخدمات   </td>
                         <td class="w-25 text-center bg">Unit Price <br> سعر الوحدة  </td>
-                        <td class="w-25 text-center bg">Quantity <br> كمية  </td>
+                        <td class="w-25 text-center bg">Quantity <br> ك الكمية  </td>
                         <td class="w-25 text-center bg">Taxable Amount <br> المبلغ الخاضع للضريبة  </td>
-                        <td class="w-25 text-center bg">Discount <br> خصم  </td>
+                        <td class="w-25 text-center bg">Discount <br> الخصم  </td>
                         <td class="w-25 text-center bg">Tax Rate <br> معدل الضريبة  </td>
-                        <td class="w-25 text-center bg">Tax Amount <br> قيمة الضريبة  </td>
-                        <td class="w-25 text-center bg">Item Subtotal(Including VAT) <br> البند المجموع الفرعي (متضمنًا ضريبة القيمة المضافة)  </td>
+                        <td class="w-25 text-center bg">Tax Amount <br>  قيمة الضريبة  </td>
+                        <td class="w-25 text-center bg">Item Subtotal(Including VAT) <br> البند المجموع الفرعي (متضمنًا قيمة الضريبة المضافة) </td>
                     </tr>
                     </thead>
                     <tbody>
