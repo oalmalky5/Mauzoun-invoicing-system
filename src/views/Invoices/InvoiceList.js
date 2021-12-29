@@ -131,7 +131,6 @@ export function InvoiceList(props) {
                                         <th>{t("email")}</th>
                                         <th>{t("phone")}</th>
                                         <th>{t("total_amount")}</th>
-                                        <th>{t("notes")}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -207,7 +206,6 @@ export function InvoiceList(props) {
                                                 <td>{invoice.billing_email}</td>
                                                 <td>{invoice.billing_phone}</td>
                                                 <td>{invoice.total}</td>
-                                                <td>{invoice.notes}</td>
                                             </tr>
                                         ))
                                     ) : (
