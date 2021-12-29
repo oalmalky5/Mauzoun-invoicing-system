@@ -18,6 +18,9 @@ import {
 } from "reactstrap";
 import {Prompt} from 'react-router'
 
+import {CKEditor} from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 export function CreateInvoice(props) {
     const {t} = useTranslation();
     const customer_id = useRef();
@@ -29,7 +32,7 @@ export function CreateInvoice(props) {
     const total_amount = useRef();
     const tax_amount = useRef();
     /*const has_approved = useRef();*/
-    const notes = useRef();
+    const [notes, setNotes] = useState('');
 
     const billing_first_name = useRef();
     const billing_first_name_arabic = useRef();
@@ -141,8 +144,8 @@ export function CreateInvoice(props) {
                 billing_zip_code: billing_zip_code.current.value,
                 billing_country: billing_country.current.value,
                 billing_country_arabic: billing_country_arabic.current.value,
-                billing_notes: billing_notes.current.value,
-                billing_notes_arabic: billing_notes_arabic.current.value,
+                // billing_notes: billing_notes.current.value,
+                // billing_notes_arabic: billing_notes_arabic.current.value,
                 billing_district: billing_district.current.value,
                 billing_district_arabic: billing_district_arabic.current.value,
                 billing_building_no: billing_building_no.current.value,
@@ -159,6 +162,7 @@ export function CreateInvoice(props) {
                 tax_amount: tax_amount.current.value,
                 /*has_approved: has_approved.current.value,*/
                 //notes: notes.current.value,
+                notes: notes,
                 items: invoiceItems,
                 custom_fields: invoiceCustomFields
             },
@@ -714,20 +718,29 @@ export function CreateInvoice(props) {
                                         <Row>
                                             <Col lg="12">
                                                 <FormGroup>
-                                                    <label>{t("notes")}</label>
+                                                    <label>{t("terms_and_conditions")}</label>
                                                     <Row>
                                                         <Col>
+                                                            <CKEditor
+                                                                editor={ClassicEditor}
+                                                                onChange={(event, editor) => {
+                                                                    setNotes(editor.getData());
+                                                                }}
+                                                                onReady={editor => {
+                                                                    setNotes(editor.getData());
+                                                                }}
+                                                            />
                                                             <textarea ref={billing_notes} rows={4}
-                                                                      className="form-control-alternative form-control"
+                                                                      className="form-control-alternative form-control d-none"
                                                                       placeholder={t("enter") + " " + t("notes")}
                                                                       defaultValue={customer.notes}/>
-                                                        </Col>
-                                                        <Col>
                                                             <textarea ref={billing_notes_arabic} dir={'rtl'} rows={4}
-                                                                      className="form-control-alternative form-control"
+                                                                      className="form-control-alternative form-control d-none"
                                                                       placeholder={t("enter") + " " + t("notes_arabic")}
                                                                       defaultValue={customer.notes_arabic}/>
                                                         </Col>
+                                                        {/*<Col>
+                                                        </Col>*/}
                                                     </Row>
 
                                                 </FormGroup>

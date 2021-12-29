@@ -74,7 +74,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
     margin: 0;
-    font-family: "Alegreya Sans",sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -99,12 +99,12 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Alegreya" !important;
 }
 
-label{
+label {
     font-family: "Alegreya" !important;
     font-weight: 500;
 }
 
-.navbar-light .navbar-nav .nav-link{
+.navbar-light .navbar-nav .nav-link {
     font-family: "Alegreya" !important;
     font-weight: 500;
 }
@@ -23465,7 +23465,19 @@ button:focus, :focus {
 .table .badge i {
     margin-right: 10px;
 }
-.invoice-td{
-    padding:5px !important;
+
+.invoice-td {
+    padding: 5px !important;
 }
+
+.ck-editor__editable {
+    min-height: 300px;
+    /*text-align: right !important;*/
+}
+
+.ck.ck-editor__editable_inline {
+   /* direction: rtl;
+    text-align: right !important;*/
+}
+
 /*# sourceMappingURL=argon-dashboard-react.css.map */
