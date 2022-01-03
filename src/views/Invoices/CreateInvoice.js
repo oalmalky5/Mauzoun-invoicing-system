@@ -58,6 +58,7 @@ export function CreateInvoice(props) {
     const billing_state_arabic = useRef();
     const billing_country_arabic = useRef();
     const billing_vat_number = useRef();
+    const billing_vat_number_arabic = useRef();
     const billing_other_buyer_id = useRef();
     const billing_notes_arabic = useRef();
     const billing_additional_no = useRef();
@@ -151,6 +152,7 @@ export function CreateInvoice(props) {
                 billing_building_no: billing_building_no.current.value,
                 billing_building_no_arabic: billing_building_no_arabic.current.value,
                 billing_vat_number: billing_vat_number.current.value,
+                billing_vat_number_arabic: billing_vat_number_arabic.current.value,
                 billing_other_buyer_id: billing_other_buyer_id.current.value,
                 billing_additional_no: billing_additional_no.current.value,
 
@@ -345,7 +347,8 @@ export function CreateInvoice(props) {
                                                         {customers.map((customer, key) => (
                                                             <option key={customer.id}
                                                                     value={customer.id}>
-                                                                {customer.first_name} {customer.lasst_name}
+                                                                {customer.first_name} {customer.last_name}
+                                                                ({customer.company_name})
                                                             </option>
                                                         ))}
                                                     </select>
@@ -698,10 +701,21 @@ export function CreateInvoice(props) {
                                             <Col lg="6">
                                                 <FormGroup>
                                                     <label>{t("vat_number")}</label>
-                                                    <textarea ref={billing_vat_number} rows={4}
-                                                              className="form-control-alternative form-control"
-                                                              placeholder={t("enter") + " " + t("vat_number")}
-                                                              defaultValue={customer.vat_number}/>
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_vat_number}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("vat_number")}
+                                                                   defaultValue={customer.vat_number}/>
+
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_vat_number_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("vat_number_arabic")}
+                                                                   defaultValue={customer.vat_number_arabic}/>
+                                                        </Col>
+                                                    </Row>
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">

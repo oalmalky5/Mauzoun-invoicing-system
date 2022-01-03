@@ -108,9 +108,9 @@ class InvoiceController extends Controller
             'billing_building_no' => $request->billing_building_no,
             'billing_building_no_arabic' => $request->billing_building_no_arabic,
             'billing_vat_number' => $request->billing_vat_number,
+            'billing_vat_number_arabic' => $request->billing_vat_number_arabic,
             'billing_other_buyer_id' => $request->billing_other_buyer_id,
             'billing_additional_no' => $request->billing_additional_no,
-
             'total_amount' => $request->total_amount,
             'tax_amount' => $request->tax_amount,
             'total' => $request->total,
@@ -341,9 +341,9 @@ class InvoiceController extends Controller
     private function generateSallaQRCode($Invoice)
     {
         return $generatedString = GenerateQrCode::fromArray([
-            new Seller('Mauzoun'), // seller name
-            new TaxNumber($Invoice->billing_vat_number), // seller tax number
-            new InvoiceDate(Carbon::parse($Invoice->date)->format('Y-m-d\TH:i:s\Z')), // invoice date as Zulu ISO8601 @see https://en.wikipedia.org/wiki/ISO_8601
+            new Seller('مؤسسة موزون للدعاية والاعلان'), // seller name
+            new TaxNumber('٣١٠١٤٥٨٠٦١٠٠٠٠٣'), // seller tax number
+            new InvoiceDate(Carbon::parse($Invoice->date . ' ' . $Invoice->created_at->format('H:i:s'))->format('Y-m-d\TH:i:s\Z')), // invoice date as Zulu ISO8601 @see https://en.wikipedia.org/wiki/ISO_8601
             new InvoiceTotalAmount($Invoice->total_amount), // invoice total amount
             new InvoiceTaxAmount($Invoice->tax_amount) // invoice tax amount
         ])->render();

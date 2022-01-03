@@ -30,7 +30,7 @@ class CustomerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
-            'email' => 'required|unique:customers'
+            'email' => 'required'
         ]);
 
         if ($validator->fails()) {

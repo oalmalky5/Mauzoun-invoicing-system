@@ -214,7 +214,7 @@
                             <td class="text-right w-25"> مؤسسة موزون للدعاية والاعلان  </td>
                             <td  class="text-right w-25">:الاسم  </td>
                         </tr>
-                        <tr>
+                        {{--<tr>
                             <td class="w-25">Building No:</td>
                             <td class="w-25">8603 </td>
                             <td class="text-right w-25">٨٦٠٣</td>
@@ -225,7 +225,7 @@
                             <td class="w-25">Alanbari</td>
                             <td class="text-right w-25">العنبري</td>
                             <td  class="text-right w-25">:اسم الشارع  </td>
-                        </tr>
+                        </tr>--}}
                         <tr>
                             <td class="w-25">District:</td>
                             <td class="w-25">Rawdah</td>
@@ -244,12 +244,12 @@
                             <td class="text-right w-25">المملكة العربية السعودية</td>
                             <td  class="text-right w-25">:الدولة </td>
                         </tr>
-                        <tr>
+                        {{--<tr>
                             <td class="w-25">Postal Code:</td>
                             <td class="w-25">-</td>
                             <td class="text-right w-25">-</td>
                             <td  class="text-right w-25">: الرمز البريدي  </td>
-                        </tr>
+                        </tr>--}}
                         <tr>
                             <td class="w-25">VAT Number:</td>
                             <td class="w-25">310145806100003</td>
@@ -273,6 +273,12 @@
                             <td class="w-25">{{$invoice->customer->name}}</td>
                             <td class="text-right w-25">{{$invoice->customer->name_arabic}}</td>
                             <td  class="text-right w-25">:الاسم </td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Brand Name:</td>
+                            <td class="w-25">{{$invoice->billing_company_name}}</td>
+                            <td class="text-right w-25">{{$invoice->billing_company_name_arabic}}</td>
+                            <td  class="text-right w-25">:اسم العلامة </td>
                         </tr>
                         <tr>
                             <td class="w-25">Building No:</td>
@@ -313,7 +319,7 @@
                         <tr>
                             <td class="w-25">VAT Number:</td>
                             <td class="w-25">{{$invoice->billing_vat_number}}</td>
-                            <td class="text-right w-25">{{$invoice->billing_vat_number}}</td>
+                            <td class="text-right w-25">{{$invoice->billing_vat_number_arabic}}</td>
                             <td  class="text-right w-25">: رقم تسجيل ضريبة القيمة المضافة  </td>
                         </tr>
                         </tbody>
@@ -326,8 +332,8 @@
                 <table class="maintable table-border mt-5">
                     <thead>
                     <tr>
-                        <th colspan="4" class="text-left" style="color: white">Line Items:</th>
-                        <th colspan="4" class="text-right" style="color: white"> :اتوصيف السلعة او الخدمة   </th>
+                        <th colspan="3" class="text-left" style="color: white">Line Items:</th>
+                        <th colspan="3 " class="text-right" style="color: white"> :اتوصيف السلعة او الخدمة   </th>
                     </tr>
                     <tr>
                         <td class="w-25 text-center bg">Nature of Good or Service <br> تفاصيل السلع او الخدمات  </td>
@@ -375,6 +381,10 @@
                     @endforeach
                     </tbody>
                 </table>
+            </div>
+
+            <div>
+                {!! $invoice->notes !!}
             </div>
             <!--  -->
             <!--End of subpage-->
