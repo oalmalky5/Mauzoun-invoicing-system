@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Invoice;
+use App\Models\InvoiceCustomField;
+use App\Models\InvoiceDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -130,6 +133,12 @@ class CustomerController extends Controller
     public function destroy(Request $request)
     {
         Customer::where('id', $request->id)->delete();
+        $Invoices = Invoice::where('customer_id', $request->id)->get();
+        foreach ($Invoices as $invoice) {
+            InvoiceDetail::where('invoice_id', $invoice->id)->delete();
+            InvoiceCustomField::where('invoice_id', $invoice->id)->delete();
+            Invoice::where('id', $invoice->id)->delete();
+        }
         return response()->json([
             'status' => true,
             'message' => 'Record deleted successfully'

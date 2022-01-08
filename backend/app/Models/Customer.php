@@ -28,12 +28,4 @@ class Customer extends BaseModel
         return $this->first_name_arabic . ' ' . $this->last_name_arabic;
     }
 
-    protected static function booted()
-    {
-        static::deleting(function ($Customer) {
-            foreach ($Customer->invoices() as $invoice) {
-                $invoice->delete();
-            }
-        });
-    }
 }
