@@ -789,11 +789,12 @@ export function EditInvoice(props) {
                                                         <Col>
                                                             <CKEditor
                                                                 editor={ClassicEditor}
+                                                                data={invoice.notes}
                                                                 onChange={(event, editor) => {
                                                                     setNotes(editor.getData());
                                                                 }}
                                                                 onReady={editor => {
-                                                                    setNotes(invoice.notes);
+                                                                    setNotes(editor.getData());
                                                                 }}
                                                             />
                                                             <textarea ref={billing_notes} rows={4}
