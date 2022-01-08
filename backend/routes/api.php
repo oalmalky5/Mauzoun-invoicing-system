@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/invoices')->group(function () {
         Route::post('/store', 'App\Http\Controllers\InvoiceController@store');
         Route::post('/{id}/delete', 'App\Http\Controllers\InvoiceController@destroy');
+        Route::post('/{id}/approve', 'App\Http\Controllers\InvoiceController@approve');
         Route::get('/{id}/show', 'App\Http\Controllers\InvoiceController@show');
         Route::post('/update', 'App\Http\Controllers\InvoiceController@update');
         Route::get('/all/{customer_id?}', 'App\Http\Controllers\InvoiceController@all');

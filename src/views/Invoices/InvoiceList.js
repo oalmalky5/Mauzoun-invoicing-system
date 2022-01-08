@@ -83,6 +83,29 @@ export function InvoiceList(props) {
         });
     };
 
+    const approveInvoice = () => {
+        setDisabled(true);
+        setIconDisabled(false);
+        axios.post(
+            API_URL + 'invoices/' + invoice.id + '/approve', {},
+        ).then((response) => {
+            if (response.data.status) {
+                history.go(0);
+                setModal(false);
+                alertify.success(response.data.message);
+            } else {
+                setDisabled(false);
+                setIconDisabled(true);
+                alertify.error(response.data.message);
+                return null;
+            }
+        }).catch((error) => {
+            setDisabled(false);
+            setIconDisabled(true);
+            // alertify.error("Something went wrong. Try again!");
+        });
+    };
+
     useEffect(() => {
 
         let url = API_URL + 'invoices/all';
@@ -150,12 +173,15 @@ export function InvoiceList(props) {
                                                             <i className="fas fa-ellipsis-v"/>
                                                         </DropdownToggle>
                                                         <DropdownMenu className="dropdown-menu-arrow" right>
+
                                                             <DropdownItem
                                                                 href={`/invoice/${invoice.sr_no}/paid`}
                                                                 target={"_blank"}
                                                                 tag="a">
                                                                 {t("preview")}
+
                                                             </DropdownItem>
+
                                                             {/*<DropdownItem
                                                                 href={`/invoice/${invoice.sr_no}/due`}
                                                                 target={"_blank"}
@@ -168,29 +194,44 @@ export function InvoiceList(props) {
                                                                 tag="a">
                                                                 {t("unpaid_preview")}
                                                             </DropdownItem>*/}
-                                                            {/*<DropdownItem
-                                                                tag={Link} to={`/admin/invoices/edit/${invoice.id}`}
-                                                            >
-                                                                {t("edit")}
-                                                            </DropdownItem>*/}
                                                             {
+                                                                !invoice.has_approved ? (
+                                                                        <DropdownItem
+                                                                            tag={Link}
+                                                                            to={`/admin/invoices/edit/${invoice.id}`}
+                                                                        >
+                                                                            {t("edit")}
+                                                                        </DropdownItem>
+                                                                    )
+                                                                    : ("")
+                                                            }
+                                                            {/*{
                                                                 !invoice.has_approved ? (
                                                                     ""
                                                                 ) : ("")
+                                                            }*/}
+                                                            {
+                                                                !invoice.has_approved ? (
+                                                                        <DropdownItem
+                                                                            onClick={() => setCurrentInvoice(invoice)}
+                                                                            key={invoice.id}
+                                                                        >
+                                                                            {t("delete")}
+                                                                        </DropdownItem>
+                                                                    )
+                                                                    : ("")
                                                             }
-
-                                                            <DropdownItem
-                                                                onClick={() => setCurrentInvoice(invoice)}
-                                                                key={invoice.id}
-                                                            >
-                                                                {t("delete")}
-                                                            </DropdownItem>
-                                                            <DropdownItem
-                                                                onClick={() => setCurrentInvoiceForApprove(invoice)}
-                                                                key={invoice.id}
-                                                            >
-                                                                {t("mark_as_approved")}
-                                                            </DropdownItem>
+                                                            {
+                                                                !invoice.has_approved ? (
+                                                                        <DropdownItem
+                                                                            onClick={() => setCurrentInvoiceForApprove(invoice)}
+                                                                            key={invoice.id}
+                                                                        >
+                                                                            {t("mark_as_approved")}
+                                                                        </DropdownItem>
+                                                                    )
+                                                                    : ("")
+                                                            }
                                                         </DropdownMenu>
                                                     </UncontrolledDropdown>
                                                 </td>
@@ -259,9 +300,9 @@ export function InvoiceList(props) {
                     <ModalFooter>
                         <Button
                             color="primary"
-                            onClick={deleteInvoice} disabled={disabled}
+                            onClick={approveInvoice} disabled={disabled}
                         >
-                            Confirm <span
+                            Confirm Approve<span
                             dangerouslySetInnerHTML={{__html: disabled ? `<i class='fas fa-spinner fa-spin'></i>` : ``}}/>
                         </Button>
                         {' '}

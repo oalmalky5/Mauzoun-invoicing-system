@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\InvoiceCustomField;
 use App\Models\InvoiceDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -187,7 +188,7 @@ class InvoiceController extends Controller
 
     public function show(Request $request)
     {
-        $Invoice = Invoice::with(['customer', 'details'])->firstWhere('id', $request->id);
+        $Invoice = Invoice::with(['customer', 'details', 'custom_fields'])->firstWhere('id', $request->id);
 
         return response()->json([
             'status' => true,
@@ -224,6 +225,10 @@ class InvoiceController extends Controller
 
     public function update(Request $request)
     {
+        /*return response()->json([
+            'status' => false,
+            'message' => $request->toArray()
+        ]);*/
         $validator = Validator::make($request->all(), [
             'id' => 'required',
             'customer_id' => 'required',
@@ -238,72 +243,110 @@ class InvoiceController extends Controller
         }
 
         $Invoice = Invoice::find($request->id);
-        $Invoice->invoice_no = $request->invoice_no;
-        $Invoice->date = Carbon::createFromFormat('d/m/Y', $request->date)->format('Y-m-d');
-        $Invoice->due_date = Carbon::createFromFormat('d/m/Y', $request->due_date)->format('Y-m-d');
-        $Invoice->is_recurring = $request->is_recurring;
-        $Invoice->recurring_interval_value = $recurring_interval_value;
-        $Invoice->recurring_interval_unit = $recurring_interval_unit;
-        $Invoice->is_infinity_cycle = $is_infinity_cycle;
-        $Invoice->recurring_cycle = $recurring_cycle;
-        $Invoice->billing_city = $request->billing_city;
-        $Invoice->billing_state = $request->billing_state;
-        $Invoice->billing_zip_code = $request->billing_zip_code;
-        $Invoice->billing_street = $request->billing_street;
-        $Invoice->billing_country = $request->billing_country;
-        $Invoice->shipping_city = $request->shipping_city;
-        $Invoice->shipping_state = $request->shipping_state;
-        $Invoice->shipping_zip_code = $request->shipping_zip_code;
-        $Invoice->shipping_address = $request->shipping_address;
-        $Invoice->shipping_country_id = $request->shipping_country_id;
-        $Invoice->quantity_type = $request->quantity_type;
-        $Invoice->discount_type = $request->discount_type;
-        $Invoice->total = $request->total;
-        $Invoice->discount_unit = $request->discount_unit;
-        $Invoice->discount_value = $request->discount_value;
-        $Invoice->discount_amount = $request->discount_amount;
-        $Invoice->adjustment_amount = $request->adjustment_amount;
-        $Invoice->net_amount = $request->net_amount;
-        $Invoice->admin_notes = $request->admin_notes;
-        $Invoice->client_notes = $request->client_notes;
-        $Invoice->terms_and_conditions = $request->terms_and_conditions;
-        $Invoice->currency_id = $request->currency_id;
-        $Invoice->customer_id = $request->customer_id;
-        $Invoice->sale_agent_id = $request->sale_agent_id;
+        $Invoice->sr_no = $request->sr_no;
+        $Invoice->date = $request->date;//Carbon::createFromFormat('Y-m-d', $request->date)->format('Y-m-d'),
+        $Invoice->due_date = $request->due_date; //Carbon::createFromFormat('Y-m-d', $request->due_date)->format('Y-m-d'),
 
+        $Invoice->billing_first_name = $request->billing_first_name;
+        $Invoice->billing_first_name_arabic = $request->billing_first_name_arabic;
+        $Invoice->billing_last_name = $request->billing_last_name;
+        $Invoice->billing_last_name_arabic = $request->billing_last_name_arabic;
+        $Invoice->billing_email = $request->billing_email;
+        $Invoice->billing_phone = $request->billing_phone;
+        $Invoice->billing_website = $request->billing_website;
+        $Invoice->billing_company_name = $request->billing_company_name;
+        $Invoice->billing_company_name_arabic = $request->billing_company_name_arabic;
+        $Invoice->billing_street = $request->billing_street;
+        $Invoice->billing_street_arabic = $request->billing_street_arabic;
+        $Invoice->billing_city = $request->billing_city;
+        $Invoice->billing_city_arabic = $request->billing_city_arabic;
+        $Invoice->billing_state = $request->billing_state;
+        $Invoice->billing_state_arabic = $request->billing_state_arabic;
+        $Invoice->billing_zip_code = $request->billing_zip_code;
+        $Invoice->billing_country = $request->billing_country;
+        $Invoice->billing_country_arabic = $request->billing_country_arabic;
+        $Invoice->billing_notes = $request->billing_notes;
+        $Invoice->billing_notes_arabic = $request->billing_notes_arabic;
+        $Invoice->billing_district = $request->billing_district;
+        $Invoice->billing_district_arabic = $request->billing_district_arabic;
+        $Invoice->billing_building_no = $request->billing_building_no;
+        $Invoice->billing_building_no_arabic = $request->billing_building_no_arabic;
+        $Invoice->billing_vat_number = $request->billing_vat_number;
+        $Invoice->billing_vat_number_arabic = $request->billing_vat_number_arabic;
+        $Invoice->billing_other_buyer_id = $request->billing_other_buyer_id;
+        $Invoice->billing_additional_no = $request->billing_additional_no;
+        $Invoice->total_amount = $request->total_amount;
+        $Invoice->tax_amount = $request->tax_amount;
+        $Invoice->total = $request->total;
+        $Invoice->vat = $request->vat;
+        $Invoice->sub_total = $request->sub_total;
+        $Invoice->expiry_date = $request->expiry_date;
+        $Invoice->business_days = $request->business_days;
+        $Invoice->notes = $request->notes;
+        $Invoice->currency = $request->currency;
+        $Invoice->customer_id = $request->customer_id;
         $Invoice->save();
 
+        if (empty($request->sr_no)) {
+            $sr_no = date('Y');
+            $Invoice->sr_no = 'QT' . date('Y') . $Invoice->id;
+            $Invoice->save();
+        }
 
-        $items = array_filter(array_column($request->details, 'item_id'));
-        InvoiceDetail::where('invoice_id', $request->id)->whereNotIn('item_id', $items)->delete();
+        $items = array_filter(array_column($request->items, 'id'));
+        InvoiceDetail::where('invoice_id', $request->id)->whereNotIn('id', $items)->delete();
 
-        foreach ($request->details as $key => $detail) {
-
-            $InvoiceDetail = $Invoice->details()->updateOrCreate(
-                [
-                    'invoice_id' => $request->id,
-                    'item_id' => $detail['item_id']
-                ],
-                [
-                    'item_id' => $detail['item_id'],
+        foreach ($request->items as $key => $detail) {
+            if (empty($detail['id'])) {
+                $details = [
+                    'item' => $detail['item'],
                     'description' => $detail['description'],
-                    'long_description' => $detail['long_description'],
                     'qty' => $detail['qty'],
-                    'unit' => $detail['unit'],
-                    'unit_id' => $detail['unit_id'],
-                    'rate' => $detail['rate'],
-                    'total' => $detail['net_amount'], //same as net amount
-                    'net_amount' => $detail['net_amount'],
-                ]
-            );
+                    'price' => $detail['price'],
+                    'taxable_amount' => $detail['taxable_amount'],
+                    'discount' => $detail['discount'],
+                    'tax_rate' => $detail['qty'],
+                    'tax_amount' => $detail['tax_amount'],
+                    'total' => $detail['total']
+                ];
 
-            $taxes = [];
-            foreach ($detail['taxes'] as $tax) {
-                $tax_id = Arr::pull($tax, 'id');
-                $taxes[$tax_id] = $tax;
+                $Invoice->details()->create($details);
+            } else {
+                $InvoiceDetail = InvoiceDetail::find($detail['id']);
+                $InvoiceDetail->item = $detail['item'];
+                $InvoiceDetail->description = $detail['description'];
+                $InvoiceDetail->qty = $detail['qty'];
+                $InvoiceDetail->price = $detail['price'];
+                $InvoiceDetail->taxable_amount = $detail['taxable_amount'];
+                $InvoiceDetail->discount = $detail['discount'];
+                $InvoiceDetail->tax_rate = $detail['qty'];
+                $InvoiceDetail->tax_amount = $detail['tax_amount'];
+                $InvoiceDetail->total = $detail['total'];
+
+                $InvoiceDetail->save();
             }
 
-            $InvoiceDetail->taxes()->sync($taxes)->save();
+        }
+
+
+        $custom_fields = array_filter(array_column($request->custom_fields, 'id'));
+        InvoiceCustomField::where('invoice_id', $request->id)->whereNotIn('id', $custom_fields)->delete();
+        foreach ($request->custom_fields as $key => $custom_field) {
+            if (empty($custom_field['id'])) {
+                $custom_field_data = [
+                    'name' => $custom_field['name'],
+                    'name_arabic' => $custom_field['name_arabic'],
+                    'value' => $custom_field['value'],
+                ];
+
+                $Invoice->custom_fields()->create($custom_field_data);
+            } else {
+                $InvoiceCustomField = InvoiceCustomField::find($custom_field['id']);
+                $InvoiceCustomField->name = $custom_field['name'];
+                $InvoiceCustomField->name_arabic = $custom_field['name_arabic'];
+                $InvoiceCustomField->value = $custom_field['value'];
+                $InvoiceCustomField->save();
+            }
 
         }
 
@@ -335,6 +378,18 @@ class InvoiceController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Record deleted successfully'
+        ]);
+    }
+
+    public function approve(Request $request)
+    {
+        $Invoice = Invoice::find($request->id);
+        $Invoice->has_approved = 1;
+        $Invoice->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Record Approved successfully'
         ]);
     }
 

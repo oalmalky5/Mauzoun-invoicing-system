@@ -14,6 +14,10 @@ class Customer extends BaseModel
     protected $guarded = [];
     protected $appends = ['name','name_arabic'];
 
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
@@ -22,5 +26,14 @@ class Customer extends BaseModel
     public function getNameArabicAttribute()
     {
         return $this->first_name_arabic . ' ' . $this->last_name_arabic;
+    }
+
+    protected static function booted()
+    {
+        static::deleting(function ($Customer) {
+            foreach ($Customer->invoices() as $invoice) {
+                $invoice->delete();
+            }
+        });
     }
 }
