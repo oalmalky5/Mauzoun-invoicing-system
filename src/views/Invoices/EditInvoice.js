@@ -60,6 +60,8 @@ export function EditInvoice(props) {
     const billing_country_arabic = useRef();
     const billing_vat_number = useRef();
     const billing_vat_number_arabic = useRef();
+    const billing_cr_number = useRef();
+    const billing_cr_number_arabic = useRef();
     const billing_other_buyer_id = useRef();
     const billing_notes_arabic = useRef();
     const billing_additional_no = useRef();
@@ -73,7 +75,7 @@ export function EditInvoice(props) {
     const [subTotal60, setSubTotal60] = useState(0);
     const [subTotal40, setSubTotal40] = useState(0);
     const [iconDisabled, setIconDisabled] = useState(false);
-    const [invoice, setInvoice] =  useState({});
+    const [invoice, setInvoice] = useState({});
 
     const initialInvoiceItem = {
         "id": "",
@@ -174,6 +176,8 @@ export function EditInvoice(props) {
                 billing_building_no_arabic: billing_building_no_arabic.current.value,
                 billing_vat_number: billing_vat_number.current.value,
                 billing_vat_number_arabic: billing_vat_number_arabic.current.value,
+                billing_cr_number: billing_cr_number.current.value,
+                billing_cr_number_arabic: billing_cr_number_arabic.current.value,
                 billing_other_buyer_id: billing_other_buyer_id.current.value,
                 billing_additional_no: billing_additional_no.current.value,
 
@@ -212,8 +216,8 @@ export function EditInvoice(props) {
     const selectCustomerHandler = (e) => {
         const selected_customer_id = e.target.value;
         const selected_customer = customers.find(c => c.id == selected_customer_id);
-        if (selected_customer != undefined){
-            invoice.customer_id=e.target.value;
+        if (selected_customer != undefined) {
+            invoice.customer_id = e.target.value;
             setCustomer(selected_customer);
             invoice.billing_first_name = selected_customer.first_name;
             invoice.billing_first_name_arabic = selected_customer.first_name_arabic;
@@ -240,11 +244,12 @@ export function EditInvoice(props) {
             invoice.billing_country_arabic = selected_customer.country_arabic;
             invoice.billing_vat_number = selected_customer.vat_number;
             invoice.billing_vat_number_arabic = selected_customer.vat_number_arabic;
+            invoice.billing_cr_number = selected_customer.cr_number;
+            invoice.billing_cr_number_arabic = selected_customer.cr_number_arabic;
             invoice.billing_other_buyer_id = selected_customer.other_buyer_id;
             invoice.billing_notes_arabic = selected_customer.notes_arabic;
             invoice.billing_additional_no = selected_customer.additional_no;
-        }
-        else {
+        } else {
             setCustomer({});
         }
     };
@@ -344,11 +349,17 @@ export function EditInvoice(props) {
     };
 
 
-    const removeInvoiceCustomField = (index) => {
-        let invoiceCustomFieldsClone = invoiceCustomFields;
-        setInvoiceCustomFields(invoiceCustomFieldsClone => invoiceCustomFieldsClone.filter((elem, ind) => ind !== index));
+    const removeInvoiceCustomField = (field, index) => {
+        let invoiceCustomFieldsClone = [...invoiceCustomFields];
+        invoiceCustomFieldsClone = invoiceCustomFieldsClone.filter((elem, ind) => elem !== field);
+        setInvoiceCustomFields(invoiceCustomFieldsClone);
 
     };
+
+
+    useEffect(() => {
+        console.log(invoiceCustomFields)
+    }, [invoiceCustomFields]);
 
     const calculateTotal = () => {
         let total_amount = 0;
@@ -411,7 +422,8 @@ export function EditInvoice(props) {
                                                     <label>{t("invoice_no")}</label>
                                                     <input ref={sr_no}
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("invoice_no")} defaultValue={invoice.sr_no}/>
+                                                           placeholder={t("enter") + " " + t("invoice_no")}
+                                                           defaultValue={invoice.sr_no}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -422,7 +434,8 @@ export function EditInvoice(props) {
                                                     <input ref={date}
                                                            type="date"
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("invoice_date")} defaultValue={invoice.date}/>
+                                                           placeholder={t("enter") + " " + t("invoice_date")}
+                                                           defaultValue={invoice.date}/>
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
@@ -431,7 +444,8 @@ export function EditInvoice(props) {
                                                     <input ref={due_date}
                                                            type="date"
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("invoice_expiry_date")} defaultValue={invoice.due_date}/>
+                                                           placeholder={t("enter") + " " + t("invoice_expiry_date")}
+                                                           defaultValue={invoice.due_date}/>
                                                 </FormGroup>
                                             </Col>
 
@@ -443,7 +457,8 @@ export function EditInvoice(props) {
                                                     <input ref={expiry_date}
                                                            type="date"
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("project_expiry_date")} defaultValue={invoice.expiry_date}/>
+                                                           placeholder={t("enter") + " " + t("project_expiry_date")}
+                                                           defaultValue={invoice.expiry_date}/>
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
@@ -452,7 +467,8 @@ export function EditInvoice(props) {
                                                     <input ref={business_days}
                                                            type="number"
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("business_days")} defaultValue={invoice.business_days}/>
+                                                           placeholder={t("enter") + " " + t("business_days")}
+                                                           defaultValue={invoice.business_days}/>
                                                 </FormGroup>
                                             </Col>
                                             {/*<Col lg="3">
@@ -474,7 +490,8 @@ export function EditInvoice(props) {
                                                     <label>{t("total_amount")}</label>
                                                     <input ref={total_amount}
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("total_amount")} defaultValue={invoice.total_amount}/>
+                                                           placeholder={t("enter") + " " + t("total_amount")}
+                                                           defaultValue={invoice.total_amount}/>
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
@@ -482,7 +499,8 @@ export function EditInvoice(props) {
                                                     <label>{t("tax_amount")}</label>
                                                     <input ref={tax_amount}
                                                            className="form-control-alternative form-control"
-                                                           placeholder={t("enter") + " " + t("tax_amount")}  defaultValue={invoice.tax_amount}/>
+                                                           placeholder={t("enter") + " " + t("tax_amount")}
+                                                           defaultValue={invoice.tax_amount}/>
                                                 </FormGroup>
                                             </Col>
                                             {/*<Col lg="3">
@@ -782,6 +800,28 @@ export function EditInvoice(props) {
 
                                         </Row>
                                         <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("cr_number")}</label>
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_cr_number}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("cr_number")}
+                                                                   defaultValue={invoice.billing_cr_number}/>
+
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_cr_number_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("cr_number_arabic")}
+                                                                   defaultValue={invoice.billing_cr_number_arabic}/>
+                                                        </Col>
+                                                    </Row>
+                                                </FormGroup>
+                                            </Col>
+                                        </Row>
+                                        <Row>
                                             <Col lg="12">
                                                 <FormGroup>
                                                     <label>{t("terms_and_conditions")}</label>
@@ -1041,7 +1081,7 @@ export function EditInvoice(props) {
                                                                         </td>
                                                                         <td>
                                                                             <a
-                                                                                onClick={() => removeInvoiceCustomField(index)}
+                                                                                onClick={() => removeInvoiceCustomField(field, index)}
                                                                                 className="float-right btn btn-dark btn-small">
                                                                                 <i className={"fa fa-trash"}></i>
                                                                             </a>

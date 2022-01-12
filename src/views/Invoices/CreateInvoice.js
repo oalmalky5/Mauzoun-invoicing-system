@@ -59,6 +59,8 @@ export function CreateInvoice(props) {
     const billing_country_arabic = useRef();
     const billing_vat_number = useRef();
     const billing_vat_number_arabic = useRef();
+    const billing_cr_number = useRef();
+    const billing_cr_number_arabic = useRef();
     const billing_other_buyer_id = useRef();
     const billing_notes_arabic = useRef();
     const billing_additional_no = useRef();
@@ -153,6 +155,8 @@ export function CreateInvoice(props) {
                 billing_building_no_arabic: billing_building_no_arabic.current.value,
                 billing_vat_number: billing_vat_number.current.value,
                 billing_vat_number_arabic: billing_vat_number_arabic.current.value,
+                billing_cr_number: billing_cr_number.current.value,
+                billing_cr_number_arabic: billing_cr_number_arabic.current.value,
                 billing_other_buyer_id: billing_other_buyer_id.current.value,
                 billing_additional_no: billing_additional_no.current.value,
 
@@ -728,6 +732,28 @@ export function CreateInvoice(props) {
                                                 </FormGroup>
                                             </Col>
 
+                                        </Row>
+                                        <Row>
+                                            <Col lg="6">
+                                                <FormGroup>
+                                                    <label>{t("cr_number")}</label>
+                                                    <Row>
+                                                        <Col>
+                                                            <input ref={billing_cr_number}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("cr_number")}
+                                                                   defaultValue={customer.cr_number}/>
+
+                                                        </Col>
+                                                        <Col>
+                                                            <input ref={billing_cr_number_arabic} dir={'rtl'}
+                                                                   className="form-control-alternative form-control"
+                                                                   placeholder={t("enter") + " " + t("cr_number_arabic")}
+                                                                   defaultValue={customer.cr_number_arabic}/>
+                                                        </Col>
+                                                    </Row>
+                                                </FormGroup>
+                                            </Col>
                                         </Row>
                                         <Row>
                                             <Col lg="12">

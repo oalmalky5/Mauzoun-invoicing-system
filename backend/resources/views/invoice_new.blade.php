@@ -322,6 +322,13 @@
                             <td class="text-right w-25">{{$invoice->billing_vat_number_arabic}}</td>
                             <td  class="text-right w-25">: رقم تسجيل ضريبة القيمة المضافة  </td>
                         </tr>
+
+                        <tr>
+                            <td class="w-25">CR Number:</td>
+                            <td class="w-25">{{$invoice->billing_cr_number}}</td>
+                            <td class="text-right w-25">{{$invoice->billing_cr_number_arabic}}</td>
+                            <td  class="text-right w-25">: رقم السجل التجاري  </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

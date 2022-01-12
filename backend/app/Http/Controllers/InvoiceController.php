@@ -110,6 +110,8 @@ class InvoiceController extends Controller
             'billing_building_no_arabic' => $request->billing_building_no_arabic,
             'billing_vat_number' => $request->billing_vat_number,
             'billing_vat_number_arabic' => $request->billing_vat_number_arabic,
+            'billing_cr_number' => $request->billing_cr_number,
+            'billing_cr_number_arabic' => $request->billing_cr_number_arabic,
             'billing_other_buyer_id' => $request->billing_other_buyer_id,
             'billing_additional_no' => $request->billing_additional_no,
             'total_amount' => $request->total_amount,
@@ -273,6 +275,8 @@ class InvoiceController extends Controller
         $Invoice->billing_building_no_arabic = $request->billing_building_no_arabic;
         $Invoice->billing_vat_number = $request->billing_vat_number;
         $Invoice->billing_vat_number_arabic = $request->billing_vat_number_arabic;
+        $Invoice->billing_cr_number = $request->billing_cr_number;
+        $Invoice->billing_cr_number_arabic = $request->billing_cr_number_arabic;
         $Invoice->billing_other_buyer_id = $request->billing_other_buyer_id;
         $Invoice->billing_additional_no = $request->billing_additional_no;
         $Invoice->total_amount = $request->total_amount;

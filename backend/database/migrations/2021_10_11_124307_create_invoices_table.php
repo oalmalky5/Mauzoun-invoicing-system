@@ -50,6 +50,8 @@ class CreateInvoicesTable extends Migration
             $table->text('billing_notes_arabic')->nullable();
             $table->string('billing_vat_number')->nullable();
             $table->string('billing_vat_number_arabic')->nullable();
+            $table->string('billing_cr_number')->nullable();
+            $table->string('billing_cr_number_arabic')->nullable();
             $table->string('billing_other_buyer_id')->nullable();
             $table->string('billing_additional_no')->nullable();
 
