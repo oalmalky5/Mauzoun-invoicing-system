@@ -195,7 +195,7 @@ export function InvoiceList(props) {
                                                                 {t("unpaid_preview")}
                                                             </DropdownItem>*/}
                                                             {
-                                                                !invoice.has_approved ? (
+                                                                (invoice.has_approved == 0) ? (
                                                                         <DropdownItem
                                                                             tag={Link}
                                                                             to={`/admin/invoices/edit/${invoice.id}`}
@@ -211,7 +211,7 @@ export function InvoiceList(props) {
                                                                 ) : ("")
                                                             }*/}
                                                             {
-                                                                !invoice.has_approved ? (
+                                                                invoice.has_approved == 0 ? (
                                                                         <DropdownItem
                                                                             onClick={() => setCurrentInvoice(invoice)}
                                                                             key={invoice.id}
@@ -222,7 +222,7 @@ export function InvoiceList(props) {
                                                                     : ("")
                                                             }
                                                             {
-                                                                !invoice.has_approved ? (
+                                                                invoice.has_approved == 0 ? (
                                                                         <DropdownItem
                                                                             onClick={() => setCurrentInvoiceForApprove(invoice)}
                                                                             key={invoice.id}
