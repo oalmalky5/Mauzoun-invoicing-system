@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::get('/home', 'App\Http\Controllers\HomeController@index');
 Route::middleware('auth:sanctum')->group(function () {
+
     Route::prefix('/users')->group(function () {
         Route::post('/store', 'App\Http\Controllers\UserController@store');
         Route::post('/{id}/delete', 'App\Http\Controllers\UserController@destroy');

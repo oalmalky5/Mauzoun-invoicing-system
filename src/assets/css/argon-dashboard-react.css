@@ -23476,8 +23476,58 @@ button:focus, :focus {
 }
 
 .ck.ck-editor__editable_inline {
-   /* direction: rtl;
-    text-align: right !important;*/
+    /* direction: rtl;
+     text-align: right !important;*/
+}
+
+.dashboard_block {
+    border: 1px solid #c1c2c3;
+    text-align: center;
+    margin-bottom:5px;
+}
+
+.hr-line {
+    margin: 0 !important;
+}
+
+.dashboard_block_count {
+    font-size: 50px;
+    background: #f9e06b;
+}
+
+.dashboard_block_title {
+    font-weight: bold;
+    padding: 15px;
+    font-size: 18px;
+    color: #76381a;
+}
+.top_customers ul{
+    padding:0;
+}
+.top_customers ul li {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid #f9e06b;
+}
+
+.top_customers .top_customer_name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.dflex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.top_customers .invoices_count {
+    font-size: 18px;
+}
+
+.top_customers .invoices_amount {
+    font-size: 22px;
+    font-weight: bold;
+    color:#76381a;
 }
 
 /*# sourceMappingURL=argon-dashboard-react.css.map */
