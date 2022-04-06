@@ -65,6 +65,7 @@ export default function Index(props) {
     const [totalInvoices, setTotalInvoices] = useState(0);
     const [totalInvoicesAmount, setTotalInvoicesAmount] = useState(0);
     const [topCustomers, setTopCustomers] = useState([]);
+    const [quickStats, setQuickStats] = useState([]);
 
     if (window.Chart) {
         parseOptions(Chart, chartOptions());
@@ -86,6 +87,7 @@ export default function Index(props) {
                 setTotalInvoices(response.data.data.invoices);
                 setTotalInvoicesAmount(response.data.data.invoices_amount);
                 setTopCustomers(response.data.data.top_customers);
+                setQuickStats(response.data.data.quick_stats);
             } else {
                 return null;
             }
@@ -151,19 +153,58 @@ export default function Index(props) {
                                 </div>
                                 <div className="mt-5">
                                     <Row>
-                                        <Col lg="4">
+                                        <Col lg="6">
                                             <h4>Top five customers having maximum invoices</h4>
                                             <div className={'top_customers'}>
                                                 <ul>
                                                     {topCustomers.map((customer, key) => (
                                                         <li>
-                                                            <div className={'top_customer_name'}> {customer.first_name}</div>
+                                                            <div
+                                                                className={'top_customer_name'}> {customer.first_name}</div>
                                                             <div className={'dflex'}>
-                                                                <div className={'invoices_count'}>{customer.invoices_count} Invoices</div>
-                                                                <div className={'invoices_amount'}>${customer.invoices_sum_total}</div>
+                                                                <div
+                                                                    className={'invoices_count'}>{customer.invoices_count} Invoices
+                                                                </div>
+                                                                <div
+                                                                    className={'invoices_amount'}>${customer.invoices_sum_total}</div>
                                                             </div>
                                                         </li>
                                                     ))}
+                                                </ul>
+                                            </div>
+                                        </Col>
+                                        <Col lg="6">
+                                            <h4>Invoices quick stats</h4>
+                                            <div className={'quick_stats'}>
+                                                <ul>
+                                                    <li>
+                                                        <div className={'duration_name'}> Today</div>
+                                                        <div className={'dflex'}>
+                                                            <div className={'invoices_count'}>{quickStats.today_invoices_count} Invoices</div>
+                                                            <div className={'invoices_amount'}>$ {quickStats.today_invoices_amount}</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div className={'duration_name'}> This Week</div>
+                                                        <div className={'dflex'}>
+                                                            <div className={'invoices_count'}>{quickStats.weekly_invoices_count} Invoices</div>
+                                                            <div className={'invoices_amount'}>$ {quickStats.weekly_invoices_amount}</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div className={'duration_name'}> This Month</div>
+                                                        <div className={'dflex'}>
+                                                            <div className={'invoices_count'}>{quickStats.monthly_invoices_count} Invoices</div>
+                                                            <div className={'invoices_amount'}>$ {quickStats.monthly_invoices_amount}</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div className={'duration_name'}> All Time</div>
+                                                        <div className={'dflex'}>
+                                                            <div className={'invoices_count'}>{quickStats.alltime_invoices_count} Invoices</div>
+                                                            <div className={'invoices_amount'}>$ {quickStats.alltime_invoices_amount}</div>
+                                                        </div>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </Col>

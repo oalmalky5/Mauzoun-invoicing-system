@@ -23483,7 +23483,7 @@ button:focus, :focus {
 .dashboard_block {
     border: 1px solid #c1c2c3;
     text-align: center;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
 
 .hr-line {
@@ -23501,16 +23501,18 @@ button:focus, :focus {
     font-size: 18px;
     color: #76381a;
 }
-.top_customers ul{
-    padding:0;
+
+.top_customers ul, .quick_stats ul {
+    padding: 0;
 }
-.top_customers ul li {
+
+.top_customers ul li, .quick_stats ul li {
     list-style: none;
     padding: 10px;
     border: 1px solid #f9e06b;
 }
 
-.top_customers .top_customer_name {
+.top_customers .top_customer_name, .quick_stats .duration_name {
     font-size: 20px;
     font-weight: bold;
 }
@@ -23520,14 +23522,14 @@ button:focus, :focus {
     justify-content: space-between;
 }
 
-.top_customers .invoices_count {
+.top_customers .invoices_count, .quick_stats .invoices_count {
     font-size: 18px;
 }
 
-.top_customers .invoices_amount {
+.top_customers .invoices_amount, .quick_stats .invoices_amount {
     font-size: 22px;
     font-weight: bold;
-    color:#76381a;
+    color: #76381a;
 }
 
 /*# sourceMappingURL=argon-dashboard-react.css.map */
