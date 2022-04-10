@@ -154,7 +154,7 @@ export default function Index(props) {
                                 <div className="mt-5">
                                     <Row>
                                         <Col lg="6">
-                                            <h4>Top five customers having maximum invoices</h4>
+                                            <h4>Clients with most invoices</h4>
                                             <div className={'top_customers'}>
                                                 <ul>
                                                     {topCustomers.map((customer, key) => (
