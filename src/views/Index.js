@@ -54,7 +54,7 @@ import {useTranslation} from 'react-i18next';
 
 import {Link} from "react-router-dom";
 
-const API_URL = " http://127.0.0.1:8000/api/";
+const API_URL = "https://mauzoun.sumsols.com/backend/api/";
 
 
 export default function Index(props) {
