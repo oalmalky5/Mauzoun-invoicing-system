@@ -211,30 +211,31 @@ export function CreateInvoice(props) {
     }
 
     const itemHandler = (e, value) => {
-        invoiceItems[e].item = value;
-        setInvoiceItems(invoiceItems);
+        let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
+        invoice_items[e].item = value;
+        setInvoiceItems(invoice_items);
     };
 
     const descriptionHandler = (e, value) => {
-        invoiceItems[e].description = value;
-        setInvoiceItems(invoiceItems);
+        let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
+        invoice_items[e].description = value;
+        setInvoiceItems(invoice_items);
     };
 
     const totalHandler = (e, value) => {
-        invoiceItems[e].total = value;
-        setInvoiceItems(invoiceItems);
+        let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
+        invoice_items[e].total = value;
+        setInvoiceItems(invoice_items);
     };
 
     const qtyHandler = (e, value) => {
         let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
         invoice_items[e].qty = value;
         // invoice_items[e].total = value * invoice_items[e].price;
-
         setInvoiceItems(invoice_items);
     };
 
     const priceHandler = (e, value) => {
-
         let invoice_items = JSON.parse(JSON.stringify(invoiceItems))
         invoice_items[e].price = value;
         // invoice_items[e].total = value * invoice_items[e].qty;
@@ -292,10 +293,12 @@ export function CreateInvoice(props) {
     };
 
     const removeInvoiceItem = (index) => {
-        let invoiceItemsClone = invoiceItems;
-        setInvoiceItems(invoiceItemsClone => invoiceItemsClone.filter((elem, ind) => ind !== index));
+        setInvoiceItems(invoiceItemsClone => invoiceItems.filter((elem, ind) => ind !== index));
     };
 
+    /*    useEffect(() => {
+            console.log(invoiceItems);
+        }, [invoiceItems]);*/
 
     const removeInvoiceCustomField = (index) => {
         let invoiceCustomFieldsClone = invoiceCustomFields;
@@ -814,17 +817,15 @@ export function CreateInvoice(props) {
 
                                                     {invoiceItems.length > 0 ? (
                                                             invoiceItems.map((invoiceItem, index) => (
-                                                                <tr>
+                                                                <tr key={index} id={`invoicerow-${index}`}>
 
-                                                                    <td className={'invoice-td'}>
+                                                                    <td className={'invoice-td'} id={index}>
                                                                         <textarea
                                                                             rows={4}
-                                                                            defaultValue={invoiceItem.item}
+                                                                            value={invoiceItems[index].item}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("item")}
-                                                                            onKeyDown={(e) => itemHandler(index, e.target.value)}
-                                                                            onKeyUp={(e) => itemHandler(index, e.target.value)}
-                                                                            onKeyPress={(e) => itemHandler(index, e.target.value)}/>
+                                                                            onChange={(e) => itemHandler(index, e.target.value)}/>
                                                                     </td>
                                                                     <td className={'invoice-td'} colSpan={2}>
                                                                         <textarea
@@ -832,85 +833,59 @@ export function CreateInvoice(props) {
                                                                             defaultValue={invoiceItem.description}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("description")}
-                                                                            onKeyDown={(e) => descriptionHandler(index, e.target.value)}
-                                                                            onKeyUp={(e) => descriptionHandler(index, e.target.value)}
-                                                                            onKeyPress={(e) => descriptionHandler(index, e.target.value)}/>
+                                                                            onChange={(e) => descriptionHandler(index, e.target.value)}/>
                                                                     </td>
                                                                     <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
-                                                                            defaultValue={invoiceItem.qty}
+                                                                            value={invoiceItem.qty}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("qty")}
-                                                                            onKeyDown={(e) => qtyHandler(index, e.target.value)}
-                                                                            onKeyUp={(e) => qtyHandler(index, e.target.value)}
-                                                                            onKeyPress={(e) => qtyHandler(index, e.target.value)}
-                                                                            onClick={(e) => qtyHandler(index, e.target.value)}
                                                                             onChange={(e) => qtyHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
                                                                     <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
-                                                                            defaultValue={invoiceItem.price}
+                                                                            value={invoiceItem.price}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("price")}
-                                                                            onKeyDown={(e) => priceHandler(index, e.target.value)}
-                                                                            onKeyUp={(e) => priceHandler(index, e.target.value)}
-                                                                            onKeyPress={(e) => priceHandler(index, e.target.value)}
-                                                                            onClick={(e) => priceHandler(index, e.target.value)}
                                                                             onChange={(e) => priceHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
                                                                     <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
-                                                                            defaultValue={invoiceItem.taxable_amount}
+                                                                            value={invoiceItem.taxable_amount}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("taxable_amount")}
-                                                                            onKeyDown={(e) => taxableAmountHandler(index, e.target.value)}
-                                                                            onKeyUp={(e) => taxableAmountHandler(index, e.target.value)}
-                                                                            onKeyPress={(e) => taxableAmountHandler(index, e.target.value)}
-                                                                            onClick={(e) => taxableAmountHandler(index, e.target.value)}
                                                                             onChange={(e) => taxableAmountHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
                                                                     <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
-                                                                            defaultValue={invoiceItem.discount}
+                                                                            value={invoiceItem.discount}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("discount")}
-                                                                            onKeyDown={(e) => discountHandler(index, e.target.value)}
-                                                                            onKeyUp={(e) => discountHandler(index, e.target.value)}
-                                                                            onKeyPress={(e) => discountHandler(index, e.target.value)}
-                                                                            onClick={(e) => discountHandler(index, e.target.value)}
                                                                             onChange={(e) => discountHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
                                                                     <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
-                                                                            defaultValue={invoiceItem.tax_rate}
+                                                                            value={invoiceItem.tax_rate}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("tax_rate")}
-                                                                            onKeyDown={(e) => taxRateHandler(index, e.target.value)}
-                                                                            onKeyUp={(e) => taxRateHandler(index, e.target.value)}
-                                                                            onKeyPress={(e) => taxRateHandler(index, e.target.value)}
-                                                                            onClick={(e) => taxRateHandler(index, e.target.value)}
                                                                             onChange={(e) => taxRateHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
                                                                     <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
-                                                                            defaultValue={invoiceItem.tax_amount}
+                                                                            value={invoiceItem.tax_amount}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("tax_amount")}
-                                                                            onKeyDown={(e) => taxAmountHandler(index, e.target.value)}
-                                                                            onKeyUp={(e) => taxAmountHandler(index, e.target.value)}
-                                                                            onKeyPress={(e) => taxAmountHandler(index, e.target.value)}
-                                                                            onClick={(e) => taxAmountHandler(index, e.target.value)}
                                                                             onChange={(e) => taxAmountHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
@@ -926,13 +901,9 @@ export function CreateInvoice(props) {
                                                                     <td className={'invoice-td'}>
                                                                         <textarea
                                                                             rows={4}
-                                                                            defaultValue={invoiceItem.total}
+                                                                            value={invoiceItem.total}
                                                                             className="form-control-alternative form-control"
                                                                             placeholder={t("total")}
-                                                                            onKeyDown={(e) => totalHandler(index, e.target.value)}
-                                                                            onKeyUp={(e) => totalHandler(index, e.target.value)}
-                                                                            onKeyPress={(e) => totalHandler(index, e.target.value)}
-                                                                            onClick={(e) => totalHandler(index, e.target.value)}
                                                                             onChange={(e) => totalHandler(index, e.target.value)}
                                                                         />
                                                                     </td>
@@ -964,7 +935,7 @@ export function CreateInvoice(props) {
                                                     </tr>*/}
                                                     {invoiceCustomFields.length > 0 ? (
                                                             invoiceCustomFields.map((field, index) => (
-                                                                    <tr>
+                                                                    <tr key={index}>
                                                                         <th colSpan={2}></th>
                                                                         <th className='text-right'>
                                                                             <a
@@ -977,11 +948,7 @@ export function CreateInvoice(props) {
                                                                             <input
                                                                                 className="form-control-alternative form-control"
                                                                                 placeholder={t("enter") + " " + t("name")}
-                                                                                defaultValue={field.name}
-                                                                                onKeyDown={(e) => nameFieldHandler(index, e.target.value)}
-                                                                                onKeyUp={(e) => nameFieldHandler(index, e.target.value)}
-                                                                                onKeyPress={(e) => nameFieldHandler(index, e.target.value)}
-                                                                                onClick={(e) => nameFieldHandler(index, e.target.value)}
+                                                                                value={field.name}
                                                                                 onChange={(e) => nameFieldHandler(index, e.target.value)}
 
                                                                             />
@@ -991,11 +958,7 @@ export function CreateInvoice(props) {
                                                                                 dir={"rtl"}
                                                                                 className="form-control-alternative form-control"
                                                                                 placeholder={t("enter") + " " + t("name_arabic")}
-                                                                                defaultValue={field.name_arabic}
-                                                                                onKeyDown={(e) => nameArabicFieldHandler(index, e.target.value)}
-                                                                                onKeyUp={(e) => nameArabicFieldHandler(index, e.target.value)}
-                                                                                onKeyPress={(e) => nameArabicFieldHandler(index, e.target.value)}
-                                                                                onClick={(e) => nameArabicFieldHandler(index, e.target.value)}
+                                                                                value={field.name_arabic}
                                                                                 onChange={(e) => nameArabicFieldHandler(index, e.target.value)}
 
                                                                             />
@@ -1004,7 +967,7 @@ export function CreateInvoice(props) {
                                                                             <input
                                                                                 className="form-control-alternative form-control"
                                                                                 placeholder={t("enter") + " " + t("value")}
-                                                                                defaultValue={field.value}
+                                                                                value={field.value}
                                                                                 onKeyDown={(e) => valueFieldHandler(index, e.target.value)}
                                                                                 onKeyUp={(e) => valueFieldHandler(index, e.target.value)}
                                                                                 onKeyPress={(e) => valueFieldHandler(index, e.target.value)}
