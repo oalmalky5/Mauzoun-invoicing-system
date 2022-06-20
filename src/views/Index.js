@@ -112,7 +112,7 @@ export default function Index(props) {
                             <CardBody>
                                 <div className="mt-5">
                                     <Row>
-                                        <Col lg="3">
+                                        <Col lg="4">
                                             <div className={'dashboard_block'}>
                                                 <div className={'dashboard_block_count'}>{totalUsers}</div>
                                                 <hr className={'hr-line'}/>
@@ -121,7 +121,7 @@ export default function Index(props) {
                                                 </div>
                                             </div>
                                         </Col>
-                                        <Col lg="3">
+                                        <Col lg="4">
                                             <div className={'dashboard_block'}>
                                                 <div className={'dashboard_block_count'}>{totalCustomers}</div>
                                                 <hr className={'hr-line'}/>
@@ -131,7 +131,7 @@ export default function Index(props) {
                                             </div>
                                         </Col>
 
-                                        <Col lg="3">
+                                        <Col lg="4">
                                             <div className={'dashboard_block'}>
                                                 <div className={'dashboard_block_count'}>{totalInvoices}</div>
                                                 <hr className={'hr-line'}/>
@@ -140,15 +140,7 @@ export default function Index(props) {
                                                 </div>
                                             </div>
                                         </Col>
-                                        <Col lg="3">
-                                            <div className={'dashboard_block'}>
-                                                <div className={'dashboard_block_count'}>${totalInvoicesAmount}</div>
-                                                <hr className={'hr-line'}/>
-                                                <div className={'dashboard_block_title'}><span
-                                                    className={'fas fa-money'}></span> Total Amount
-                                                </div>
-                                            </div>
-                                        </Col>
+
                                     </Row>
                                 </div>
                                 <div className="mt-5">
@@ -163,10 +155,10 @@ export default function Index(props) {
                                                                 className={'top_customer_name'}> {customer.first_name}</div>
                                                             <div className={'dflex'}>
                                                                 <div
-                                                                    className={'invoices_count'}>{customer.invoices_count} Invoices
+                                                                    className={'invoices_count'}>
                                                                 </div>
                                                                 <div
-                                                                    className={'invoices_amount'}>${customer.invoices_sum_total}</div>
+                                                                    className={'invoices_amount'}>{customer.invoices_count} Invoices</div>
                                                             </div>
                                                         </li>
                                                     ))}
@@ -180,29 +172,29 @@ export default function Index(props) {
                                                     <li>
                                                         <div className={'duration_name'}> Today</div>
                                                         <div className={'dflex'}>
-                                                            <div className={'invoices_count'}>{quickStats.today_invoices_count} Invoices</div>
-                                                            <div className={'invoices_amount'}>$ {quickStats.today_invoices_amount}</div>
+                                                            <div className={'invoices_count'}></div>
+                                                            <div className={'invoices_amount'}>{quickStats.today_invoices_count} Invoices</div>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div className={'duration_name'}> This Week</div>
                                                         <div className={'dflex'}>
-                                                            <div className={'invoices_count'}>{quickStats.weekly_invoices_count} Invoices</div>
-                                                            <div className={'invoices_amount'}>$ {quickStats.weekly_invoices_amount}</div>
+                                                            <div className={'invoices_count'}></div>
+                                                            <div className={'invoices_amount'}>{quickStats.weekly_invoices_count} Invoices</div>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div className={'duration_name'}> This Month</div>
                                                         <div className={'dflex'}>
-                                                            <div className={'invoices_count'}>{quickStats.monthly_invoices_count} Invoices</div>
-                                                            <div className={'invoices_amount'}>$ {quickStats.monthly_invoices_amount}</div>
+                                                            <div className={'invoices_count'}></div>
+                                                            <div className={'invoices_amount'}>{quickStats.monthly_invoices_count} Invoices</div>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div className={'duration_name'}> All Time</div>
                                                         <div className={'dflex'}>
-                                                            <div className={'invoices_count'}>{quickStats.alltime_invoices_count} Invoices</div>
-                                                            <div className={'invoices_amount'}>$ {quickStats.alltime_invoices_amount}</div>
+                                                            <div className={'invoices_count'}></div>
+                                                            <div className={'invoices_amount'}>{quickStats.alltime_invoices_count} Invoices</div>
                                                         </div>
                                                     </li>
                                                 </ul>
